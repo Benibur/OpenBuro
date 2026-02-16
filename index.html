@@ -1246,10 +1246,47 @@
        18. NEWSLETTER
        ======================================== */
 
+    .newsletter-section {
+      background: linear-gradient(180deg, transparent 0%, rgba(59, 130, 246, 0.03) 50%, transparent 100%);
+    }
+
+    .dark .newsletter-section {
+      background: linear-gradient(180deg, transparent 0%, rgba(59, 130, 246, 0.05) 50%, transparent 100%);
+    }
+
+    .newsletter-container {
+      max-width: 600px;
+    }
+
     .newsletter-icon {
-      font-size: var(--text-4xl);
       margin-bottom: 1rem;
       color: var(--color-primary);
+      display: flex;
+      justify-content: center;
+    }
+
+    .newsletter-icon svg {
+      width: 48px;
+      height: 48px;
+    }
+
+    .newsletter-desc {
+      color: var(--color-text-muted);
+      font-size: var(--text-lg);
+      max-width: 500px;
+      margin: 0 auto 0.5rem;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
     }
 
     /* ========================================
@@ -2015,24 +2052,31 @@
   </section>
 
   <!-- Newsletter Section -->
-  <section id="newsletter">
-    <div class="container">
-      <div class="newsletter-icon">[Email Icon]</div>
-      <h2>Stay Updated</h2>
-      <p>[Placeholder: Get the latest news about Open Buro Standard development, Alliance activities, and ecosystem growth]</p>
+  <section id="newsletter" class="newsletter-section" aria-label="Newsletter signup">
+    <div class="container newsletter-container">
+      <div class="newsletter-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+        </svg>
+      </div>
+      <h2>Stay Informed</h2>
+      <p class="newsletter-desc">Receive project updates, Alliance news, and ecosystem developments directly in your inbox.</p>
 
       <form class="newsletter-form" action="#" method="POST">
+        <label for="newsletter-email" class="sr-only">Email address</label>
         <input
+          id="newsletter-email"
           type="email"
           name="email"
           placeholder="your.email@example.com"
           required
-          aria-label="Email address"
+          autocomplete="email"
         >
         <button type="submit" class="btn-primary">Subscribe</button>
       </form>
 
-      <p class="gdpr-notice">[Placeholder: Your email will only be used for Open Buro updates. No tracking, no third parties. GDPR compliant. Unsubscribe anytime.]</p>
+      <p class="gdpr-notice">By subscribing, you agree to receive occasional updates about Open Buro. We respect your privacy and will never share your email address. You can unsubscribe at any time.</p>
     </div>
   </section>
 
