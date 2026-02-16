@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-16)
 
 **Core value:** Clearly communicate that Open Buro is the missing orchestration layer turning isolated open source apps into a real platform, and make it effortless for visitors to join the Alliance.
-**Current focus:** Phase 4 - Timeline & Ecosystem
+**Current focus:** Phase 5 - News & Newsletter (COMPLETE)
 
 ## Current Position
 
-Phase: 4 of 7 (Timeline & Ecosystem)
-Plan: 2 of 2 in current phase - PHASE COMPLETE
-Status: Phase 4 complete, ready for Phase 5
-Last activity: 2026-02-17 — Completed Phase 04 Plan 02 (Ecosystem section with member cards and gradient CTA)
+Phase: 5 of 7 (News & Newsletter)
+Plan: 1 of 1 in current phase - PHASE COMPLETE
+Status: Phase 5 complete, ready for Phase 6
+Last activity: 2026-02-17 — Completed Phase 05 Plan 01 (News section with article cards and Newsletter with email form)
 
-Progress: [███████░░░] 70%
+Progress: [████████░░] 80%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
+- Total plans completed: 8
 - Average duration: 127 seconds (2.1 minutes)
-- Total execution time: 0.25 hours
+- Total execution time: 0.28 hours
 
 **By Phase:**
 
@@ -31,10 +31,11 @@ Progress: [███████░░░] 70%
 | 02 | 1/1 ✓ | 116s | 116s |
 | 03 | 2/2 ✓ | 264s | 132s |
 | 04 | 2/2 ✓ | 146s | 73s |
+| 05 | 1/1 ✓ | 125s | 125s |
 
 **Recent Trend:**
-- Last 5 plans: 02-01 (116s), 03-01 (146s), 03-02 (118s), 04-01 (~73s), 04-02 (~73s)
-- Trend: Accelerating velocity, Phase 4 complete
+- Last 5 plans: 03-01 (146s), 03-02 (118s), 04-01 (~73s), 04-02 (~73s), 05-01 (125s)
+- Trend: Consistent velocity, Phase 5 complete
 
 ## Accumulated Context
 
@@ -71,6 +72,12 @@ Recent decisions affecting current work:
 - [Phase 04-02]: CSS mask-composite gradient border technique (no extra wrapper elements)
 - [Phase 04-02]: Separate btn-eco-ghost class to preserve existing btn-ghost behavior
 - [Phase 04-02]: auto-fit grid with 250px minimum for natural responsive column adaptation
+- [Phase 05-01]: Flex horizontal scroll on mobile, CSS grid at 768px for news cards
+- [Phase 05-01]: Date tag overlay with backdrop-filter blur on gradient images
+- [Phase 05-01]: Inline SVG mail icon (Lucide-style) for newsletter section
+- [Phase 05-01]: sr-only accessible label pattern for form inputs
+- [Phase 05-01]: 600px narrow container for focused newsletter form UX
+- [Phase 05-01]: Subtle gradient background for newsletter section visual separation
 
 ### Pending Todos
 
@@ -82,10 +89,10 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-02-17 (Phase 4 execution)
-Stopped at: Completed Phase 04 Plan 02 (Ecosystem section with member cards and gradient CTA)
+Last session: 2026-02-17 (Phase 5 execution)
+Stopped at: Completed Phase 05 Plan 01 (News & Newsletter sections)
 Resume file: None
 
 ---
 
-**Next step:** Phase 4 complete. Ready to begin Phase 5 when requested.
+**Next step:** Phase 5 complete. Ready to begin Phase 6 when requested.
