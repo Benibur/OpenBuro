@@ -34,6 +34,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   5. Page loads as single HTML file with inline CSS and metadata for SEO/social sharing
 **Plans**: 2 plans
 
+Plans:
 - [ ] 01-01-PLAN.md — HTML structure with semantic markup and SEO metadata
 - [ ] 01-02-PLAN.md — Dark mode design system with CSS custom properties and FOUC prevention
 
@@ -109,10 +110,11 @@ Plans:
   4. User can open/close mobile hamburger menu with smooth slide-out drawer and proper ARIA labels
   5. Card grids animate with staggered cascade (100-150ms delay), cards elevate on hover
   6. All animations respect prefers-reduced-motion and use single shared Intersection Observer
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- (Plans will be generated via /gsd:plan-phase)
+- [ ] 06-01-PLAN.md — Scroll animations with shared Intersection Observer and navbar transitions
+- [ ] 06-02-PLAN.md — Mobile hamburger menu and interactive hover polish
 
 ### Phase 7: Performance & Launch
 **Goal**: Optimize for production deployment with Lighthouse 90+ scores and launch-ready assets
@@ -135,11 +137,11 @@ Plans:
 Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 
 | Phase | Plans Complete | Status | Completed |
+|-------|----------------|--------|-----------|
 | 1. Foundation & Design System | 0/2 | Planned | - |
-| 1. Foundation & Design System | 0/TBD | Not started | - |
 | 2. Hero & Canvas Animation | 0/TBD | Not started | - |
 | 3. Core Content Sections | 0/TBD | Not started | - |
 | 4. Timeline & Ecosystem | 0/2 | Planned | - |
 | 5. News & Newsletter | 0/1 | Planned | - |
-| 6. Animations & Interactivity | 0/TBD | Not started | - |
+| 6. Animations & Interactivity | 0/2 | Planned | - |
 | 7. Performance & Launch | 0/TBD | Not started | - |
