@@ -812,7 +812,79 @@
     }
 
     /* ========================================
-       19. UTILITY CLASSES
+       19. PROBLEM SECTION
+       ======================================== */
+
+    .problem-layout {
+      display: grid;
+      gap: 3rem;
+      margin-top: 2rem;
+      text-align: left;
+    }
+
+    .problem-text {
+      font-size: var(--text-lg);
+      line-height: 1.7;
+      color: var(--color-text);
+    }
+
+    .constat-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .constat-card {
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .constat-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-accent);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .card-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      line-height: 1;
+    }
+
+    .constat-card h3 {
+      font-size: var(--text-xl);
+      margin-bottom: 0.75rem;
+      color: var(--color-text);
+    }
+
+    .constat-card p {
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    @media (min-width: 768px) {
+      .problem-layout {
+        grid-template-columns: 40% 60%;
+        align-items: start;
+      }
+
+      #problem {
+        padding: 6rem var(--space-section-x);
+      }
+    }
+
+    @media (max-width: 767px) {
+      #problem {
+        padding: 3rem var(--space-section-x);
+      }
+    }
+
+    /* ========================================
+       20. UTILITY CLASSES
        ======================================== */
 
     .intro {
@@ -900,27 +972,35 @@
   </section>
 
   <!-- Problem Section -->
-  <section id="problem">
+  <section id="problem" aria-label="Problem statement">
     <div class="container">
       <div class="badge">LE CONSTAT</div>
-      <h2>The Problem with Isolated Open Source Apps</h2>
-      <p class="intro">[Placeholder: Europe has mature open source alternatives for every workplace need, but they remain isolated silos lacking the integration that makes Microsoft 365 dominant]</p>
-      <div class="constat-grid">
-        <article class="constat-card">
-          <div class="icon-placeholder">[Icon]</div>
-          <h3>Fragmented Experience</h3>
-          <p>[Placeholder: Users must navigate between disconnected apps with separate logins, interfaces, and workflows]</p>
-        </article>
-        <article class="constat-card">
-          <div class="icon-placeholder">[Icon]</div>
-          <h3>No Cross-App Workflows</h3>
-          <p>[Placeholder: Data and actions are trapped in silos - you cannot share a chat message to a document or schedule from an email]</p>
-        </article>
-        <article class="constat-card">
-          <div class="icon-placeholder">[Icon]</div>
-          <h3>Platform Lock-In Wins</h3>
-          <p>[Placeholder: Without orchestration, proprietary suites maintain dominance through integration alone, not superior technology]</p>
-        </article>
+      <h2>The Workplace Tech Paradox</h2>
+
+      <div class="problem-layout">
+        <!-- Left column: Problem text -->
+        <div class="problem-text">
+          <p>European organizations invest millions in open source workplace apps—email, document collaboration, project management, video conferencing—yet these tools remain isolated islands. Users juggle multiple logins, data sits in silos, and workflows break at app boundaries. The promise of open source flexibility becomes a burden of fragmentation.</p>
+        </div>
+
+        <!-- Right column: 3 constat cards -->
+        <div class="constat-cards">
+          <article class="constat-card">
+            <div class="card-icon">🔐</div>
+            <h3>Login Fatigue</h3>
+            <p>Users authenticate 5-10 times daily across separate apps. SSO exists but requires custom integration for each tool. Password managers become mandatory, not convenience.</p>
+          </article>
+          <article class="constat-card">
+            <div class="card-icon">🏝️</div>
+            <h3>Data Islands</h3>
+            <p>Customer mentions in email don't link to CRM records. Meeting notes live separately from project tasks. Search works within apps, never across them. Knowledge scatters.</p>
+          </article>
+          <article class="constat-card">
+            <div class="card-icon">🔀</div>
+            <h3>Context Switching Tax</h3>
+            <p>Moving between apps means mental model switching. Different navigation patterns, inconsistent terminology, no shared workspace. Productivity bleeds at every boundary.</p>
+          </article>
+        </div>
       </div>
     </div>
   </section>
