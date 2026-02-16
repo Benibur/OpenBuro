@@ -961,41 +961,183 @@
        16. ECOSYSTEM
        ======================================== */
 
-    .founding-members {
+    .ecosystem-grid {
       display: grid;
-      gap: 2rem;
-      margin-top: 2rem;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
     }
 
-    .member {
+    .member-card {
       background: var(--color-bg-elevated);
       border: 1px solid var(--color-border);
-      border-radius: var(--border-radius);
+      border-radius: 12px;
       padding: 2rem;
+      transition: all 0.3s ease;
+      text-align: left;
     }
 
-    .member-logo {
+    .member-card:hover {
+      border-color: var(--color-accent);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .member-logo-placeholder {
       font-family: var(--font-heading);
-      font-size: var(--text-xl);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .member-subtitle {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .member-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+
+    .member-desc {
+      font-size: var(--text-sm);
+      line-height: 1.6;
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    /* Placeholder cards */
+    .member-placeholder {
+      border: 2px dashed var(--color-text-muted);
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      text-align: center;
+    }
+
+    .member-placeholder:hover {
+      border-style: solid;
+      border-color: rgba(59, 130, 246, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .placeholder-icon {
+      font-size: 3rem;
+      color: var(--color-text-muted);
+      margin-bottom: 1rem;
+      line-height: 1;
+    }
+
+    .placeholder-text {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    /* CTA Block with gradient border */
+    .ecosystem-cta {
+      position: relative;
+      padding: 2rem;
+      border-radius: 16px;
+      background: var(--color-bg-elevated);
+      margin-top: 3rem;
+    }
+
+    .ecosystem-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      padding: 2px;
+      background: linear-gradient(135deg, var(--color-accent), #8b5cf6);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .cta-title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
       font-weight: 700;
       margin-bottom: 1rem;
-      color: var(--color-primary);
+      color: var(--color-text);
     }
 
-    .ecosystem-cta {
-      margin-top: 4rem;
-      padding: 2rem;
-      border: 2px solid var(--color-primary);
-      border-radius: var(--border-radius);
-      background: linear-gradient(135deg, transparent, var(--color-bg-elevated));
+    .cta-desc {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--color-text-muted);
+      max-width: 600px;
+      margin: 0 auto 2rem;
     }
 
     .cta-buttons {
       display: flex;
       gap: 1rem;
       justify-content: center;
-      margin-top: 1.5rem;
       flex-wrap: wrap;
+    }
+
+    .btn-eco-ghost {
+      background: transparent;
+      border: 2px solid var(--color-accent);
+      color: var(--color-accent);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 500;
+      padding: 0.75rem 2rem;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .btn-eco-ghost:hover {
+      background: var(--color-accent);
+      color: white;
+      text-decoration: none;
+    }
+
+    @media (min-width: 768px) {
+      .ecosystem-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .ecosystem-cta {
+        padding: 3rem;
+      }
+
+      .cta-title {
+        font-size: 2rem;
+      }
+
+      .cta-desc {
+        font-size: var(--text-lg);
+      }
     }
 
     /* ========================================
@@ -1699,28 +1841,53 @@
   </section>
 
   <!-- Ecosystem Section -->
-  <section id="ecosystem">
+  <section id="ecosystem" aria-label="Alliance ecosystem">
     <div class="container">
       <div class="badge">L'ECOSYSTEME</div>
-      <h2>Founding Members</h2>
+      <h2>The Alliance</h2>
+      <p class="intro">Growing the European open source workplace ecosystem together</p>
 
-      <div class="founding-members">
-        <div class="member">
-          <div class="member-logo">[LINAGORA / Twake.ai]</div>
-          <p>[Placeholder: European leader in open source collaboration, providing email, chat, drive, calendar solutions]</p>
+      <div class="ecosystem-grid">
+        <!-- Founding Members -->
+        <div class="member-card member-founding">
+          <div class="member-logo-placeholder">LINAGORA</div>
+          <div class="member-subtitle">Twake.ai Platform</div>
+          <span class="member-badge">Founding Member</span>
+          <p class="member-desc">Enterprise collaboration platform powering La Suite numerique</p>
         </div>
-        <div class="member">
-          <div class="member-logo">[DINUM / La Suite numérique]</div>
-          <p>[Placeholder: French government digital workplace initiative, deploying open source to 10M+ public sector users]</p>
+
+        <div class="member-card member-founding">
+          <div class="member-logo-placeholder">DINUM</div>
+          <div class="member-subtitle">La Suite numerique</div>
+          <span class="member-badge">Founding Member</span>
+          <p class="member-desc">French government digital workplace for public sector</p>
+        </div>
+
+        <!-- Future Member Placeholders -->
+        <div class="member-card member-placeholder" aria-label="Future member placeholder">
+          <div class="placeholder-icon">+</div>
+          <p class="placeholder-text">Your organization here</p>
+        </div>
+
+        <div class="member-card member-placeholder" aria-label="Future member placeholder">
+          <div class="placeholder-icon">+</div>
+          <p class="placeholder-text">Your organization here</p>
+        </div>
+
+        <div class="member-card member-placeholder" aria-label="Future member placeholder">
+          <div class="placeholder-icon">+</div>
+          <p class="placeholder-text">Your organization here</p>
         </div>
       </div>
 
       <div class="ecosystem-cta">
-        <h3>Join the Alliance</h3>
-        <p>[Placeholder: Open source publishers, public institutions, and enterprises can participate in shaping the future of European digital workplace]</p>
-        <div class="cta-buttons">
-          <button class="btn-primary">Become a Member</button>
-          <button class="btn-secondary">View Membership Benefits</button>
+        <div class="cta-content">
+          <h3 class="cta-title">Join the Open Buro Alliance</h3>
+          <p class="cta-desc">Whether you're an open source publisher, institution, or enterprise, help us build the European alternative to proprietary workplace platforms.</p>
+          <div class="cta-buttons">
+            <a href="#join" class="btn-primary">Become a Member</a>
+            <a href="#learn" class="btn-eco-ghost">Learn More</a>
+          </div>
         </div>
       </div>
     </div>
