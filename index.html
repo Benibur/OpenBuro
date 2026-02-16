@@ -264,7 +264,11 @@
       background: none;
       border: none;
       cursor: pointer;
-      padding: 8px;
+      padding: 12px;
+      min-width: 48px;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
     }
 
     .nav-mobile-toggle span {
@@ -272,6 +276,142 @@
       height: 2px;
       background: var(--color-text);
       transition: all 0.3s ease;
+    }
+
+    /* Hide CTA button on mobile */
+    .nav-cta-desktop {
+      display: none;
+    }
+
+    /* Mobile Drawer */
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 280px;
+      height: 100vh;
+      background: var(--color-bg-elevated);
+      border-left: 1px solid var(--color-border);
+      z-index: 100;
+      transform: translateX(100%);
+      transition: transform 300ms ease-out;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem;
+      overflow-y: auto;
+    }
+
+    .mobile-drawer.drawer-open {
+      transform: translateX(0);
+    }
+
+    .mobile-drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .mobile-drawer-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text);
+      padding: 8px;
+      min-width: 48px;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--border-radius);
+      transition: background-color 0.2s ease;
+    }
+
+    .mobile-drawer-close:hover {
+      background-color: rgba(96, 165, 250, 0.1);
+    }
+
+    .mobile-drawer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      flex: 1;
+    }
+
+    .mobile-drawer-links a {
+      display: block;
+      padding: 0.875rem 0.5rem;
+      color: var(--color-text);
+      font-size: var(--text-lg);
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: var(--border-radius);
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .mobile-drawer-links a:hover,
+    .mobile-drawer-links a:focus {
+      background-color: rgba(96, 165, 250, 0.1);
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+
+    .mobile-drawer-cta {
+      margin-top: 1.5rem;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Mobile drawer overlay */
+    .mobile-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 99;
+      opacity: 0;
+      transition: opacity 300ms ease-out;
+      pointer-events: none;
+    }
+
+    .mobile-overlay.overlay-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Body scroll lock when drawer is open */
+    body.drawer-active {
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .nav-mobile-toggle {
+        display: none;
+      }
+
+      .nav-cta-desktop {
+        display: inline-flex;
+      }
+
+      .mobile-drawer {
+        display: none !important;
+      }
+
+      .mobile-overlay {
+        display: none !important;
+      }
+    }
+
+    /* Reduced motion: disable drawer slide animation */
+    @media (prefers-reduced-motion: reduce) {
+      .mobile-drawer {
+        transition: none !important;
+      }
+
+      .mobile-overlay {
+        transition: none !important;
+      }
     }
 
     /* ========================================
@@ -1410,7 +1550,114 @@
       opacity: 1;
     }
 
-    /* Respect prefers-reduced-motion for ALL scroll animations */
+    /* ========================================
+       20b. CARD HOVER EFFECTS
+       ======================================== */
+
+    /* Enhanced card hover: only on hover-capable devices */
+    @media (hover: hover) {
+      .constat-card,
+      .feature-card,
+      .mission-block,
+      .news-card,
+      .member-card:not(.member-placeholder) {
+        transition: transform 300ms ease-out, box-shadow 300ms ease-out, border-color 300ms ease-out;
+      }
+
+      .constat-card:hover,
+      .feature-card:hover,
+      .mission-block:hover,
+      .news-card:hover,
+      .member-card:not(.member-placeholder):hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        border-color: var(--color-accent);
+      }
+    }
+
+    /* ========================================
+       20c. ANIMATED LINK UNDERLINES
+       ======================================== */
+
+    .link-underline {
+      position: relative;
+      text-decoration: none !important;
+    }
+
+    .link-underline::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--color-primary);
+      transition: width 300ms ease-out;
+    }
+
+    @media (hover: hover) {
+      .link-underline:hover::after {
+        width: 100%;
+      }
+    }
+
+    /* Footer links underline variant */
+    .footer-nav a,
+    .footer-contact a {
+      position: relative;
+    }
+
+    .footer-nav a::after,
+    .footer-contact a::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--color-primary);
+      transition: width 300ms ease-out;
+    }
+
+    @media (hover: hover) {
+      .footer-nav a:hover::after,
+      .footer-contact a:hover::after {
+        width: 100%;
+      }
+
+      .footer-nav a:hover,
+      .footer-contact a:hover {
+        text-decoration: none;
+      }
+    }
+
+    /* Read more link underline */
+    .read-more {
+      position: relative;
+    }
+
+    .read-more::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--color-accent);
+      transition: width 300ms ease-out;
+    }
+
+    @media (hover: hover) {
+      .read-more:hover::after {
+        width: 100%;
+      }
+
+      .read-more:hover {
+        text-decoration: none;
+      }
+    }
+
+    /* Respect prefers-reduced-motion for ALL animations */
     @media (prefers-reduced-motion: reduce) {
       .animate-on-scroll {
         opacity: 1 !important;
@@ -1428,6 +1675,21 @@
       nav {
         transition: none !important;
         will-change: auto;
+      }
+
+      .constat-card,
+      .feature-card,
+      .mission-block,
+      .news-card,
+      .member-card {
+        transition: none !important;
+      }
+
+      .link-underline::after,
+      .footer-nav a::after,
+      .footer-contact a::after,
+      .read-more::after {
+        transition: none !important;
       }
     }
 
@@ -1652,22 +1914,45 @@
     <div class="nav-container">
       <div class="nav-logo">Open Buro</div>
       <div class="nav-desktop">
-        <a href="#problem">Problem</a>
-        <a href="#vision">Vision</a>
-        <a href="#pillars">Pillars</a>
-        <a href="#timeline">Timeline</a>
-        <a href="#ecosystem">Ecosystem</a>
-        <a href="#news">News</a>
-        <a href="#newsletter">Newsletter</a>
+        <a href="#problem" class="link-underline">Problem</a>
+        <a href="#vision" class="link-underline">Vision</a>
+        <a href="#pillars" class="link-underline">Pillars</a>
+        <a href="#timeline" class="link-underline">Timeline</a>
+        <a href="#ecosystem" class="link-underline">Ecosystem</a>
+        <a href="#news" class="link-underline">News</a>
+        <a href="#newsletter" class="link-underline">Newsletter</a>
       </div>
-      <button class="btn-primary">Join the Alliance</button>
-      <button class="nav-mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <button class="btn-primary nav-cta-desktop">Join the Alliance</button>
+      <button class="nav-mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
       </button>
     </div>
   </nav>
+
+  <!-- Mobile Drawer -->
+  <div id="mobile-drawer" class="mobile-drawer" role="navigation" aria-label="Main navigation">
+    <div class="mobile-drawer-header">
+      <div class="nav-logo">Open Buro</div>
+      <button id="mobile-menu-close" class="mobile-drawer-close" aria-label="Close navigation menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-drawer-links">
+      <a href="#problem">Problem</a>
+      <a href="#vision">Vision</a>
+      <a href="#pillars">Pillars</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#ecosystem">Ecosystem</a>
+      <a href="#news">News</a>
+      <a href="#newsletter">Newsletter</a>
+    </div>
+    <a href="#ecosystem" class="btn-primary mobile-drawer-cta">Join the Alliance</a>
+  </div>
 
   <!-- Hero Section -->
   <section id="hero">
@@ -2549,6 +2834,108 @@
       }, { passive: true });
     }
 
+    /**
+     * initMobileDrawer: Hamburger menu with accessible slide-out drawer
+     * - Toggle drawer with hamburger button, close button, overlay click, Escape key
+     * - ARIA: aria-expanded toggles, focus trapping, focus returns to toggle on close
+     * - Body scroll lock when drawer is open
+     */
+    function initMobileDrawer() {
+      const toggleBtn = document.getElementById('mobile-menu-toggle');
+      const drawer = document.getElementById('mobile-drawer');
+      const closeBtn = document.getElementById('mobile-menu-close');
+
+      if (!toggleBtn || !drawer || !closeBtn) return;
+
+      // Create overlay element
+      const overlay = document.createElement('div');
+      overlay.className = 'mobile-overlay';
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(overlay);
+
+      let isOpen = false;
+
+      function openDrawer() {
+        isOpen = true;
+        drawer.classList.add('drawer-open');
+        overlay.classList.add('overlay-active');
+        document.body.classList.add('drawer-active');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+
+        // Focus the close button for accessibility
+        setTimeout(() => closeBtn.focus(), 100);
+      }
+
+      function closeDrawer() {
+        isOpen = false;
+        drawer.classList.remove('drawer-open');
+        overlay.classList.remove('overlay-active');
+        document.body.classList.remove('drawer-active');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+
+        // Return focus to hamburger button
+        toggleBtn.focus();
+      }
+
+      function toggleDrawer() {
+        if (isOpen) {
+          closeDrawer();
+        } else {
+          openDrawer();
+        }
+      }
+
+      // Event listeners
+      toggleBtn.addEventListener('click', toggleDrawer);
+      closeBtn.addEventListener('click', closeDrawer);
+      overlay.addEventListener('click', closeDrawer);
+
+      // Close on nav link click
+      const drawerLinks = drawer.querySelectorAll('.mobile-drawer-links a, .mobile-drawer-cta');
+      drawerLinks.forEach(link => {
+        link.addEventListener('click', closeDrawer);
+      });
+
+      // Escape key closes drawer
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isOpen) {
+          closeDrawer();
+        }
+      });
+
+      // Focus trapping within drawer when open
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Tab' || !isOpen) return;
+
+        const focusableElements = drawer.querySelectorAll(
+          'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstFocusable = focusableElements[0];
+        const lastFocusable = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) {
+          // Shift+Tab: if at first element, wrap to last
+          if (document.activeElement === firstFocusable) {
+            e.preventDefault();
+            lastFocusable.focus();
+          }
+        } else {
+          // Tab: if at last element, wrap to first
+          if (document.activeElement === lastFocusable) {
+            e.preventDefault();
+            firstFocusable.focus();
+          }
+        }
+      });
+
+      // Close drawer on window resize to desktop
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768 && isOpen) {
+          closeDrawer();
+        }
+      });
+    }
+
     // Initialize on DOMContentLoaded
     document.addEventListener('DOMContentLoaded', () => {
       // Initialize canvas animation
@@ -2571,6 +2958,9 @@
 
       // Initialize navbar scroll behavior (Phase 6)
       initNavbarScroll();
+
+      // Initialize mobile drawer (Phase 6)
+      initMobileDrawer();
     });
   </script>
 </body>
