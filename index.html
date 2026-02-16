@@ -638,27 +638,157 @@
        13. TIMELINE
        ======================================== */
 
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      margin-top: 3rem;
+    .timeline-container {
+      position: relative;
+      padding: 4rem 0 2rem;
     }
 
-    .timeline-node {
-      background: var(--color-bg-elevated);
-      border: 1px solid var(--color-border);
-      border-radius: var(--border-radius);
-      padding: 1.5rem;
+    .timeline-line {
+      position: absolute;
+      left: 8px;
+      top: 4rem;
+      bottom: 2rem;
+      width: 2px;
+      background: var(--color-border);
+    }
+
+    .timeline-milestones {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .timeline-milestone {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .milestone-node {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid var(--color-border);
+      background: transparent;
+      flex-shrink: 0;
+      margin-right: 1rem;
+      z-index: 1;
+      position: relative;
+    }
+
+    .milestone-content {
       text-align: left;
     }
 
-    .timeline-marker {
-      font-family: var(--font-mono);
+    .milestone-date {
       font-size: var(--text-sm);
-      color: var(--color-accent);
-      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
       margin-bottom: 0.5rem;
+      font-family: var(--font-mono);
+      color: var(--color-text-muted);
+    }
+
+    .milestone-title {
+      font-family: var(--font-heading);
+      font-size: var(--text-lg);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: var(--color-text);
+    }
+
+    .milestone-desc {
+      font-size: var(--text-sm);
+      line-height: 1.5;
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    /* State: Completed */
+    .milestone-completed .milestone-node {
+      background: #10b981;
+      border-color: #10b981;
+    }
+
+    .milestone-completed .milestone-date {
+      color: #10b981;
+    }
+
+    /* State: Current */
+    .milestone-current .milestone-node {
+      background: var(--blue-500);
+      border-color: var(--blue-500);
+      animation: pulse-blue 2s infinite;
+    }
+
+    .milestone-current .milestone-date {
+      color: var(--blue-500);
+      font-weight: 600;
+    }
+
+    /* State: Future */
+    .milestone-future .milestone-node {
+      background: transparent;
+      border-color: var(--color-text-muted);
+    }
+
+    .milestone-future .milestone-date,
+    .milestone-future .milestone-title {
+      opacity: 0.6;
+    }
+
+    @keyframes pulse-blue {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+      50% { box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); }
+    }
+
+    /* Desktop: Horizontal timeline */
+    @media (min-width: 768px) {
+      .timeline-container {
+        padding: 4rem 0;
+      }
+
+      .timeline-line {
+        left: 0;
+        right: 0;
+        top: calc(4rem + 8px);
+        bottom: auto;
+        width: 100%;
+        height: 2px;
+      }
+
+      .timeline-milestones {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .timeline-milestone {
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+      }
+
+      .milestone-node {
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+
+      .milestone-content {
+        text-align: center;
+        max-width: 180px;
+      }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .milestone-current .milestone-node {
+        animation: none;
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+      }
     }
 
     /* ========================================
@@ -1501,42 +1631,69 @@
   </section>
 
   <!-- Timeline Section -->
-  <section id="timeline">
+  <section id="timeline" aria-label="Project timeline">
     <div class="container">
       <div class="badge">EN MOUVEMENT</div>
-      <h2>Progress & Roadmap</h2>
+      <h2>Project Timeline</h2>
+      <p class="intro">From vision to reality, tracking our progress</p>
 
-      <div class="timeline">
-        <article class="timeline-node">
-          <div class="timeline-marker">2024 Q3</div>
-          <h3>Genesis</h3>
-          <p>[Placeholder: DINUM and LINAGORA identify orchestration gap, begin collaboration on unified architecture]</p>
-        </article>
-        <article class="timeline-node">
-          <div class="timeline-marker">2024 Q4</div>
-          <h3>Standard Foundation</h3>
-          <p>[Placeholder: Initial specification draft covering packaging, navigation, authentication protocols]</p>
-        </article>
-        <article class="timeline-node">
-          <div class="timeline-marker">2025 Q1</div>
-          <h3>First Implementations</h3>
-          <p>[Placeholder: Pilot integrations with Twake Mail, Drive, Calendar demonstrating cross-app workflows]</p>
-        </article>
-        <article class="timeline-node">
-          <div class="timeline-marker">2025 Q2</div>
-          <h3>Alliance Formation</h3>
-          <p>[Placeholder: Official launch of governance body, founding members signed, working groups established]</p>
-        </article>
-        <article class="timeline-node">
-          <div class="timeline-marker">2026 S1</div>
-          <h3>Certification Program</h3>
-          <p>[Placeholder: Testing and certification infrastructure operational, first certified services]</p>
-        </article>
-        <article class="timeline-node">
-          <div class="timeline-marker">2026 S2</div>
-          <h3>Ecosystem Growth</h3>
-          <p>[Placeholder: 20+ services certified, public sector deployments, developer community active]</p>
-        </article>
+      <div class="timeline-container">
+        <div class="timeline-line" aria-hidden="true"></div>
+        <div class="timeline-milestones">
+          <div class="timeline-milestone milestone-completed">
+            <div class="milestone-node" aria-hidden="true"></div>
+            <div class="milestone-content">
+              <div class="milestone-date">2024 Q3</div>
+              <h3 class="milestone-title">Foundational work</h3>
+              <p class="milestone-desc">La Suite x Twake.ai collaboration begins</p>
+            </div>
+          </div>
+
+          <div class="timeline-milestone milestone-completed">
+            <div class="milestone-node" aria-hidden="true"></div>
+            <div class="milestone-content">
+              <div class="milestone-date">2024 Q4</div>
+              <h3 class="milestone-title">Advanced integration</h3>
+              <p class="milestone-desc">La Suite x Twake.ai technical integration</p>
+            </div>
+          </div>
+
+          <div class="timeline-milestone milestone-completed">
+            <div class="milestone-node" aria-hidden="true"></div>
+            <div class="milestone-content">
+              <div class="milestone-date">2025 Q1</div>
+              <h3 class="milestone-title">First specifications</h3>
+              <p class="milestone-desc">Open Buro draft specifications published</p>
+            </div>
+          </div>
+
+          <div class="timeline-milestone milestone-current">
+            <div class="milestone-node" aria-hidden="true"></div>
+            <div class="milestone-content">
+              <div class="milestone-date">2025 Q2</div>
+              <h3 class="milestone-title">Standard V1.0 publication</h3>
+              <p class="milestone-desc">Official standard release and governance setup</p>
+            </div>
+          </div>
+
+          <div class="timeline-milestone milestone-future">
+            <div class="milestone-node" aria-hidden="true"></div>
+            <div class="milestone-content">
+              <div class="milestone-date">2026 H1</div>
+              <h3 class="milestone-title">Alliance expansion</h3>
+              <p class="milestone-desc">Growing membership across European markets</p>
+            </div>
+          </div>
+
+          <div class="timeline-milestone milestone-future">
+            <div class="milestone-node" aria-hidden="true"></div>
+            <div class="milestone-content">
+              <div class="milestone-date">2026 H2</div>
+              <h3 class="milestone-title">Multi-vendor POCs</h3>
+              <p class="milestone-desc">First production implementations demonstrating interoperability</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
