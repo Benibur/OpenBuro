@@ -77,10 +77,11 @@ Plans:
   3. Timeline renders vertically on mobile with proper spacing and readability
   4. User sees founding members (LINAGORA/Twake.ai, DINUM/La Suite numerique) as styled text placeholders
   5. Prominent CTA block with gradient border invites visitors to join the Alliance
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- (Plans will be generated via /gsd:plan-phase)
+- [ ] 04-01-PLAN.md — Timeline section with 6 milestones and state-based styling
+- [ ] 04-02-PLAN.md — Ecosystem section with member display and gradient CTA
 
 ### Phase 5: News & Newsletter
 **Goal**: Enable visitor engagement through news display and email capture with GDPR compliance
@@ -138,7 +139,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 1. Foundation & Design System | 0/TBD | Not started | - |
 | 2. Hero & Canvas Animation | 0/TBD | Not started | - |
 | 3. Core Content Sections | 0/TBD | Not started | - |
-| 4. Timeline & Ecosystem | 0/TBD | Not started | - |
+| 4. Timeline & Ecosystem | 0/2 | Planned | - |
 | 5. News & Newsletter | 0/1 | Planned | - |
 | 6. Animations & Interactivity | 0/TBD | Not started | - |
 | 7. Performance & Launch | 0/TBD | Not started | - |
