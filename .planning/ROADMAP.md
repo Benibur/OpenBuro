@@ -127,10 +127,11 @@ Plans:
   3. No third-party cookies or tracking scripts present (GDPR by design)
   4. Site works as static file drop on any hosting (tested with local file:// protocol)
   5. All images optimized, fonts loaded efficiently, critical CSS inlined
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- (Plans will be generated via /gsd:plan-phase)
+- [ ] 07-01-PLAN.md — Optimize CSS payload, font loading, and complete accessibility audit
+- [ ] 07-02-PLAN.md — Generate inline SVG favicon, validate HTML, and verify production readiness
 
 ## Progress
 
@@ -145,4 +146,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 4. Timeline & Ecosystem | 0/2 | Planned | - |
 | 5. News & Newsletter | 0/1 | Planned | - |
 | 6. Animations & Interactivity | 0/2 | Planned | - |
-| 7. Performance & Launch | 0/TBD | Not started | - |
+| 7. Performance & Launch | 0/2 | Planned | - |
