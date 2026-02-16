@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-16)
 ## Current Position
 
 Phase: 3 of 7 (Core Content Sections)
-Plan: 2 of 2 in current phase
-Status: Plan 03-01 complete, executing Plan 03-02
-Last activity: 2026-02-17 — Completed Phase 03 Plan 01 (Problem + Vision sections)
+Plan: 2 of 2 in current phase - PHASE COMPLETE
+Status: Phase 3 complete, ready for Phase 4
+Last activity: 2026-02-17 — Completed Phase 03 Plan 02 (Pillars section with accordions)
 
-Progress: [████░░░░░░] 50%
+Progress: [█████░░░░░] 60%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
-- Average duration: 143 seconds (2.4 minutes)
-- Total execution time: 0.16 hours
+- Total plans completed: 5
+- Average duration: 137 seconds (2.3 minutes)
+- Total execution time: 0.19 hours
 
 **By Phase:**
 
@@ -29,11 +29,11 @@ Progress: [████░░░░░░] 50%
 |-------|-------|-------|----------|
 | 01 | 2/2 ✓ | 311s | 156s |
 | 02 | 1/1 ✓ | 116s | 116s |
-| 03 | 1/2 | 146s | 146s |
+| 03 | 2/2 ✓ | 264s | 132s |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (114s), 01-02 (197s), 02-01 (116s), 03-01 (146s)
-- Trend: Consistent velocity, Phase 3 in progress
+- Last 5 plans: 01-01 (114s), 01-02 (197s), 02-01 (116s), 03-01 (146s), 03-02 (118s)
+- Trend: Improving velocity, Phase 3 complete
 
 ## Accumulated Context
 
@@ -60,6 +60,10 @@ Recent decisions affecting current work:
 - [Phase 03-01]: SVG inline (not external file) for single-file constraint
 - [Phase 03-01]: stroke-dasharray draw-in animation for smooth SVG path reveals
 - [Phase 03-01]: Intersection Observer threshold 0.3 triggers animation at 30% visibility
+- [Phase 03-02]: Single-expand accordion behavior for focused user attention
+- [Phase 03-02]: Smooth scroll to expanded accordion (scrollIntoView) keeps content visible
+- [Phase 03-02]: Alliance blocks reuse constat card styling for design consistency
+- [Phase 03-02]: max-height: 500px for accordion animation (covers all content without truncation)
 
 ### Pending Todos
 
@@ -72,9 +76,9 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-17 (Phase 3 execution)
-Stopped at: Completed Phase 03 Plan 01 (Problem + Vision sections)
+Stopped at: Completed Phase 03 Plan 02 (Pillars section with accordions)
 Resume file: None
 
 ---
 
-**Next step:** Plan 03-01 complete. Executing Plan 03-02 (Pillars section with accordions).
+**Next step:** Phase 3 complete. Ready to begin Phase 4 when requested.
