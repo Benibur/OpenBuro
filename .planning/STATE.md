@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-16)
 
 **Core value:** Clearly communicate that Open Buro is the missing orchestration layer turning isolated open source apps into a real platform, and make it effortless for visitors to join the Alliance.
-**Current focus:** Phase 1 - Foundation & Design System
+**Current focus:** Phase 4 - Timeline & Ecosystem
 
 ## Current Position
 
-Phase: 3 of 7 (Core Content Sections)
+Phase: 4 of 7 (Timeline & Ecosystem)
 Plan: 2 of 2 in current phase - PHASE COMPLETE
-Status: Phase 3 complete, ready for Phase 4
-Last activity: 2026-02-17 — Completed Phase 03 Plan 02 (Pillars section with accordions)
+Status: Phase 4 complete, ready for Phase 5
+Last activity: 2026-02-17 — Completed Phase 04 Plan 02 (Ecosystem section with member cards and gradient CTA)
 
-Progress: [█████░░░░░] 60%
+Progress: [███████░░░] 70%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 5
-- Average duration: 137 seconds (2.3 minutes)
-- Total execution time: 0.19 hours
+- Total plans completed: 7
+- Average duration: 127 seconds (2.1 minutes)
+- Total execution time: 0.25 hours
 
 **By Phase:**
 
@@ -30,10 +30,11 @@ Progress: [█████░░░░░] 60%
 | 01 | 2/2 ✓ | 311s | 156s |
 | 02 | 1/1 ✓ | 116s | 116s |
 | 03 | 2/2 ✓ | 264s | 132s |
+| 04 | 2/2 ✓ | 146s | 73s |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (114s), 01-02 (197s), 02-01 (116s), 03-01 (146s), 03-02 (118s)
-- Trend: Improving velocity, Phase 3 complete
+- Last 5 plans: 02-01 (116s), 03-01 (146s), 03-02 (118s), 04-01 (~73s), 04-02 (~73s)
+- Trend: Accelerating velocity, Phase 4 complete
 
 ## Accumulated Context
 
@@ -64,6 +65,12 @@ Recent decisions affecting current work:
 - [Phase 03-02]: Smooth scroll to expanded accordion (scrollIntoView) keeps content visible
 - [Phase 03-02]: Alliance blocks reuse constat card styling for design consistency
 - [Phase 03-02]: max-height: 500px for accordion animation (covers all content without truncation)
+- [Phase 04-01]: Mobile-first vertical timeline switching to horizontal at 768px breakpoint
+- [Phase 04-01]: CSS state classes (milestone-completed/current/future) for semantic timeline styling
+- [Phase 04-01]: prefers-reduced-motion: static box-shadow replaces pulse animation
+- [Phase 04-02]: CSS mask-composite gradient border technique (no extra wrapper elements)
+- [Phase 04-02]: Separate btn-eco-ghost class to preserve existing btn-ghost behavior
+- [Phase 04-02]: auto-fit grid with 250px minimum for natural responsive column adaptation
 
 ### Pending Todos
 
@@ -75,10 +82,10 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-02-17 (Phase 3 execution)
-Stopped at: Completed Phase 03 Plan 02 (Pillars section with accordions)
+Last session: 2026-02-17 (Phase 4 execution)
+Stopped at: Completed Phase 04 Plan 02 (Ecosystem section with member cards and gradient CTA)
 Resume file: None
 
 ---
 
-**Next step:** Phase 3 complete. Ready to begin Phase 4 when requested.
+**Next step:** Phase 4 complete. Ready to begin Phase 5 when requested.
