@@ -32,10 +32,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. User sees sticky navbar with Open Buro logo and "Join the Alliance" CTA button
   4. User sees footer with navigation links, contact email, social media links, and license info
   5. Page loads as single HTML file with inline CSS and metadata for SEO/social sharing
-**Plans**: TBD
+**Plans**: 2 plans
 
-Plans:
-- (Plans will be generated via /gsd:plan-phase)
+- [ ] 01-01-PLAN.md — HTML structure with semantic markup and SEO metadata
+- [ ] 01-02-PLAN.md — Dark mode design system with CSS custom properties and FOUC prevention
 
 ### Phase 2: Hero & Canvas Animation
 **Goal**: Deliver impressive first-screen experience with animated network constellation that performs smoothly on mobile
@@ -135,7 +135,7 @@ Plans:
 Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 
 | Phase | Plans Complete | Status | Completed |
-|-------|----------------|--------|-----------|
+| 1. Foundation & Design System | 0/2 | Planned | - |
 | 1. Foundation & Design System | 0/TBD | Not started | - |
 | 2. Hero & Canvas Animation | 0/TBD | Not started | - |
 | 3. Core Content Sections | 0/TBD | Not started | - |
