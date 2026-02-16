@@ -907,24 +907,194 @@
       font-size: var(--text-sm);
     }
 
-    .vision-quote {
-      font-family: var(--font-heading);
-      font-size: var(--text-xl);
-      color: var(--color-text-muted);
-      font-style: italic;
-      margin-top: 3rem;
-      padding: 2rem;
-      border-left: 4px solid var(--color-primary);
-      text-align: left;
-    }
+    /* ========================================
+       20. VISION SECTION
+       ======================================== */
 
     .transformation-diagram {
       background: var(--color-bg-elevated);
       border: 1px solid var(--color-border);
       border-radius: var(--border-radius);
-      padding: 4rem 2rem;
-      margin: 2rem 0;
+      padding: 3rem 1rem;
+      margin: 3rem 0;
+      overflow-x: auto;
+    }
+
+    .transformation-diagram svg {
+      width: 100%;
+      max-width: 1000px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* SVG diagram styling */
+    .diagram-label {
+      font-size: 14px;
+      font-weight: 600;
+      fill: var(--color-text);
+      font-family: var(--font-heading);
+    }
+
+    .diagram-text {
+      font-size: 11px;
+      fill: var(--color-text-muted);
+      font-family: var(--font-body);
+    }
+
+    .diagram-text-large {
+      font-size: 14px;
+      fill: var(--color-text);
+      font-weight: 600;
+      font-family: var(--font-heading);
+    }
+
+    .diagram-callout {
+      font-size: 10px;
+      fill: var(--color-accent);
+      font-family: var(--font-mono);
+    }
+
+    .diagram-box {
+      stroke-width: 2;
+      fill: var(--color-bg);
+    }
+
+    .diagram-box.isolated {
+      stroke: var(--color-text-muted);
+      stroke-dasharray: 4 4;
+      opacity: 0.6;
+    }
+
+    .diagram-box.orchestration {
+      stroke: var(--color-accent);
+      fill: var(--color-bg-elevated);
+      filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.3));
+    }
+
+    .diagram-box.unified {
+      stroke: var(--color-accent);
+      fill: var(--color-bg);
+    }
+
+    .diagram-node {
+      fill: var(--color-accent);
+    }
+
+    .diagram-connection {
+      stroke: var(--color-accent);
+      stroke-width: 1.5;
+    }
+
+    .animated-path {
+      stroke: var(--color-accent);
+      stroke-width: 3;
+      fill: none;
+      stroke-dasharray: 0;
+      stroke-dashoffset: 0;
+    }
+
+    .arrow-fill {
+      fill: var(--color-accent);
+    }
+
+    /* Features grid below diagram */
+    .features-grid {
+      display: grid;
+      gap: 1.5rem;
+      margin-top: 3rem;
+      grid-template-columns: 1fr;
+    }
+
+    .feature-card {
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      text-align: left;
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-accent);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .feature-card .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      line-height: 1;
+    }
+
+    .feature-card h3 {
+      font-size: var(--text-lg);
+      margin-bottom: 0.5rem;
+      color: var(--color-text);
+    }
+
+    .feature-card p {
       color: var(--color-text-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    @media (min-width: 768px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .transformation-diagram {
+        padding: 4rem 2rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .features-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    /* Mobile: stack diagram vertically */
+    @media (max-width: 767px) {
+      .transformation-diagram svg {
+        height: 600px;
+      }
+
+      .diagram-label {
+        font-size: 12px;
+      }
+
+      .diagram-text {
+        font-size: 9px;
+      }
+
+      .diagram-text-large {
+        font-size: 12px;
+      }
+    }
+
+    .vision-quote {
+      margin: 4rem auto 0;
+      padding: 2rem 0 2rem 2rem;
+      border-left: 4px solid var(--color-accent);
+      max-width: 800px;
+      background: linear-gradient(90deg, rgba(96, 165, 250, 0.05) 0%, transparent 100%);
+      text-align: left;
+    }
+
+    .dark .vision-quote {
+      background: linear-gradient(90deg, rgba(96, 165, 250, 0.08) 0%, transparent 100%);
+    }
+
+    .vision-quote p {
+      font-size: 1.75rem;
+      font-weight: 600;
+      font-family: var(--font-heading);
+      color: var(--color-text);
+      margin: 0;
+      line-height: 1.3;
+      font-style: italic;
     }
   </style>
 </head>
@@ -1006,37 +1176,98 @@
   </section>
 
   <!-- Vision Section -->
-  <section id="vision">
+  <section id="vision" aria-label="Vision statement">
     <div class="container">
       <div class="badge">LA VISION</div>
-      <h2>From Isolated Apps to Unified Platform</h2>
-      <p class="subtitle">[Placeholder: Open Buro provides the orchestration layer that transforms independent services into an integrated workplace experience]</p>
+      <h2>From Fragmentation to Unity</h2>
+      <p class="subtitle">Open Buro orchestrates existing apps into a cohesive platform—no vendor lock-in, no rip-and-replace.</p>
 
+      <!-- Transformation Diagram (SVG) -->
       <div class="transformation-diagram">
-        [Placeholder: SVG diagram showing transformation from isolated apps to unified platform via Open Buro orchestration layer - will be implemented in Phase 3]
+        <svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" aria-labelledby="diagram-title">
+          <title id="diagram-title">Transformation from isolated apps to unified workplace via Open Buro</title>
+
+          <!-- Stage 1: Isolated Apps -->
+          <g id="stage-1">
+            <text x="100" y="40" text-anchor="middle" class="diagram-label">Isolated Apps</text>
+            <rect x="70" y="80" width="60" height="40" class="diagram-box isolated" rx="4"/>
+            <text x="100" y="105" text-anchor="middle" class="diagram-text">Email</text>
+            <rect x="70" y="130" width="60" height="40" class="diagram-box isolated" rx="4"/>
+            <text x="100" y="155" text-anchor="middle" class="diagram-text">Docs</text>
+            <rect x="70" y="180" width="60" height="40" class="diagram-box isolated" rx="4"/>
+            <text x="100" y="205" text-anchor="middle" class="diagram-text">Tasks</text>
+          </g>
+
+          <!-- Arrow 1: Isolated → Open Buro -->
+          <g id="arrow-1">
+            <path d="M 150 150 L 320 150" class="animated-path" stroke-linecap="round" marker-end="url(#arrowhead)"/>
+          </g>
+
+          <!-- Stage 2: Open Buro Layer -->
+          <g id="stage-2">
+            <text x="500" y="40" text-anchor="middle" class="diagram-label">Open Buro Layer</text>
+            <rect x="400" y="80" width="200" height="140" class="diagram-box orchestration" rx="8"/>
+            <text x="500" y="140" text-anchor="middle" class="diagram-text-large">Open Buro Standard</text>
+            <text x="500" y="170" text-anchor="middle" class="diagram-callout">SSO</text>
+            <text x="500" y="190" text-anchor="middle" class="diagram-callout">Unified Nav</text>
+            <text x="500" y="210" text-anchor="middle" class="diagram-callout">Cross-app Data</text>
+          </g>
+
+          <!-- Arrow 2: Open Buro → Unified Workplace -->
+          <g id="arrow-2">
+            <path d="M 620 150 L 790 150" class="animated-path" stroke-linecap="round" marker-end="url(#arrowhead)"/>
+          </g>
+
+          <!-- Stage 3: Unified Workplace -->
+          <g id="stage-3">
+            <text x="870" y="40" text-anchor="middle" class="diagram-label">Unified Workplace</text>
+            <rect x="800" y="80" width="140" height="140" class="diagram-box unified" rx="8"/>
+            <text x="870" y="140" text-anchor="middle" class="diagram-text-large">Seamless</text>
+            <text x="870" y="165" text-anchor="middle" class="diagram-text-large">Experience</text>
+            <!-- Connected nodes inside -->
+            <circle cx="840" cy="190" r="4" class="diagram-node"/>
+            <circle cx="870" cy="190" r="4" class="diagram-node"/>
+            <circle cx="900" cy="190" r="4" class="diagram-node"/>
+            <line x1="840" y1="190" x2="870" y2="190" class="diagram-connection"/>
+            <line x1="870" y1="190" x2="900" y2="190" class="diagram-connection"/>
+          </g>
+
+          <!-- Arrowhead marker definition -->
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" class="arrow-fill"/>
+            </marker>
+          </defs>
+        </svg>
       </div>
 
+      <!-- 4 Feature Cards -->
       <div class="features-grid">
         <article class="feature-card">
-          <h3>Unified Navigation</h3>
-          <p>[Placeholder: Single navigation interface across all workplace services - users feel like they're in one platform]</p>
+          <div class="card-icon">📦</div>
+          <h3>Universal Packaging</h3>
+          <p>Standard app format. One registry. Any publisher can contribute.</p>
         </article>
         <article class="feature-card">
-          <h3>Cross-App Workflows</h3>
-          <p>[Placeholder: Share content, trigger actions, and move data seamlessly between apps - chat to document, email to calendar]</p>
+          <div class="card-icon">🧭</div>
+          <h3>Shared Navigation</h3>
+          <p>Common home, unified app grid, global search. Users never lost.</p>
         </article>
         <article class="feature-card">
-          <h3>Shared Intelligence</h3>
-          <p>[Placeholder: Platform-level search, notifications, and AI services that understand your full workplace context]</p>
+          <div class="card-icon">🔗</div>
+          <h3>Cross-App Data</h3>
+          <p>Business objects flow between apps. Semantic graph connects knowledge.</p>
         </article>
         <article class="feature-card">
-          <h3>Enterprise Security</h3>
-          <p>[Placeholder: Centralized authentication, authorization, and audit trails across all integrated services]</p>
+          <div class="card-icon">👥</div>
+          <h3>Collective Identity</h3>
+          <p>Organization-wide groups, permissions, presence. Manage once, apply everywhere.</p>
         </article>
       </div>
 
+      <!-- Conclusion Quote -->
       <blockquote class="vision-quote">
-        "[Placeholder: Quote about the power of orchestration turning open source apps into a platform that rivals proprietary suites]"
+        <p>Open Buro doesn't replace your apps. It makes them work together.</p>
       </blockquote>
     </div>
   </section>
@@ -1448,6 +1679,51 @@
       }
     }
 
+    /**
+     * animateSVGPaths: Draw-in animation for Vision section SVG diagram
+     * Triggers when section enters viewport using Intersection Observer
+     */
+    function animateSVGPaths() {
+      const paths = document.querySelectorAll('#vision svg path.animated-path');
+      const visionSection = document.querySelector('#vision');
+
+      if (!visionSection || paths.length === 0) return;
+
+      // Check for prefers-reduced-motion
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Use existing Intersection Observer pattern from Phase 2
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (prefersReducedMotion) {
+              // Show paths immediately, skip animation
+              paths.forEach(path => {
+                path.style.strokeDashoffset = '0';
+              });
+            } else {
+              // Animate paths
+              paths.forEach((path, index) => {
+                const length = path.getTotalLength();
+                path.style.strokeDasharray = length;
+                path.style.strokeDashoffset = length;
+
+                // Stagger animation: 500ms delay between paths
+                setTimeout(() => {
+                  path.style.transition = 'stroke-dashoffset 1.5s ease-in-out';
+                  path.style.strokeDashoffset = '0';
+                }, index * 500);
+              });
+            }
+
+            observer.unobserve(visionSection);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      observer.observe(visionSection);
+    }
+
     // Initialize on DOMContentLoaded
     document.addEventListener('DOMContentLoaded', () => {
       // Initialize canvas animation
@@ -1458,6 +1734,9 @@
       heroTextElements.forEach((element, index) => {
         element.style.animationDelay = `${index * 200}ms`;
       });
+
+      // Initialize SVG path animation
+      animateSVGPaths();
     });
   </script>
 </body>
