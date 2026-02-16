@@ -583,6 +583,57 @@
       color: var(--color-text-muted);
     }
 
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      color: var(--color-text-muted);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    /* Hero text animation (initially hidden, will fade in sequentially) */
+    .hero-text {
+      opacity: 0;
+      animation: heroTextFade 0.8s ease-out forwards;
+    }
+
+    @keyframes heroTextFade {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% {
+        opacity: 0.5;
+        transform: translateX(-50%) scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.2);
+      }
+    }
+
+    /* Respect reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-text {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+      .scroll-indicator {
+        animation: none;
+        opacity: 0.7;
+      }
+    }
+
     /* ========================================
        13. TIMELINE
        ======================================== */
@@ -830,16 +881,21 @@
 
   <!-- Hero Section -->
   <section id="hero">
-    <div id="hero-canvas"></div>
+    <canvas id="hero-canvas"></canvas>
     <div class="hero-content">
-      <div class="badge">an open standard</div>
-      <h1>[Placeholder: The European Standard for Workplace Orchestration]</h1>
-      <p class="subtitle">[Placeholder: Unifying open source workplace apps into a true platform alternative to Microsoft 365]</p>
-      <div class="hero-cta">
-        <button class="btn-primary">Join the Alliance</button>
-        <button class="btn-secondary">Learn More</button>
+      <div class="badge hero-text">EUROPEAN OPEN STANDARD</div>
+      <h1 class="hero-text" style="background: linear-gradient(135deg, var(--color-primary), var(--color-accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">The European Standard for Workplace Orchestration</h1>
+      <p class="subtitle hero-text">Unifying open source workplace apps into a true platform alternative to Microsoft 365</p>
+      <div class="hero-cta hero-text">
+        <a href="#ecosystem" class="btn-primary">Join the Alliance</a>
+        <a href="#vision" class="btn-secondary">Learn More</a>
       </div>
-      <p class="origin-credit">[Placeholder: Born from the collaboration between La Suite numérique (DINUM) and Twake.ai (LINAGORA)]</p>
+      <p class="origin-credit hero-text">Born from the collaboration between La Suite numérique (DINUM) and Twake.ai (LINAGORA)</p>
+    </div>
+    <div class="scroll-indicator">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
     </div>
   </section>
 
