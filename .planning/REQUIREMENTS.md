@@ -156,13 +156,84 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (populated by roadmapper) | | |
+| NAV-01 | Phase 1 | Pending |
+| NAV-02 | Phase 6 | Pending |
+| NAV-03 | Phase 6 | Pending |
+| NAV-04 | Phase 6 | Pending |
+| NAV-05 | Phase 1 | Pending |
+| NAV-06 | Phase 1 | Pending |
+| HERO-01 | Phase 2 | Pending |
+| HERO-02 | Phase 2 | Pending |
+| HERO-03 | Phase 2 | Pending |
+| HERO-04 | Phase 2 | Pending |
+| HERO-05 | Phase 2 | Pending |
+| HERO-06 | Phase 2 | Pending |
+| PROB-01 | Phase 3 | Pending |
+| PROB-02 | Phase 3 | Pending |
+| PROB-03 | Phase 3 | Pending |
+| VIS-01 | Phase 3 | Pending |
+| VIS-02 | Phase 3 | Pending |
+| VIS-03 | Phase 3 | Pending |
+| VIS-04 | Phase 3 | Pending |
+| VIS-05 | Phase 3 | Pending |
+| PIL-01 | Phase 3 | Pending |
+| PIL-02 | Phase 3 | Pending |
+| PIL-03 | Phase 3 | Pending |
+| PIL-04 | Phase 3 | Pending |
+| TIME-01 | Phase 4 | Pending |
+| TIME-02 | Phase 4 | Pending |
+| TIME-03 | Phase 4 | Pending |
+| TIME-04 | Phase 4 | Pending |
+| TIME-05 | Phase 4 | Pending |
+| ECO-01 | Phase 4 | Pending |
+| ECO-02 | Phase 4 | Pending |
+| ECO-03 | Phase 4 | Pending |
+| ECO-04 | Phase 4 | Pending |
+| NEWS-01 | Phase 5 | Pending |
+| NEWS-02 | Phase 5 | Pending |
+| NEWS-03 | Phase 5 | Pending |
+| NEWS-04 | Phase 5 | Pending |
+| NLTR-01 | Phase 5 | Pending |
+| NLTR-02 | Phase 5 | Pending |
+| NLTR-03 | Phase 5 | Pending |
+| ANIM-01 | Phase 6 | Pending |
+| ANIM-02 | Phase 6 | Pending |
+| ANIM-03 | Phase 6 | Pending |
+| ANIM-04 | Phase 6 | Pending |
+| ANIM-05 | Phase 6 | Pending |
+| ANIM-06 | Phase 6 | Pending |
+| ANIM-07 | Phase 6 | Pending |
+| DS-01 | Phase 1 | Pending |
+| DS-02 | Phase 1 | Pending |
+| DS-03 | Phase 1 | Pending |
+| DS-04 | Phase 1 | Pending |
+| DS-05 | Phase 1 | Pending |
+| SEO-01 | Phase 1 | Pending |
+| SEO-02 | Phase 1 | Pending |
+| SEO-03 | Phase 1 | Pending |
+| FOOT-01 | Phase 1 | Pending |
+| FOOT-02 | Phase 1 | Pending |
+| PERF-01 | Phase 7 | Pending |
+| PERF-02 | Phase 7 | Pending |
+| PERF-03 | Phase 7 | Pending |
+| PERF-04 | Phase 1 | Pending |
 
 **Coverage:**
 - v1 requirements: 47 total
-- Mapped to phases: 0
-- Unmapped: 47 (pending roadmap)
+- Mapped to phases: 47
+- Unmapped: 0
+
+**Verification:**
+- Phase 1: 14 requirements (NAV-01, NAV-05, NAV-06, FOOT-01, FOOT-02, DS-01, DS-02, DS-03, DS-04, DS-05, SEO-01, SEO-02, SEO-03, PERF-04)
+- Phase 2: 6 requirements (HERO-01 through HERO-06)
+- Phase 3: 12 requirements (PROB-01 through PROB-03, VIS-01 through VIS-05, PIL-01 through PIL-04)
+- Phase 4: 9 requirements (TIME-01 through TIME-05, ECO-01 through ECO-04)
+- Phase 5: 7 requirements (NEWS-01 through NEWS-04, NLTR-01 through NLTR-03)
+- Phase 6: 10 requirements (NAV-02, NAV-03, NAV-04, ANIM-01 through ANIM-07)
+- Phase 7: 3 requirements (PERF-01, PERF-02, PERF-03)
+
+Total: 14 + 6 + 12 + 9 + 7 + 10 + 3 = 61 requirement assignments (note: NAV-01 in Phase 1 provides structure, NAV-02/03/04 in Phase 6 provide interactivity)
 
 ---
 *Requirements defined: 2026-02-16*
-*Last updated: 2026-02-16 after initial definition*
+*Last updated: 2026-02-16 after roadmap creation*
