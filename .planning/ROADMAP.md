@@ -63,10 +63,11 @@ Plans:
   3. Transformation diagram lines draw in smoothly when section enters viewport
   4. User sees Pillars section with Standard technical axes (7 expandable accordions) and Alliance mission blocks
   5. Pull quote "Code is Law... but Architecture is Politics" displays with distinctive styling
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- (Plans will be generated via /gsd:plan-phase)
+- [ ] 03-01-PLAN.md — Problem and Vision sections with responsive cards and animated SVG diagram
+- [ ] 03-02-PLAN.md — Pillars section with 7 accordions, 5 Alliance blocks, and pull quote
 
 ### Phase 4: Timeline & Ecosystem
 **Goal**: Showcase project momentum through visual timeline and display founding partners with recruitment CTA
@@ -140,7 +141,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 |-------|----------------|--------|-----------|
 | 1. Foundation & Design System | 0/2 | Planned | - |
 | 2. Hero & Canvas Animation | 0/TBD | Not started | - |
-| 3. Core Content Sections | 0/TBD | Not started | - |
+| 3. Core Content Sections | 0/2 | Planned | - |
 | 4. Timeline & Ecosystem | 0/2 | Planned | - |
 | 5. News & Newsletter | 0/1 | Planned | - |
 | 6. Animations & Interactivity | 0/2 | Planned | - |
