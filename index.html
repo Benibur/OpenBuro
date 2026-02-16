@@ -39,11 +39,11 @@
   <meta property="og:image" content="https://openburo.eu/og-image.png">
 
   <!-- Twitter Card -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://openburo.eu/">
-  <meta property="twitter:title" content="Open Buro - European Workplace Orchestration Standard">
-  <meta property="twitter:description" content="An open European standard for workplace orchestration, providing the missing layer that turns isolated open source apps into a unified digital workplace platform.">
-  <meta property="twitter:image" content="https://openburo.eu/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://openburo.eu/">
+  <meta name="twitter:title" content="Open Buro - European Workplace Orchestration Standard">
+  <meta name="twitter:description" content="An open European standard for workplace orchestration, providing the missing layer that turns isolated open source apps into a unified digital workplace platform.">
+  <meta name="twitter:image" content="https://openburo.eu/og-image.png">
 
   <!-- Color Scheme & Theme -->
   <meta name="color-scheme" content="dark light">
@@ -51,13 +51,13 @@
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 
   <!-- Favicon (inline SVG) -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='30' fill='none' stroke='%234f46e5' stroke-width='4'/><circle cx='50' cy='50' r='5' fill='%234f46e5'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='30' fill='none' stroke='%234f46e5' stroke-width='4'/><circle cx='50' cy='50' r='5' fill='%234f46e5'/></svg>">
 
   <!-- External Resources -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@600;700&display=swap" rel="stylesheet">
 
   <!-- CSS Design System -->
   <style>
@@ -183,6 +183,22 @@
 
     a:hover {
       text-decoration: underline;
+    }
+
+    /* Focus-visible styles for keyboard accessibility */
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    [tabindex]:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
+    /* Remove default focus for mouse users */
+    :focus:not(:focus-visible) {
+      outline: none;
     }
 
     /* ========================================
@@ -1910,7 +1926,7 @@
 </head>
 <body>
   <!-- Navigation -->
-  <nav>
+  <nav aria-label="Main navigation" role="navigation">
     <div class="nav-container">
       <div class="nav-logo">Open Buro</div>
       <div class="nav-desktop">
@@ -1922,7 +1938,7 @@
         <a href="#news" class="link-underline">News</a>
         <a href="#newsletter" class="link-underline">Newsletter</a>
       </div>
-      <button class="btn-primary nav-cta-desktop">Join the Alliance</button>
+      <a href="#ecosystem" class="btn-primary nav-cta-desktop">Join the Alliance</a>
       <button class="nav-mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
         <span></span>
         <span></span>
@@ -1954,9 +1970,10 @@
     <a href="#ecosystem" class="btn-primary mobile-drawer-cta">Join the Alliance</a>
   </div>
 
+  <main>
   <!-- Hero Section -->
-  <section id="hero">
-    <canvas id="hero-canvas"></canvas>
+  <section id="hero" aria-label="Hero introduction">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-content">
       <div class="badge hero-text">EUROPEAN OPEN STANDARD</div>
       <h1 class="hero-text" style="background: linear-gradient(135deg, var(--color-primary), var(--color-accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">The European Standard for Workplace Orchestration</h1>
@@ -1967,8 +1984,8 @@
       </div>
       <p class="origin-credit hero-text">Born from the collaboration between La Suite numérique (DINUM) and Twake.ai (LINAGORA)</p>
     </div>
-    <div class="scroll-indicator">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <div class="scroll-indicator" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <polyline points="6 9 12 15 18 9"></polyline>
       </svg>
     </div>
@@ -1989,17 +2006,17 @@
         <!-- Right column: 3 constat cards -->
         <div class="constat-cards">
           <article class="constat-card animate-on-scroll stagger-1">
-            <div class="card-icon">🔐</div>
+            <div class="card-icon" aria-hidden="true">🔐</div>
             <h3>Login Fatigue</h3>
             <p>Users authenticate 5-10 times daily across separate apps. SSO exists but requires custom integration for each tool. Password managers become mandatory, not convenience.</p>
           </article>
           <article class="constat-card animate-on-scroll stagger-2">
-            <div class="card-icon">🏝️</div>
+            <div class="card-icon" aria-hidden="true">🏝️</div>
             <h3>Data Islands</h3>
             <p>Customer mentions in email don't link to CRM records. Meeting notes live separately from project tasks. Search works within apps, never across them. Knowledge scatters.</p>
           </article>
           <article class="constat-card animate-on-scroll stagger-3">
-            <div class="card-icon">🔀</div>
+            <div class="card-icon" aria-hidden="true">🔀</div>
             <h3>Context Switching Tax</h3>
             <p>Moving between apps means mental model switching. Different navigation patterns, inconsistent terminology, no shared workspace. Productivity bleeds at every boundary.</p>
           </article>
@@ -2077,22 +2094,22 @@
       <!-- 4 Feature Cards -->
       <div class="features-grid">
         <article class="feature-card animate-on-scroll stagger-1">
-          <div class="card-icon">📦</div>
+          <div class="card-icon" aria-hidden="true">📦</div>
           <h3>Universal Packaging</h3>
           <p>Standard app format. One registry. Any publisher can contribute.</p>
         </article>
         <article class="feature-card animate-on-scroll stagger-2">
-          <div class="card-icon">🧭</div>
+          <div class="card-icon" aria-hidden="true">🧭</div>
           <h3>Shared Navigation</h3>
           <p>Common home, unified app grid, global search. Users never lost.</p>
         </article>
         <article class="feature-card animate-on-scroll stagger-3">
-          <div class="card-icon">🔗</div>
+          <div class="card-icon" aria-hidden="true">🔗</div>
           <h3>Cross-App Data</h3>
           <p>Business objects flow between apps. Semantic graph connects knowledge.</p>
         </article>
         <article class="feature-card animate-on-scroll stagger-4">
-          <div class="card-icon">👥</div>
+          <div class="card-icon" aria-hidden="true">👥</div>
           <h3>Collective Identity</h3>
           <p>Organization-wide groups, permissions, presence. Manage once, apply everywhere.</p>
         </article>
@@ -2106,7 +2123,7 @@
   </section>
 
   <!-- Pillars Section -->
-  <section id="pillars" class="animate-on-scroll">
+  <section id="pillars" aria-label="Standard and Alliance pillars" class="animate-on-scroll">
     <div class="container">
       <div class="badge animate-on-scroll scale-in">DEUX PILIERS</div>
       <h2>Standard + Alliance</h2>
@@ -2196,31 +2213,31 @@
 
           <div class="alliance-mission">
             <div class="mission-block">
-              <div class="card-icon">📜</div>
+              <div class="card-icon" aria-hidden="true">📜</div>
               <h4>A Manifesto</h4>
               <p>Open Buro exists to prevent European workplace fragmentation. Open source without orchestration creates chaos. We establish founding principles before code.</p>
             </div>
 
             <div class="mission-block">
-              <div class="card-icon">⚖️</div>
+              <div class="card-icon" aria-hidden="true">⚖️</div>
               <h4>Open Governance</h4>
               <p>Neutral foundation structure modeled on Linux Foundation, CNCF. No single vendor controls the standard. Transparent decision-making, public roadmap.</p>
             </div>
 
             <div class="mission-block">
-              <div class="card-icon">🛠️</div>
+              <div class="card-icon" aria-hidden="true">🛠️</div>
               <h4>Adoption Actions</h4>
               <p>Implementation support for publishers: reference architectures, migration guides, certification program. Alliance members don't just endorse—they implement.</p>
             </div>
 
             <div class="mission-block">
-              <div class="card-icon">🌍</div>
+              <div class="card-icon" aria-hidden="true">🌍</div>
               <h4>International Visibility</h4>
               <p>European-scale promotion: conferences, government outreach, media relations. Make Open Buro the default assumption for workplace tech procurement.</p>
             </div>
 
             <div class="mission-block">
-              <div class="card-icon">💶</div>
+              <div class="card-icon" aria-hidden="true">💶</div>
               <h4>Funding</h4>
               <p>Resource mobilization through member contributions, public grants (EU innovation funds), commercial services. Sustainable funding model ensures long-term viability.</p>
             </div>
@@ -2329,17 +2346,17 @@
 
         <!-- Future Member Placeholders -->
         <div class="member-card member-placeholder" aria-label="Future member placeholder">
-          <div class="placeholder-icon">+</div>
+          <div class="placeholder-icon" aria-hidden="true">+</div>
           <p class="placeholder-text">Your organization here</p>
         </div>
 
         <div class="member-card member-placeholder" aria-label="Future member placeholder">
-          <div class="placeholder-icon">+</div>
+          <div class="placeholder-icon" aria-hidden="true">+</div>
           <p class="placeholder-text">Your organization here</p>
         </div>
 
         <div class="member-card member-placeholder" aria-label="Future member placeholder">
-          <div class="placeholder-icon">+</div>
+          <div class="placeholder-icon" aria-hidden="true">+</div>
           <p class="placeholder-text">Your organization here</p>
         </div>
       </div>
@@ -2374,7 +2391,7 @@
             <div class="news-card-body">
               <h3>Open Buro Website Launch</h3>
               <p class="news-excerpt">Discover our new landing page showcasing the Open Buro standard and Alliance mission.</p>
-              <a href="#" class="read-more">Read <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-left: 4px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+              <a href="#" class="read-more" aria-label="Read more about Open Buro Website Launch">Read <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: middle; margin-left: 4px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
             </div>
           </article>
 
@@ -2386,7 +2403,7 @@
             <div class="news-card-body">
               <h3>Open Buro Presented at FOSDEM 2025</h3>
               <p class="news-excerpt">The project was introduced to the open source community at Europe's largest developer conference.</p>
-              <a href="#" class="read-more">Read <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-left: 4px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+              <a href="#" class="read-more" aria-label="Read more about Open Buro at FOSDEM 2025">Read <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: middle; margin-left: 4px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
             </div>
           </article>
 
@@ -2398,7 +2415,7 @@
             <div class="news-card-body">
               <h3>La Suite numerique & Twake: Genesis of a Standard</h3>
               <p class="news-excerpt">How collaboration between French government and LINAGORA created the foundation for Open Buro.</p>
-              <a href="#" class="read-more">Read <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-left: 4px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+              <a href="#" class="read-more" aria-label="Read more about La Suite numerique and Twake genesis">Read <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: middle; margin-left: 4px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
             </div>
           </article>
         </div>
@@ -2409,8 +2426,8 @@
   <!-- Newsletter Section -->
   <section id="newsletter" class="newsletter-section animate-on-scroll" aria-label="Newsletter signup">
     <div class="container newsletter-container">
-      <div class="newsletter-icon">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <div class="newsletter-icon" aria-hidden="true">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <rect x="2" y="4" width="20" height="16" rx="2"></rect>
           <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
         </svg>
@@ -2418,7 +2435,7 @@
       <h2>Stay Informed</h2>
       <p class="newsletter-desc">Receive project updates, Alliance news, and ecosystem developments directly in your inbox.</p>
 
-      <form class="newsletter-form" action="#" method="POST">
+      <form class="newsletter-form" action="#" method="POST" aria-label="Newsletter subscription">
         <label for="newsletter-email" class="sr-only">Email address</label>
         <input
           id="newsletter-email"
@@ -2426,6 +2443,7 @@
           name="email"
           placeholder="your.email@example.com"
           required
+          aria-required="true"
           autocomplete="email"
         >
         <button type="submit" class="btn-primary">Subscribe</button>
@@ -2434,6 +2452,8 @@
       <p class="gdpr-notice">By subscribing, you agree to receive occasional updates about Open Buro. We respect your privacy and will never share your email address. You can unsubscribe at any time.</p>
     </div>
   </section>
+
+  </main>
 
   <!-- Footer -->
   <footer>
@@ -2444,7 +2464,7 @@
           <p class="footer-tagline">European open source ecosystem</p>
         </div>
 
-        <nav class="footer-nav">
+        <nav class="footer-nav" aria-label="Footer navigation">
           <h4>Navigation</h4>
           <a href="#problem">Problem</a>
           <a href="#vision">Vision</a>
