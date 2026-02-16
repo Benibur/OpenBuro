@@ -92,10 +92,10 @@ Plans:
   3. User can submit email address via newsletter form with configurable action endpoint
   4. Form displays GDPR consent text and validates email format before submission
   5. Newsletter section appears with email icon, clear heading, and description
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- (Plans will be generated via /gsd:plan-phase)
+- [ ] 05-01-PLAN.md — Add News section (3 article cards) and Newsletter section (email form with GDPR compliance)
 
 ### Phase 6: Animations & Interactivity
 **Goal**: Add scroll-triggered animations, mobile navigation, and interactive polish that elevates experience without sacrificing performance
@@ -139,6 +139,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 2. Hero & Canvas Animation | 0/TBD | Not started | - |
 | 3. Core Content Sections | 0/TBD | Not started | - |
 | 4. Timeline & Ecosystem | 0/TBD | Not started | - |
-| 5. News & Newsletter | 0/TBD | Not started | - |
+| 5. News & Newsletter | 0/1 | Planned | - |
 | 6. Animations & Interactivity | 0/TBD | Not started | - |
 | 7. Performance & Launch | 0/TBD | Not started | - |
