@@ -1828,6 +1828,58 @@
     }
 
     /**
+     * initAccordions: Expand/collapse functionality for Pillars section accordions
+     * Single-expand behavior: clicking one accordion closes others
+     * ARIA attributes for accessibility, keyboard navigation support
+     */
+    function initAccordions() {
+      const accordionItems = document.querySelectorAll('.accordion-item');
+
+      accordionItems.forEach((item, index) => {
+        const trigger = item.querySelector('.accordion-trigger');
+        const content = item.querySelector('.accordion-content');
+
+        if (!trigger || !content) return;
+
+        // Set unique IDs for ARIA
+        trigger.setAttribute('id', `accordion-trigger-${index + 1}`);
+        content.setAttribute('id', `accordion-content-${index + 1}`);
+        trigger.setAttribute('aria-controls', `accordion-content-${index + 1}`);
+
+        trigger.addEventListener('click', () => {
+          const isExpanded = item.classList.contains('expanded');
+
+          // Close all other accordions (single-expand behavior)
+          accordionItems.forEach(otherItem => {
+            if (otherItem !== item) {
+              otherItem.classList.remove('expanded');
+              otherItem.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+            }
+          });
+
+          // Toggle current accordion
+          item.classList.toggle('expanded');
+          trigger.setAttribute('aria-expanded', !isExpanded);
+
+          // Smooth scroll to accordion if expanding (keeps it in view)
+          if (!isExpanded) {
+            setTimeout(() => {
+              trigger.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+          }
+        });
+
+        // Keyboard accessibility: Enter/Space triggers click
+        trigger.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            trigger.click();
+          }
+        });
+      });
+    }
+
+    /**
      * animateSVGPaths: Draw-in animation for Vision section SVG diagram
      * Triggers when section enters viewport using Intersection Observer
      */
@@ -1885,6 +1937,9 @@
 
       // Initialize SVG path animation
       animateSVGPaths();
+
+      // Initialize accordion functionality
+      initAccordions();
     });
   </script>
 </body>
