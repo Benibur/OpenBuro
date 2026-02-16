@@ -1200,5 +1200,185 @@
       </div>
     </div>
   </footer>
+
+  <!-- Canvas Animation Script -->
+  <script>
+    /**
+     * ParticleNetwork: Performant canvas constellation animation
+     * Features: Intersection Observer for offscreen pause, mobile optimization,
+     * prefers-reduced-motion support, debounced resize handling
+     */
+    class ParticleNetwork {
+      constructor(canvasId) {
+        this.canvas = document.getElementById(canvasId);
+        if (!this.canvas) {
+          console.error(`Canvas element #${canvasId} not found`);
+          return;
+        }
+
+        this.ctx = this.canvas.getContext('2d', { alpha: true });
+        this.particles = [];
+        this.animationId = null;
+        this.isVisible = true;
+        this.resizeTimeout = null;
+
+        // Performance: Detect mobile and reduce particle count
+        this.isMobile = window.innerWidth < 768;
+        this.particleCount = this.isMobile ? 15 : 25;
+
+        // Accessibility: Check prefers-reduced-motion
+        this.prefersReducedMotion = window.matchMedia('(prefers-color-scheme: reduce)').matches ||
+                                     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Get CSS variable colors
+        this.nodeColor = getComputedStyle(document.documentElement)
+          .getPropertyValue('--blue-500').trim() || '#3b82f6';
+        this.lineColor = getComputedStyle(document.documentElement)
+          .getPropertyValue('--color-border').trim() || '#e5e7eb';
+
+        this.init();
+        this.setupIntersectionObserver();
+        this.setupResizeHandler();
+
+        // Start animation only if motion is allowed
+        if (!this.prefersReducedMotion) {
+          this.animate();
+        }
+      }
+
+      init() {
+        // Set canvas dimensions to match container
+        this.canvas.width = this.canvas.offsetWidth;
+        this.canvas.height = this.canvas.offsetHeight;
+
+        // Create particles with random positions and velocities
+        this.particles = [];
+        for (let i = 0; i < this.particleCount; i++) {
+          this.particles.push({
+            x: Math.floor(Math.random() * this.canvas.width),
+            y: Math.floor(Math.random() * this.canvas.height),
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+          });
+        }
+      }
+
+      animate() {
+        if (!this.isVisible) return;
+
+        // Clear canvas with semi-transparent fill for trailing effect
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+        // Update and draw particles
+        this.particles.forEach((particle, i) => {
+          // Update position
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+
+          // Bounce off edges
+          if (particle.x <= 0 || particle.x >= this.canvas.width) {
+            particle.vx *= -1;
+            particle.x = Math.max(0, Math.min(this.canvas.width, particle.x));
+          }
+          if (particle.y <= 0 || particle.y >= this.canvas.height) {
+            particle.vy *= -1;
+            particle.y = Math.max(0, Math.min(this.canvas.height, particle.y));
+          }
+
+          // Draw particle (small circle)
+          this.ctx.beginPath();
+          this.ctx.arc(particle.x, particle.y, 3, 0, Math.PI * 2);
+          this.ctx.fillStyle = this.nodeColor;
+          this.ctx.globalAlpha = 0.15;
+          this.ctx.fill();
+
+          // Draw connecting lines to nearby particles
+          for (let j = i + 1; j < this.particles.length; j++) {
+            const other = this.particles[j];
+            const dx = particle.x - other.x;
+            const dy = particle.y - other.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            // Only connect if distance < 150px
+            if (distance < 150) {
+              this.ctx.beginPath();
+              this.ctx.moveTo(particle.x, particle.y);
+              this.ctx.lineTo(other.x, other.y);
+              this.ctx.strokeStyle = this.lineColor;
+              // Opacity based on distance (closer = more opaque)
+              this.ctx.globalAlpha = 0.15 * (1 - distance / 150);
+              this.ctx.lineWidth = 1;
+              this.ctx.stroke();
+            }
+          }
+        });
+
+        // Reset alpha for next frame
+        this.ctx.globalAlpha = 1;
+
+        // Continue animation loop
+        this.animationId = requestAnimationFrame(() => this.animate());
+      }
+
+      setupIntersectionObserver() {
+        const options = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1,
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            this.isVisible = entry.isIntersecting;
+
+            if (this.isVisible && !this.prefersReducedMotion) {
+              // Resume animation when visible
+              this.animate();
+            } else if (!this.isVisible && this.animationId) {
+              // Pause animation when offscreen
+              cancelAnimationFrame(this.animationId);
+              this.animationId = null;
+            }
+          });
+        }, options);
+
+        observer.observe(this.canvas);
+      }
+
+      setupResizeHandler() {
+        window.addEventListener('resize', () => {
+          // Debounce resize (250ms) to avoid performance hit
+          clearTimeout(this.resizeTimeout);
+          this.resizeTimeout = setTimeout(() => {
+            this.isMobile = window.innerWidth < 768;
+            const newCount = this.isMobile ? 15 : 25;
+
+            // Only reinitialize if particle count changes
+            if (newCount !== this.particleCount) {
+              this.particleCount = newCount;
+              this.init();
+            } else {
+              // Just update canvas dimensions
+              this.canvas.width = this.canvas.offsetWidth;
+              this.canvas.height = this.canvas.offsetHeight;
+            }
+          }, 250);
+        });
+      }
+    }
+
+    // Initialize on DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize canvas animation
+      const network = new ParticleNetwork('hero-canvas');
+
+      // Setup hero text sequencing
+      const heroTextElements = document.querySelectorAll('.hero-text');
+      heroTextElements.forEach((element, index) => {
+        element.style.animationDelay = `${index * 200}ms`;
+      });
+    });
+  </script>
 </body>
 </html>
