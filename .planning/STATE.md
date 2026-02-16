@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-16)
 
 **Core value:** Clearly communicate that Open Buro is the missing orchestration layer turning isolated open source apps into a real platform, and make it effortless for visitors to join the Alliance.
-**Current focus:** Phase 5 - News & Newsletter (COMPLETE)
+**Current focus:** Phase 6 - Animations & Interactivity (COMPLETE)
 
 ## Current Position
 
-Phase: 5 of 7 (News & Newsletter)
-Plan: 1 of 1 in current phase - PHASE COMPLETE
-Status: Phase 5 complete, ready for Phase 6
-Last activity: 2026-02-17 — Completed Phase 05 Plan 01 (News section with article cards and Newsletter with email form)
+Phase: 6 of 7 (Animations & Interactivity)
+Plan: 2 of 2 in current phase - PHASE COMPLETE
+Status: Phase 6 complete, ready for Phase 7
+Last activity: 2026-02-17 — Completed Phase 06 Plans 01-02 (Scroll animations, navbar transitions, mobile menu, hover polish)
 
-Progress: [████████░░] 80%
+Progress: [█████████░] 90%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 8
-- Average duration: 127 seconds (2.1 minutes)
-- Total execution time: 0.28 hours
+- Total plans completed: 10
+- Average duration: 132 seconds (2.2 minutes)
+- Total execution time: 0.37 hours
 
 **By Phase:**
 
@@ -32,10 +32,11 @@ Progress: [████████░░] 80%
 | 03 | 2/2 ✓ | 264s | 132s |
 | 04 | 2/2 ✓ | 146s | 73s |
 | 05 | 1/1 ✓ | 125s | 125s |
+| 06 | 2/2 ✓ | 345s | 173s |
 
 **Recent Trend:**
-- Last 5 plans: 03-01 (146s), 03-02 (118s), 04-01 (~73s), 04-02 (~73s), 05-01 (125s)
-- Trend: Consistent velocity, Phase 5 complete
+- Last 5 plans: 04-01 (~73s), 04-02 (~73s), 05-01 (125s), 06-01 (~170s), 06-02 (~175s)
+- Trend: Phase 6 slightly longer due to animation complexity and mobile drawer
 
 ## Accumulated Context
 
@@ -51,7 +52,7 @@ Recent decisions affecting current work:
 - Text placeholders for partner logos: No logo files available yet, swap later
 - [Phase 01]: English content with French badges for brand identity (broader European reach)
 - [Phase 01]: Inline SVG favicon for zero external asset dependencies
-- [Phase 01]: Layered CSS token system (primitive → semantic → component) for maintainable theming
+- [Phase 01]: Layered CSS token system (primitive -> semantic -> component) for maintainable theming
 - [Phase 01]: Inline blocking script for FOUC prevention (only acceptable blocking script)
 - [Phase 01]: Transform-based animations to avoid layout thrashing
 - [Phase 02]: Canvas API for hero animation (not CSS/SVG) for dynamic constellation effect
@@ -78,6 +79,16 @@ Recent decisions affecting current work:
 - [Phase 05-01]: sr-only accessible label pattern for form inputs
 - [Phase 05-01]: 600px narrow container for focused newsletter form UX
 - [Phase 05-01]: Subtle gradient background for newsletter section visual separation
+- [Phase 06-01]: Single shared IntersectionObserver with threshold 0.15 for all scroll animations
+- [Phase 06-01]: requestAnimationFrame throttling for scroll handler (prevents jank)
+- [Phase 06-01]: Navbar transitions from transparent to opaque at 50% hero height scroll
+- [Phase 06-01]: GPU-accelerated animations only: transform and opacity
+- [Phase 06-01]: observer.unobserve() after each trigger to prevent memory leaks
+- [Phase 06-02]: Separate drawer element outside nav for z-index stacking clarity
+- [Phase 06-02]: JS-created overlay element for clean separation
+- [Phase 06-02]: @media (hover: hover) guards all hover effects from touch devices
+- [Phase 06-02]: 48x48px minimum touch target on hamburger and close buttons
+- [Phase 06-02]: Focus trapping with Tab/Shift+Tab wrapping in open drawer
 
 ### Pending Todos
 
@@ -89,10 +100,10 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-02-17 (Phase 5 execution)
-Stopped at: Completed Phase 05 Plan 01 (News & Newsletter sections)
+Last session: 2026-02-17 (Phase 6 execution)
+Stopped at: Completed Phase 06 Plans 01-02 (Animations & Interactivity)
 Resume file: None
 
 ---
 
-**Next step:** Phase 5 complete. Ready to begin Phase 6 when requested.
+**Next step:** Phase 6 complete. Ready to begin Phase 7 when requested.
