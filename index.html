@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- External Resources -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <div class="nav-logo">Open Buro</div>
+      <div class="nav-desktop">
+        <a href="#problem">Problem</a>
+        <a href="#vision">Vision</a>
+        <a href="#pillars">Pillars</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#ecosystem">Ecosystem</a>
+        <a href="#news">News</a>
+        <a href="#newsletter">Newsletter</a>
+      </div>
+      <button class="btn-primary">Join the Alliance</button>
+      <button class="nav-mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <div id="hero-canvas"></div>
+    <div class="hero-content">
+      <div class="badge">an open standard</div>
+      <h1>[Placeholder: The European Standard for Workplace Orchestration]</h1>
+      <p class="subtitle">[Placeholder: Unifying open source workplace apps into a true platform alternative to Microsoft 365]</p>
+      <div class="hero-cta">
+        <button class="btn-primary">Join the Alliance</button>
+        <button class="btn-secondary">Learn More</button>
+      </div>
+      <p class="origin-credit">[Placeholder: Born from the collaboration between La Suite numérique (DINUM) and Twake.ai (LINAGORA)]</p>
+    </div>
+  </section>
+
+  <!-- Problem Section -->
+  <section id="problem">
+    <div class="container">
+      <div class="badge">LE CONSTAT</div>
+      <h2>The Problem with Isolated Open Source Apps</h2>
+      <p class="intro">[Placeholder: Europe has mature open source alternatives for every workplace need, but they remain isolated silos lacking the integration that makes Microsoft 365 dominant]</p>
+      <div class="constat-grid">
+        <article class="constat-card">
+          <div class="icon-placeholder">[Icon]</div>
+          <h3>Fragmented Experience</h3>
+          <p>[Placeholder: Users must navigate between disconnected apps with separate logins, interfaces, and workflows]</p>
+        </article>
+        <article class="constat-card">
+          <div class="icon-placeholder">[Icon]</div>
+          <h3>No Cross-App Workflows</h3>
+          <p>[Placeholder: Data and actions are trapped in silos - you cannot share a chat message to a document or schedule from an email]</p>
+        </article>
+        <article class="constat-card">
+          <div class="icon-placeholder">[Icon]</div>
+          <h3>Platform Lock-In Wins</h3>
+          <p>[Placeholder: Without orchestration, proprietary suites maintain dominance through integration alone, not superior technology]</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision Section -->
+  <section id="vision">
+    <div class="container">
+      <div class="badge">LA VISION</div>
+      <h2>From Isolated Apps to Unified Platform</h2>
+      <p class="subtitle">[Placeholder: Open Buro provides the orchestration layer that transforms independent services into an integrated workplace experience]</p>
+
+      <div class="transformation-diagram">
+        [Placeholder: SVG diagram showing transformation from isolated apps to unified platform via Open Buro orchestration layer - will be implemented in Phase 3]
+      </div>
+
+      <div class="features-grid">
+        <article class="feature-card">
+          <h3>Unified Navigation</h3>
+          <p>[Placeholder: Single navigation interface across all workplace services - users feel like they're in one platform]</p>
+        </article>
+        <article class="feature-card">
+          <h3>Cross-App Workflows</h3>
+          <p>[Placeholder: Share content, trigger actions, and move data seamlessly between apps - chat to document, email to calendar]</p>
+        </article>
+        <article class="feature-card">
+          <h3>Shared Intelligence</h3>
+          <p>[Placeholder: Platform-level search, notifications, and AI services that understand your full workplace context]</p>
+        </article>
+        <article class="feature-card">
+          <h3>Enterprise Security</h3>
+          <p>[Placeholder: Centralized authentication, authorization, and audit trails across all integrated services]</p>
+        </article>
+      </div>
+
+      <blockquote class="vision-quote">
+        "[Placeholder: Quote about the power of orchestration turning open source apps into a platform that rivals proprietary suites]"
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Pillars Section -->
+  <section id="pillars">
+    <div class="container">
+      <div class="badge">DEUX PILIERS</div>
+      <h2>Two Pillars: Standard & Alliance</h2>
+
+      <div class="pillars-layout">
+        <!-- Left Column: Technical Standard -->
+        <div class="pillar-standard">
+          <h3>The Standard</h3>
+          <p>[Placeholder: Technical specifications defining how services orchestrate]</p>
+
+          <div class="accordion">
+            <details class="accordion-item">
+              <summary>Service Packaging</summary>
+              <p>[Placeholder: How to package apps for Open Buro compatibility - manifest files, metadata, capabilities declaration]</p>
+            </details>
+            <details class="accordion-item">
+              <summary>Navigation Protocol</summary>
+              <p>[Placeholder: Unified navigation bar specification, cross-app routing, deep linking standards]</p>
+            </details>
+            <details class="accordion-item">
+              <summary>Authentication & SSO</summary>
+              <p>[Placeholder: OAuth2/OIDC implementation requirements, token exchange, session management]</p>
+            </details>
+            <details class="accordion-item">
+              <summary>Cross-App Messaging</summary>
+              <p>[Placeholder: Event bus protocol for inter-service communication, action triggers, data sharing]</p>
+            </details>
+            <details class="accordion-item">
+              <summary>Search & Intelligence</summary>
+              <p>[Placeholder: Platform-level search API, notification aggregation, context awareness]</p>
+            </details>
+            <details class="accordion-item">
+              <summary>Security & Compliance</summary>
+              <p>[Placeholder: Authorization model, audit logging, GDPR compliance requirements]</p>
+            </details>
+            <details class="accordion-item">
+              <summary>Developer SDK</summary>
+              <p>[Placeholder: Libraries and tools for implementing Open Buro in your service]</p>
+            </details>
+          </div>
+        </div>
+
+        <!-- Right Column: The Alliance -->
+        <div class="pillar-alliance">
+          <h3>The Alliance</h3>
+          <p>[Placeholder: The governance body that evolves the standard and certifies implementations]</p>
+
+          <div class="alliance-mission">
+            <div class="mission-block">
+              <h4>Govern the Standard</h4>
+              <p>[Placeholder: Democratic evolution of technical specifications through working groups]</p>
+            </div>
+            <div class="mission-block">
+              <h4>Certify Implementations</h4>
+              <p>[Placeholder: Testing and certification program ensuring interoperability]</p>
+            </div>
+            <div class="mission-block">
+              <h4>Build Reference Implementations</h4>
+              <p>[Placeholder: Open source tooling and example integrations]</p>
+            </div>
+            <div class="mission-block">
+              <h4>Foster Ecosystem</h4>
+              <p>[Placeholder: Events, documentation, developer support, partnership facilitation]</p>
+            </div>
+            <div class="mission-block">
+              <h4>Advocate for Open Standards</h4>
+              <p>[Placeholder: Policy engagement, public procurement support, digital sovereignty]</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <blockquote class="pillars-quote">
+        "Code is Law... but Architecture is Politics"
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Timeline Section -->
+  <section id="timeline">
+    <div class="container">
+      <div class="badge">EN MOUVEMENT</div>
+      <h2>Progress & Roadmap</h2>
+
+      <div class="timeline">
+        <article class="timeline-node">
+          <div class="timeline-marker">2024 Q3</div>
+          <h3>Genesis</h3>
+          <p>[Placeholder: DINUM and LINAGORA identify orchestration gap, begin collaboration on unified architecture]</p>
+        </article>
+        <article class="timeline-node">
+          <div class="timeline-marker">2024 Q4</div>
+          <h3>Standard Foundation</h3>
+          <p>[Placeholder: Initial specification draft covering packaging, navigation, authentication protocols]</p>
+        </article>
+        <article class="timeline-node">
+          <div class="timeline-marker">2025 Q1</div>
+          <h3>First Implementations</h3>
+          <p>[Placeholder: Pilot integrations with Twake Mail, Drive, Calendar demonstrating cross-app workflows]</p>
+        </article>
+        <article class="timeline-node">
+          <div class="timeline-marker">2025 Q2</div>
+          <h3>Alliance Formation</h3>
+          <p>[Placeholder: Official launch of governance body, founding members signed, working groups established]</p>
+        </article>
+        <article class="timeline-node">
+          <div class="timeline-marker">2026 S1</div>
+          <h3>Certification Program</h3>
+          <p>[Placeholder: Testing and certification infrastructure operational, first certified services]</p>
+        </article>
+        <article class="timeline-node">
+          <div class="timeline-marker">2026 S2</div>
+          <h3>Ecosystem Growth</h3>
+          <p>[Placeholder: 20+ services certified, public sector deployments, developer community active]</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ecosystem Section -->
+  <section id="ecosystem">
+    <div class="container">
+      <div class="badge">L'ECOSYSTEME</div>
+      <h2>Founding Members</h2>
+
+      <div class="founding-members">
+        <div class="member">
+          <div class="member-logo">[LINAGORA / Twake.ai]</div>
+          <p>[Placeholder: European leader in open source collaboration, providing email, chat, drive, calendar solutions]</p>
+        </div>
+        <div class="member">
+          <div class="member-logo">[DINUM / La Suite numérique]</div>
+          <p>[Placeholder: French government digital workplace initiative, deploying open source to 10M+ public sector users]</p>
+        </div>
+      </div>
+
+      <div class="ecosystem-cta">
+        <h3>Join the Alliance</h3>
+        <p>[Placeholder: Open source publishers, public institutions, and enterprises can participate in shaping the future of European digital workplace]</p>
+        <div class="cta-buttons">
+          <button class="btn-primary">Become a Member</button>
+          <button class="btn-secondary">View Membership Benefits</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- News Section -->
+  <section id="news">
+    <div class="container">
+      <div class="badge">ACTUALITES</div>
+      <h2>Latest News</h2>
+
+      <div class="news-grid">
+        <article class="news-card">
+          <div class="news-date">2026-02-15</div>
+          <div class="news-image">[Placeholder Image]</div>
+          <h3>[Placeholder: Alliance Launches Certification Program]</h3>
+          <p>[Placeholder: The Open Buro Alliance announces official certification testing for compliant services...]</p>
+          <a href="#" class="read-more">Read more</a>
+        </article>
+        <article class="news-card">
+          <div class="news-date">2026-01-20</div>
+          <div class="news-image">[Placeholder Image]</div>
+          <h3>[Placeholder: Five New Members Join Alliance]</h3>
+          <p>[Placeholder: European open source publishers expand the ecosystem with new service integrations...]</p>
+          <a href="#" class="read-more">Read more</a>
+        </article>
+        <article class="news-card">
+          <div class="news-date">2025-12-10</div>
+          <div class="news-image">[Placeholder Image]</div>
+          <h3>[Placeholder: Public Sector Pilot Results Published]</h3>
+          <p>[Placeholder: Government deployment study shows 40% improvement in cross-service workflows...]</p>
+          <a href="#" class="read-more">Read more</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section id="newsletter">
+    <div class="container">
+      <div class="newsletter-icon">[Email Icon]</div>
+      <h2>Stay Updated</h2>
+      <p>[Placeholder: Get the latest news about Open Buro Standard development, Alliance activities, and ecosystem growth]</p>
+
+      <form class="newsletter-form" action="#" method="POST">
+        <input
+          type="email"
+          name="email"
+          placeholder="your.email@example.com"
+          required
+          aria-label="Email address"
+        >
+        <button type="submit" class="btn-primary">Subscribe</button>
+      </form>
+
+      <p class="gdpr-notice">[Placeholder: Your email will only be used for Open Buro updates. No tracking, no third parties. GDPR compliant. Unsubscribe anytime.]</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">Open Buro</div>
+          <p class="footer-tagline">European open source ecosystem</p>
+        </div>
+
+        <nav class="footer-nav">
+          <h4>Navigation</h4>
+          <a href="#problem">Problem</a>
+          <a href="#vision">Vision</a>
+          <a href="#pillars">Pillars</a>
+          <a href="#timeline">Timeline</a>
+          <a href="#ecosystem">Ecosystem</a>
+          <a href="#news">News</a>
+          <a href="#newsletter">Newsletter</a>
+        </nav>
+
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <a href="mailto:hello@openburo.eu">hello@openburo.eu</a>
+          <div class="social-links">
+            <a href="#" aria-label="GitHub">GitHub</a>
+            <a href="#" aria-label="LinkedIn">LinkedIn</a>
+            <a href="#" aria-label="Mastodon">Mastodon</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Open Buro Alliance. Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
