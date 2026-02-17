@@ -57,7 +57,8 @@
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css">
 
   <!-- CSS Design System -->
   <style>
@@ -102,7 +103,7 @@
       --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
 
       /* Typography scale */
-      --font-heading: 'Syne', sans-serif;
+      --font-heading: 'Plus Jakarta Sans', sans-serif;
       --font-body: 'IBM Plex Sans', sans-serif;
       --font-mono: 'IBM Plex Mono', monospace;
 
@@ -159,7 +160,7 @@
     h1, h2, h3, h4, h5, h6 {
       font-family: var(--font-heading);
       font-weight: 700;
-      line-height: 1.2;
+      line-height: 1.4;
       margin-bottom: 1rem;
       color: var(--color-text);
     }
@@ -589,9 +590,18 @@
     }
 
     .footer-grid {
-      display: grid;
-      gap: 2rem;
-      margin-bottom: 2rem;
+      display: table;
+      width: 100%;
+      border-spacing: 2rem 0;
+      margin: 0 -2rem;
+    }
+
+    .footer-brand,
+    .footer-nav,
+    .footer-contact {
+      display: table-cell;
+      vertical-align: top;
+      width: 33.33%;
     }
 
     .footer-logo {
@@ -634,7 +644,9 @@
 
     .footer-bottom {
       text-align: center;
-      padding-top: 2rem;
+      padding: 2rem var(--space-section-x) 1rem;
+      margin: 2rem auto 0;
+      max-width: var(--container-max);
       border-top: 1px solid var(--color-border);
       color: var(--color-text-muted);
       font-size: var(--text-sm);
@@ -680,7 +692,6 @@
       }
 
       .footer-grid {
-        grid-template-columns: repeat(3, 1fr);
         text-align: left;
       }
 
@@ -756,6 +767,30 @@
     .origin-credit {
       font-size: var(--text-sm);
       color: var(--color-text-muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .origin-credit p {
+      margin: 0;
+    }
+
+    .origin-logos {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .origin-credit img {
+      height: 56px;
+      width: auto;
+    }
+
+    .origin-credit .credit-sep {
+      margin: 0;
     }
 
     .scroll-indicator {
@@ -1079,9 +1114,13 @@
     }
 
     .mission-block .card-icon {
-      font-size: 2.5rem;
       margin-bottom: 1rem;
-      line-height: 1;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(99, 102, 241, 0.1));
+      color: var(--color-accent-purple, var(--color-primary));
+    }
+
+    .dark .mission-block .card-icon {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(99, 102, 241, 0.15));
     }
 
     .mission-block h4 {
@@ -1094,6 +1133,22 @@
       color: var(--color-text-muted);
       line-height: 1.6;
       margin: 0;
+    }
+
+    a.mission-block-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    a.mission-block-link:hover {
+      text-decoration: none;
+    }
+
+    a.mission-block-link h4::after {
+      content: " \2192";
+      color: var(--color-primary);
+      font-size: var(--text-sm);
     }
 
     .pull-quote {
@@ -1421,15 +1476,15 @@
     }
 
     .newsletter-icon {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       color: var(--color-primary);
       display: flex;
       justify-content: center;
     }
 
-    .newsletter-icon svg {
-      width: 48px;
-      height: 48px;
+    .newsletter-icon i {
+      font-size: 48px;
+      --ph-duotone-opacity: 0.3;
     }
 
     .newsletter-desc {
@@ -1489,9 +1544,25 @@
     }
 
     .card-icon {
-      font-size: 3rem;
+      width: 52px;
+      height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
       margin-bottom: 1rem;
       line-height: 1;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(99, 102, 241, 0.1));
+      color: var(--color-accent-blue, var(--color-accent));
+    }
+
+    .card-icon i {
+      font-size: 26px;
+      --ph-duotone-opacity: 0.3;
+    }
+
+    .dark .card-icon {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(99, 102, 241, 0.15));
     }
 
     .constat-card h3 {
@@ -1848,9 +1919,8 @@
     }
 
     .feature-card .card-icon {
-      font-size: 2.5rem;
       margin-bottom: 1rem;
-      line-height: 1;
+      color: var(--color-accent-blue, var(--color-accent));
     }
 
     .feature-card h3 {
@@ -1934,6 +2004,7 @@
         <a href="#vision" class="link-underline">Vision</a>
         <a href="#pillars" class="link-underline">Pillars</a>
         <a href="#timeline" class="link-underline">Timeline</a>
+        <a href="#first-implementation" class="link-underline">1st Implementation</a>
         <a href="#ecosystem" class="link-underline">Ecosystem</a>
         <a href="#news" class="link-underline">News</a>
         <a href="#newsletter" class="link-underline">Newsletter</a>
@@ -1963,6 +2034,7 @@
       <a href="#vision">Vision</a>
       <a href="#pillars">Pillars</a>
       <a href="#timeline">Timeline</a>
+      <a href="#first-implementation">1st Implementation</a>
       <a href="#ecosystem">Ecosystem</a>
       <a href="#news">News</a>
       <a href="#newsletter">Newsletter</a>
@@ -1976,13 +2048,20 @@
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-content">
       <div class="badge hero-text">EUROPEAN OPEN STANDARD</div>
-      <h1 class="hero-text" style="background: linear-gradient(135deg, var(--color-primary), var(--color-accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">The European Standard for Workplace Orchestration</h1>
+      <h1 class="hero-text" style="color: #ffffff;">The European Standard for Workplace Orchestration</h1>
       <p class="subtitle hero-text">Unifying open source workplace apps into a true platform alternative to Microsoft 365</p>
       <div class="hero-cta hero-text">
         <a href="#ecosystem" class="btn-primary">Join the Alliance</a>
         <a href="#vision" class="btn-secondary">Learn More</a>
       </div>
-      <p class="origin-credit hero-text">Born from the collaboration between La Suite numérique (DINUM) and Twake.ai (LINAGORA)</p>
+      <div class="origin-credit hero-text">
+        <p>Born from the collaboration between</p>
+        <div class="origin-logos">
+          <img src="assets/images/news/dinum-logo.webp" alt="DINUM" title="DINUM - Direction interministérielle du numérique">
+          <span class="credit-sep">&</span>
+          <img src="assets/images/news/linagora-logo.png" alt="LINAGORA" title="LINAGORA - Twake.ai">
+        </div>
+      </div>
     </div>
     <div class="scroll-indicator" aria-hidden="true">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1994,7 +2073,7 @@
   <!-- Problem Section -->
   <section id="problem" aria-label="Problem statement" class="animate-on-scroll">
     <div class="container">
-      <div class="badge animate-on-scroll scale-in">LE CONSTAT</div>
+      <div class="badge animate-on-scroll scale-in">THE PROBLEM</div>
       <h2>The Workplace Tech Paradox</h2>
 
       <div class="problem-layout">
@@ -2006,17 +2085,17 @@
         <!-- Right column: 3 constat cards -->
         <div class="constat-cards">
           <article class="constat-card animate-on-scroll stagger-1">
-            <div class="card-icon" aria-hidden="true">🔐</div>
+            <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-lock-key"></i></div>
             <h3>Login Fatigue</h3>
             <p>Users authenticate 5-10 times daily across separate apps. SSO exists but requires custom integration for each tool. Password managers become mandatory, not convenience.</p>
           </article>
           <article class="constat-card animate-on-scroll stagger-2">
-            <div class="card-icon" aria-hidden="true">🏝️</div>
+            <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-database"></i></div>
             <h3>Data Islands</h3>
             <p>Customer mentions in email don't link to CRM records. Meeting notes live separately from project tasks. Search works within apps, never across them. Knowledge scatters.</p>
           </article>
           <article class="constat-card animate-on-scroll stagger-3">
-            <div class="card-icon" aria-hidden="true">🔀</div>
+            <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-arrows-split"></i></div>
             <h3>Context Switching Tax</h3>
             <p>Moving between apps means mental model switching. Different navigation patterns, inconsistent terminology, no shared workspace. Productivity bleeds at every boundary.</p>
           </article>
@@ -2028,13 +2107,13 @@
   <!-- Vision Section -->
   <section id="vision" aria-label="Vision statement" class="animate-on-scroll">
     <div class="container">
-      <div class="badge animate-on-scroll scale-in">LA VISION</div>
+      <div class="badge animate-on-scroll scale-in">THE VISION</div>
       <h2>From Fragmentation to Unity</h2>
       <p class="subtitle">Open Buro orchestrates existing apps into a cohesive platform—no vendor lock-in, no rip-and-replace.</p>
 
       <!-- Transformation Diagram (SVG) -->
       <div class="transformation-diagram">
-        <svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" aria-labelledby="diagram-title">
+        <svg viewBox="30 20 940 230" xmlns="http://www.w3.org/2000/svg" aria-labelledby="diagram-title">
           <title id="diagram-title">Transformation from isolated apps to unified workplace via Open Buro</title>
 
           <!-- Stage 1: Isolated Apps -->
@@ -2094,22 +2173,22 @@
       <!-- 4 Feature Cards -->
       <div class="features-grid">
         <article class="feature-card animate-on-scroll stagger-1">
-          <div class="card-icon" aria-hidden="true">📦</div>
+          <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-package"></i></div>
           <h3>Universal Packaging</h3>
           <p>Standard app format. One registry. Any publisher can contribute.</p>
         </article>
         <article class="feature-card animate-on-scroll stagger-2">
-          <div class="card-icon" aria-hidden="true">🧭</div>
+          <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-compass"></i></div>
           <h3>Shared Navigation</h3>
           <p>Common home, unified app grid, global search. Users never lost.</p>
         </article>
         <article class="feature-card animate-on-scroll stagger-3">
-          <div class="card-icon" aria-hidden="true">🔗</div>
+          <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-graph"></i></div>
           <h3>Cross-App Data</h3>
           <p>Business objects flow between apps. Semantic graph connects knowledge.</p>
         </article>
         <article class="feature-card animate-on-scroll stagger-4">
-          <div class="card-icon" aria-hidden="true">👥</div>
+          <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-users-three"></i></div>
           <h3>Collective Identity</h3>
           <p>Organization-wide groups, permissions, presence. Manage once, apply everywhere.</p>
         </article>
@@ -2125,7 +2204,7 @@
   <!-- Pillars Section -->
   <section id="pillars" aria-label="Standard and Alliance pillars" class="animate-on-scroll">
     <div class="container">
-      <div class="badge animate-on-scroll scale-in">DEUX PILIERS</div>
+      <div class="badge animate-on-scroll scale-in">TWO PILLARS</div>
       <h2>Standard + Alliance</h2>
       <p class="subtitle">Technical orchestration meets ecosystem coordination</p>
 
@@ -2137,7 +2216,7 @@
           <div class="accordion">
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <h3>Application Integration</h3>
+                <h3>🔗 Application Integration</h3>
                 <span class="accordion-icon">›</span>
               </button>
               <div class="accordion-content" role="region">
@@ -2147,7 +2226,7 @@
 
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <h3>Cross-service Navigation</h3>
+                <h3>🧭 Cross-service Navigation</h3>
                 <span class="accordion-icon">›</span>
               </button>
               <div class="accordion-content" role="region">
@@ -2157,7 +2236,7 @@
 
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <h3>Data Intelligence</h3>
+                <h3>🧠 Data Intelligence</h3>
                 <span class="accordion-icon">›</span>
               </button>
               <div class="accordion-content" role="region">
@@ -2167,7 +2246,7 @@
 
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <h3>Platform Collaboration</h3>
+                <h3>🤝 Platform Collaboration</h3>
                 <span class="accordion-icon">›</span>
               </button>
               <div class="accordion-content" role="region">
@@ -2177,7 +2256,7 @@
 
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <h3>Inter-apps & AI</h3>
+                <h3>🤖 Inter-apps & AI</h3>
                 <span class="accordion-icon">›</span>
               </button>
               <div class="accordion-content" role="region">
@@ -2187,7 +2266,7 @@
 
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <h3>Security & Encryption</h3>
+                <h3>🔒 Security & Encryption</h3>
                 <span class="accordion-icon">›</span>
               </button>
               <div class="accordion-content" role="region">
@@ -2197,7 +2276,7 @@
 
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <h3>Mobile & Desktop</h3>
+                <h3>📱 Mobile & Desktop</h3>
                 <span class="accordion-icon">›</span>
               </button>
               <div class="accordion-content" role="region">
@@ -2212,32 +2291,32 @@
           <h3>The Alliance</h3>
 
           <div class="alliance-mission">
-            <div class="mission-block">
-              <div class="card-icon" aria-hidden="true">📜</div>
+            <a href="pages/manifesto.html" class="mission-block mission-block-link">
+              <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-scroll"></i></div>
               <h4>A Manifesto</h4>
               <p>Open Buro exists to prevent European workplace fragmentation. Open source without orchestration creates chaos. We establish founding principles before code.</p>
-            </div>
+            </a>
 
-            <div class="mission-block">
-              <div class="card-icon" aria-hidden="true">⚖️</div>
+            <a href="pages/governance.html" class="mission-block mission-block-link">
+              <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-scales"></i></div>
               <h4>Open Governance</h4>
               <p>Neutral foundation structure modeled on Linux Foundation, CNCF. No single vendor controls the standard. Transparent decision-making, public roadmap.</p>
-            </div>
+            </a>
 
             <div class="mission-block">
-              <div class="card-icon" aria-hidden="true">🛠️</div>
+              <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-rocket-launch"></i></div>
               <h4>Adoption Actions</h4>
               <p>Implementation support for publishers: reference architectures, migration guides, certification program. Alliance members don't just endorse—they implement.</p>
             </div>
 
             <div class="mission-block">
-              <div class="card-icon" aria-hidden="true">🌍</div>
+              <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-globe-hemisphere-west"></i></div>
               <h4>International Visibility</h4>
               <p>European-scale promotion: conferences, government outreach, media relations. Make Open Buro the default assumption for workplace tech procurement.</p>
             </div>
 
             <div class="mission-block">
-              <div class="card-icon" aria-hidden="true">💶</div>
+              <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-coins"></i></div>
               <h4>Funding</h4>
               <p>Resource mobilization through member contributions, public grants (EU innovation funds), commercial services. Sustainable funding model ensures long-term viability.</p>
             </div>
@@ -2256,7 +2335,7 @@
   <!-- Timeline Section -->
   <section id="timeline" aria-label="Project timeline" class="animate-on-scroll">
     <div class="container">
-      <div class="badge animate-on-scroll scale-in">EN MOUVEMENT</div>
+      <div class="badge animate-on-scroll scale-in">IN MOTION</div>
       <h2>Project Timeline</h2>
       <p class="intro">From vision to reality, tracking our progress</p>
 
@@ -2266,7 +2345,7 @@
           <div class="timeline-milestone milestone-completed">
             <div class="milestone-node" aria-hidden="true"></div>
             <div class="milestone-content">
-              <div class="milestone-date">2024 Q3</div>
+              <div class="milestone-date">2025 Q2</div>
               <h3 class="milestone-title">Foundational work</h3>
               <p class="milestone-desc">La Suite x Twake.ai collaboration begins</p>
             </div>
@@ -2275,25 +2354,25 @@
           <div class="timeline-milestone milestone-completed">
             <div class="milestone-node" aria-hidden="true"></div>
             <div class="milestone-content">
-              <div class="milestone-date">2024 Q4</div>
+              <div class="milestone-date">2025 Q4</div>
               <h3 class="milestone-title">Advanced integration</h3>
               <p class="milestone-desc">La Suite x Twake.ai technical integration</p>
-            </div>
-          </div>
-
-          <div class="timeline-milestone milestone-completed">
-            <div class="milestone-node" aria-hidden="true"></div>
-            <div class="milestone-content">
-              <div class="milestone-date">2025 Q1</div>
-              <h3 class="milestone-title">First specifications</h3>
-              <p class="milestone-desc">Open Buro draft specifications published</p>
             </div>
           </div>
 
           <div class="timeline-milestone milestone-current">
             <div class="milestone-node" aria-hidden="true"></div>
             <div class="milestone-content">
-              <div class="milestone-date">2025 Q2</div>
+              <div class="milestone-date">2026 Q1</div>
+              <h3 class="milestone-title">First specifications</h3>
+              <p class="milestone-desc">Open Buro draft specifications published at FOSDEM</p>
+            </div>
+          </div>
+
+          <div class="timeline-milestone milestone-future">
+            <div class="milestone-node" aria-hidden="true"></div>
+            <div class="milestone-content">
+              <div class="milestone-date">2026 Q2</div>
               <h3 class="milestone-title">Standard V1.0 publication</h3>
               <p class="milestone-desc">Official standard release and governance setup</p>
             </div>
@@ -2302,18 +2381,9 @@
           <div class="timeline-milestone milestone-future">
             <div class="milestone-node" aria-hidden="true"></div>
             <div class="milestone-content">
-              <div class="milestone-date">2026 H1</div>
+              <div class="milestone-date">2026 Q2</div>
               <h3 class="milestone-title">Alliance expansion</h3>
               <p class="milestone-desc">Growing membership across European markets</p>
-            </div>
-          </div>
-
-          <div class="timeline-milestone milestone-future">
-            <div class="milestone-node" aria-hidden="true"></div>
-            <div class="milestone-content">
-              <div class="milestone-date">2026 H2</div>
-              <h3 class="milestone-title">Multi-vendor POCs</h3>
-              <p class="milestone-desc">First production implementations demonstrating interoperability</p>
             </div>
           </div>
         </div>
@@ -2321,10 +2391,25 @@
     </div>
   </section>
 
+  <!-- First Implementation Section -->
+  <section id="first-implementation" aria-label="First implementation in Twake.AI" class="animate-on-scroll" style="padding: var(--spacing-section) 0;">
+    <div class="container">
+      <div class="badge animate-on-scroll scale-in">FIRST IMPLEMENTATION</div>
+      <h2>First Implementation in Twake.AI</h2>
+      <p class="intro">Twake.AI is the first platform to integrate La Suite num&eacute;rique components from DINUM, built on the Open Buro beta specification. It brings together messaging, videoconferencing, document editing, email, and more into a unified sovereign workplace.</p>
+
+      <div style="margin-top: 2.5rem; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12); border: 1px solid var(--border);">
+        <img src="assets/images/twake-workplace-dashboard.png" alt="Twake Workplace dashboard showing integrated apps: Chat, Drive, Mail, Notes, Docs, Visio, Calendar and more" style="width: 100%; height: auto; display: block;">
+      </div>
+
+      <p style="margin-top: 1.5rem; text-align: center; color: var(--text-secondary); font-size: 0.95rem;">The Twake Workplace dashboard &mdash; a unified interface orchestrating 15+ open source applications following the Open Buro standard.</p>
+    </div>
+  </section>
+
   <!-- Ecosystem Section -->
   <section id="ecosystem" aria-label="Alliance ecosystem" class="animate-on-scroll">
     <div class="container">
-      <div class="badge animate-on-scroll scale-in">L'ECOSYSTEME</div>
+      <div class="badge animate-on-scroll scale-in">THE ECOSYSTEM</div>
       <h2>The Alliance</h2>
       <p class="intro">Growing the European open source workplace ecosystem together</p>
 
@@ -2377,7 +2462,7 @@
   <!-- News Section -->
   <section id="news" aria-label="Latest news" class="animate-on-scroll">
     <div class="container">
-      <div class="badge animate-on-scroll scale-in">ACTUALITES</div>
+      <div class="badge animate-on-scroll scale-in">LATEST NEWS</div>
       <h2>Latest News</h2>
       <p class="intro">Updates from the Open Buro project and Alliance</p>
 
@@ -2385,37 +2470,37 @@
         <div class="news-cards">
           <article class="news-card animate-on-scroll stagger-1">
             <div class="news-image-wrapper">
-              <div class="news-image" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6);"></div>
+              <div class="news-image" style="background: url('assets/images/news/openburo-orchestration-diagram.png') center/cover no-repeat;"></div>
               <span class="news-date-tag">Feb 2026</span>
             </div>
             <div class="news-card-body">
-              <h3>Open Buro Website Launch</h3>
-              <p class="news-excerpt">Discover our new landing page showcasing the Open Buro standard and Alliance mission.</p>
-              <a href="#" class="read-more" aria-label="Read more about Open Buro Website Launch">Read <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: middle; margin-left: 4px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+              <h3>When an Independent Observer Asks the Right Questions</h3>
+              <p class="news-excerpt">An independent review crystallizes what European sovereign suites have been missing: not better apps, but better orchestration.</p>
+              <a href="news/twake-openburo-independent-review.html" class="read-more" aria-label="Read more about the independent review">Read <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: middle; margin-left: 4px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
             </div>
           </article>
 
           <article class="news-card animate-on-scroll stagger-2">
             <div class="news-image-wrapper">
-              <div class="news-image" style="background: linear-gradient(135deg, #10b981, #3b82f6);"></div>
-              <span class="news-date-tag">Jan 2025</span>
+              <div class="news-image" style="background: url('assets/images/news/fosdem-2025-montage.jpeg') center/cover no-repeat;"></div>
+              <span class="news-date-tag">Feb 2025</span>
             </div>
             <div class="news-card-body">
               <h3>Open Buro Presented at FOSDEM 2025</h3>
               <p class="news-excerpt">The project was introduced to the open source community at Europe's largest developer conference.</p>
-              <a href="#" class="read-more" aria-label="Read more about Open Buro at FOSDEM 2025">Read <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: middle; margin-left: 4px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+              <a href="news/fosdem-2025.html" class="read-more" aria-label="Read more about Open Buro at FOSDEM 2025">Read <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: middle; margin-left: 4px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
             </div>
           </article>
 
           <article class="news-card animate-on-scroll stagger-3">
             <div class="news-image-wrapper">
-              <div class="news-image" style="background: linear-gradient(135deg, #8b5cf6, #ec4899);"></div>
-              <span class="news-date-tag">2025</span>
+              <div class="news-image" style="background: url('assets/images/news/hackathon-header.jpg') center/cover no-repeat;"></div>
+              <span class="news-date-tag">Juin 2025</span>
             </div>
             <div class="news-card-body">
               <h3>La Suite numerique & Twake: Genesis of a Standard</h3>
               <p class="news-excerpt">How collaboration between French government and LINAGORA created the foundation for Open Buro.</p>
-              <a href="#" class="read-more" aria-label="Read more about La Suite numerique and Twake genesis">Read <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: middle; margin-left: 4px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+              <a href="news/la-suite-numerique-twake-genesis.html" class="read-more" aria-label="Read more about La Suite numerique and Twake genesis">Read <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: middle; margin-left: 4px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
             </div>
           </article>
         </div>
@@ -2427,10 +2512,7 @@
   <section id="newsletter" class="newsletter-section animate-on-scroll" aria-label="Newsletter signup">
     <div class="container newsletter-container">
       <div class="newsletter-icon" aria-hidden="true">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-        </svg>
+        <i class="ph-duotone ph-envelope-simple"></i>
       </div>
       <h2>Stay Informed</h2>
       <p class="newsletter-desc">Receive project updates, Alliance news, and ecosystem developments directly in your inbox.</p>
@@ -2456,8 +2538,8 @@
   </main>
 
   <!-- Footer -->
-  <footer>
-    <div class="container">
+  <footer style="display: flex; flex-direction: column;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; width: 100%;">
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="footer-logo">Open Buro</div>
@@ -2470,6 +2552,7 @@
           <a href="#vision">Vision</a>
           <a href="#pillars">Pillars</a>
           <a href="#timeline">Timeline</a>
+          <a href="#first-implementation">1st Implementation</a>
           <a href="#ecosystem">Ecosystem</a>
           <a href="#news">News</a>
           <a href="#newsletter">Newsletter</a>
@@ -2485,8 +2568,7 @@
           </div>
         </div>
       </div>
-
-      <div class="footer-bottom">
+      <div style="text-align: center; padding-top: 2rem; margin-top: 2rem; border-top: 1px solid var(--color-border); color: var(--color-text-muted); font-size: 0.875rem;">
         <p>&copy; 2026 Open Buro Alliance. Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
       </div>
     </div>
@@ -2721,34 +2803,56 @@
 
       if (!visionSection || paths.length === 0) return;
 
-      // Check for prefers-reduced-motion
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let isVisible = false;
+      let loopTimeout = null;
 
-      // Use existing Intersection Observer pattern from Phase 2
+      function runAnimation() {
+        // Reset all paths to hidden, remove arrowheads
+        paths.forEach(path => {
+          const length = path.getTotalLength();
+          path.style.transition = 'none';
+          path.style.strokeDasharray = length;
+          path.style.strokeDashoffset = length;
+          path.setAttribute('marker-end', 'none');
+        });
+
+        // Force reflow so the reset takes effect
+        void paths[0].offsetWidth;
+
+        // Animate paths with stagger
+        const animDuration = 1500;
+        const staggerDelay = 500;
+        paths.forEach((path, index) => {
+          setTimeout(() => {
+            path.style.transition = 'stroke-dashoffset 1.5s ease-in-out';
+            path.style.strokeDashoffset = '0';
+            // Restore arrowhead when draw-in finishes
+            setTimeout(() => {
+              path.setAttribute('marker-end', 'url(#arrowhead)');
+            }, animDuration);
+          }, index * staggerDelay);
+        });
+
+        // Schedule next loop: wait for all animations + 2s pause
+        const totalAnimTime = (paths.length - 1) * staggerDelay + animDuration;
+        loopTimeout = setTimeout(() => {
+          if (isVisible) runAnimation();
+        }, totalAnimTime + 2000);
+      }
+
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && !isVisible) {
+            isVisible = true;
             if (prefersReducedMotion) {
-              // Show paths immediately, skip animation
-              paths.forEach(path => {
-                path.style.strokeDashoffset = '0';
-              });
+              paths.forEach(path => { path.style.strokeDashoffset = '0'; });
             } else {
-              // Animate paths
-              paths.forEach((path, index) => {
-                const length = path.getTotalLength();
-                path.style.strokeDasharray = length;
-                path.style.strokeDashoffset = length;
-
-                // Stagger animation: 500ms delay between paths
-                setTimeout(() => {
-                  path.style.transition = 'stroke-dashoffset 1.5s ease-in-out';
-                  path.style.strokeDashoffset = '0';
-                }, index * 500);
-              });
+              runAnimation();
             }
-
-            observer.unobserve(visionSection);
+          } else if (!entry.isIntersecting && isVisible) {
+            isVisible = false;
+            if (loopTimeout) clearTimeout(loopTimeout);
           }
         });
       }, { threshold: 0.3 });
