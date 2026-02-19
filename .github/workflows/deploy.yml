@@ -1,0 +1,30 @@
+name: Deploy to FTP
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Deploy to FTP
+        env:
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+        run: |
+          lftp -u "$FTP_USER","$FTP_PASSWORD" "ftp://$FTP_HOST" -e "
+            set ftp:ssl-allow no;
+            cd www;
+            put index.html;
+            mirror -R --only-newer --exclude .git/ --exclude .github/ --exclude .planning/ --exclude README.md assets/ assets/;
+            mirror -R --only-newer news/ news/;
+            mirror -R --only-newer pages/ pages/;
+            quit
+          "
