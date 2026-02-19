@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- FOUC Prevention: Dark Mode Script -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = savedTheme === 'dark' || (!savedTheme && systemPrefersDark);
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+
+  <!-- Primary Meta Tags -->
+  <title>When an Independent Observer Asks the Right Questions - Open Buro</title>
+  <meta name="description" content="An independent reviewer analyzed Twake Workplace and Open Buro, identifying the missing orchestration layer that European sovereign suites need to truly compete with Microsoft 365.">
+  <link rel="canonical" href="https://openburo.eu/news/twake-openburo-independent-review.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://openburo.eu/news/twake-openburo-independent-review.html">
+  <meta property="og:title" content="When an Independent Observer Asks the Right Questions">
+  <meta property="og:description" content="An independent reviewer analyzed Twake Workplace and Open Buro, identifying the missing orchestration layer that European sovereign suites need to truly compete with Microsoft 365.">
+  <meta property="og:image" content="https://openburo.eu/assets/images/news/openburo-orchestration-diagram.png">
+
+  <!-- Color Scheme & Theme -->
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='none' stroke='%234f46e5' stroke-width='1.5'/><line x1='16' y1='8' x2='16' y2='24' stroke='%234f46e5' stroke-width='1'/><line x1='8' y1='16' x2='24' y2='16' stroke='%234f46e5' stroke-width='1'/><line x1='10' y1='10' x2='22' y2='22' stroke='%234f46e5' stroke-width='1'/><line x1='22' y1='10' x2='10' y2='22' stroke='%234f46e5' stroke-width='1'/><circle cx='16' cy='8' r='2.5' fill='%234f46e5'/><circle cx='16' cy='24' r='2.5' fill='%234f46e5'/><circle cx='8' cy='16' r='2.5' fill='%234f46e5'/><circle cx='24' cy='16' r='2.5' fill='%234f46e5'/><circle cx='10' cy='10' r='2' fill='%236366f1'/><circle cx='22' cy='10' r='2' fill='%236366f1'/><circle cx='10' cy='22' r='2' fill='%236366f1'/><circle cx='22' cy='22' r='2' fill='%236366f1'/><circle cx='16' cy='16' r='3' fill='%234f46e5'/></svg>">
+
+  <!-- External Resources -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css">
+
+  <style>
+    /* Design Tokens */
+    :root {
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-900: #111827;
+      --gray-950: #0a0a0a;
+      --blue-500: #3b82f6;
+      --blue-600: #2563eb;
+      --indigo-600: #4f46e5;
+      --indigo-500: #6366f1;
+      --indigo-400: #818cf8;
+
+      --color-bg: var(--gray-50);
+      --color-bg-elevated: var(--gray-100);
+      --color-text: var(--gray-900);
+      --color-text-muted: var(--gray-500);
+      --color-primary: var(--indigo-600);
+      --color-accent: var(--blue-600);
+      --color-border: var(--gray-200);
+
+      --space-section-x: 1.5rem;
+      --container-max: 1200px;
+      --nav-height: 4rem;
+      --border-radius: 0.5rem;
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+
+      --font-heading: 'Plus Jakarta Sans', sans-serif;
+      --font-body: 'IBM Plex Sans', sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.25rem;
+      --text-2xl: 1.5rem;
+      --text-3xl: 1.875rem;
+      --text-4xl: 2.25rem;
+    }
+
+    .dark {
+      --color-bg: var(--gray-950);
+      --color-bg-elevated: var(--gray-900);
+      --color-text: var(--gray-50);
+      --color-text-muted: var(--gray-400);
+      --color-primary: var(--indigo-500);
+      --color-accent: #60a5fa;
+      --color-border: #374151;
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+    }
+
+    /* Reset & Base */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 1rem;
+      color: var(--color-text);
+    }
+
+    h1 { font-size: var(--text-4xl); }
+    h2 { font-size: var(--text-3xl); }
+    h3 { font-size: var(--text-2xl); }
+
+    p { margin-bottom: 1rem; }
+
+    a {
+      color: var(--color-primary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    a:hover { text-decoration: underline; }
+
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+    :focus:not(:focus-visible) { outline: none; }
+
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* Navbar */
+    .article-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: var(--nav-height);
+      background: rgba(249, 250, 251, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--color-border);
+      transition: background-color 300ms ease-out;
+    }
+
+    .dark .article-nav {
+      background: rgba(10, 10, 10, 0.9);
+    }
+
+    .nav-container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      height: 100%;
+      padding: 0 var(--space-section-x);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .nav-logo {
+      font-family: var(--font-heading);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      color: var(--color-text);
+      text-decoration: none;
+    }
+    .nav-logo:hover { text-decoration: none; }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .nav-back:hover {
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+
+    /* Article Hero */
+    .article-hero {
+      position: relative;
+      width: 100%;
+      max-height: 480px;
+      overflow: hidden;
+    }
+
+    .article-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 240px;
+      max-height: 480px;
+    }
+
+    .article-hero-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(to top, var(--color-bg), transparent);
+    }
+
+    /* Article Content */
+    .article-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 var(--space-section-x);
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .article-date {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    .article-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      background: rgba(99, 102, 241, 0.1);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+    }
+
+    .article-title {
+      font-size: var(--text-3xl);
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .article-subtitle {
+      font-size: var(--text-xl);
+      color: var(--color-text-muted);
+      font-weight: 400;
+      margin-bottom: 2.5rem;
+      line-height: 1.5;
+    }
+
+    .article-body {
+      font-size: var(--text-lg);
+      line-height: 1.8;
+    }
+
+    .article-body p { margin-bottom: 1.5rem; }
+
+    .article-body h2 {
+      font-size: var(--text-2xl);
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .article-body blockquote {
+      border-left: 3px solid var(--color-primary);
+      padding: 1rem 1.5rem;
+      margin: 2rem 0;
+      background: var(--color-bg-elevated);
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      font-style: italic;
+      color: var(--color-text-muted);
+    }
+
+    .article-body blockquote p { margin-bottom: 0; }
+
+    .article-body ul {
+      margin: 1rem 0 1.5rem 1.5rem;
+      list-style: disc;
+    }
+
+    .article-body li { margin-bottom: 0.5rem; }
+
+    .article-body .diagram-figure {
+      margin: 2.5rem 0;
+      text-align: center;
+    }
+
+    .article-body .diagram-figure img {
+      border-radius: var(--border-radius);
+      border: 1px solid var(--color-border);
+      margin: 0 auto;
+    }
+
+    .article-body .diagram-figure figcaption {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-top: 0.75rem;
+      font-style: italic;
+    }
+
+    /* Highlight Box */
+    .highlight-box {
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+    }
+
+    .highlight-box h3 {
+      color: var(--color-primary);
+      margin-top: 0;
+      font-size: var(--text-xl);
+    }
+
+    /* Back link */
+    .article-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 3rem 0 1rem;
+      font-weight: 500;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--color-bg-elevated);
+      border-top: 1px solid var(--color-border);
+      padding: 3rem var(--space-section-x);
+      margin-top: 4rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .footer-brand, .footer-nav, .footer-contact { flex: 1 1 200px; }
+
+    .footer-logo {
+      font-family: var(--font-heading);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-tagline {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .footer-nav h4, .footer-contact h4 {
+      font-size: var(--text-base);
+      margin-bottom: 1rem;
+    }
+
+    .footer-nav a, .footer-contact a {
+      display: block;
+      color: var(--color-text-muted);
+      margin-bottom: 0.5rem;
+      font-size: var(--text-sm);
+    }
+
+    .footer-nav a:hover, .footer-contact a:hover {
+      color: var(--color-primary);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 2rem 1.5rem 1rem;
+      margin: 2rem auto 0;
+      max-width: var(--container-max);
+      width: 100%;
+      border-top: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) {
+      :root { --text-4xl: 3rem; }
+      .article-title { font-size: var(--text-4xl); }
+      .article-subtitle { font-size: var(--text-2xl); }
+    }
+
+    @media (min-width: 1024px) {
+      .article-container { padding: 0 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="article-nav">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">Open Buro</a>
+      <a href="../index.html#news" class="nav-back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Back to news
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Image -->
+  <div class="article-hero">
+    <img src="../assets/images/news/openburo-orchestration-diagram.png" alt="Open Buro orchestration layer diagram: isolated building blocks on the left connect through Open Buro's orchestration layer to produce operational workflows on the right" loading="eager">
+    <div class="article-hero-overlay"></div>
+  </div>
+
+  <!-- Article -->
+  <main>
+    <article class="article-container" style="padding-top: 2.5rem; padding-bottom: 2rem;">
+
+      <div class="article-meta">
+        <span class="article-tag">Analysis</span>
+        <span class="article-tag">Orchestration</span>
+        <time class="article-date" datetime="2026-02-16">February 2026</time>
+      </div>
+
+      <h1 class="article-title">When an Independent Observer Asks the Right Questions</h1>
+      <p class="article-subtitle">An independent review of Twake Workplace and Open Buro crystallizes what the European sovereign ecosystem has been missing: not better apps, but better orchestration.</p>
+
+      <div class="article-body">
+
+        <p>Two in-depth articles recently published on <a href="https://souverain.ovh" target="_blank" rel="noopener">souverain.ovh</a> deserve careful reading. The first is a thorough hands-on test of <strong>Twake Workplace</strong>, LINAGORA's open source sovereign collaborative suite. The second goes much further: a strategic reflection on what European suites still lack to genuinely compete with Google Workspace and Microsoft 365&mdash;and the role <strong>Open Buro</strong> could play.</p>
+
+        <p>These are not sponsored posts. They represent the demanding perspective of a user who tests, compares, documents, and challenges. This is exactly what the sovereign ecosystem needs to move forward.</p>
+
+        <h2>The Diagnosis: It's Not About Individual Tools</h2>
+
+        <p>The reviewer articulates with remarkable clarity what many feel without always being able to express. The problem with European sovereign suites is not the quality of individual tools. It is the <strong>absence of workflow chaining</strong>:</p>
+
+        <blockquote>
+          <p>Email &rarr; synchronized contact &rarr; calendar with availability &rarr; video link &rarr; join in one click. This is not a feature. It is a workflow. And it is precisely this workflow that makes Google and Microsoft so hard to leave.</p>
+        </blockquote>
+
+        <figure class="diagram-figure">
+          <img src="../assets/images/news/openburo-orchestration-diagram.png" alt="Open Buro orchestration diagram showing isolated apps (email, calendar, contacts, files, video, chat) connected through an orchestration layer into operational workflows">
+          <figcaption>From isolated building blocks to operational workflows: Open Buro provides the orchestration layer.</figcaption>
+        </figure>
+
+        <p>Microsoft doesn't win because Word is irreplaceable. It wins because the entire ecosystem is <strong>interconnected, fluid, and seamless</strong>. Open source tools, despite their quality, remain isolated islands.</p>
+
+        <h2>"Don't Copy Gmail": A Shared Conviction</h2>
+
+        <p>The reviewer argues against reinventing the user experience from scratch. LINAGORA agrees. The webmail is the entry point. It is the Trojan horse of adoption. Ignoring this means ignoring 20 years of web history. But "don't copy Gmail" doesn't mean ignoring why Gmail worked&mdash;it means doing better, with our own values.</p>
+
+        <p>The reviewer also notes a turning point: <strong>UX is no longer a weakness</strong> for sovereign suites. At LINAGORA, this evolution is no accident. It is the result of deliberate investment in design, ergonomics, and user research. That independent observers notice this shift is the best validation possible.</p>
+
+        <h2>Open Buro: The Missing Vision</h2>
+
+        <p>The reviewer dedicates a significant portion of his analysis to <strong>Open Buro</strong>, the project jointly initiated by DINUM and LINAGORA. And he identifies the essential point:</p>
+
+        <div class="highlight-box">
+          <h3>The Platform Problem</h3>
+          <p>The building blocks exist. But they don't yet form a platform. Microsoft is not hard to leave because Word is irreplaceable&mdash;it is hard to leave because everything is interlocked, fluid, seamless. Open Buro aims to fix exactly this: a shared orchestration standard, so that independent services assemble and communicate properly, under open governance.</p>
+        </div>
+
+        <p>The reviewer references the first Open Buro working group, formed at <a href="fosdem-2025.html">FOSDEM</a> with Samuel Paccoud and Benjamin Andre. He also cites Henri Verdier praising how the DINUM team built European cooperation with Germany, the Netherlands, and soon Italy&mdash;moving beyond the reflex of "let's pick one solution: mine."</p>
+
+        <p>This is precisely the dynamic Open Buro is part of.</p>
+
+        <h2>The Trust Challenge</h2>
+
+        <p>The reviewer concludes with a plea for what he calls <strong>"the trust project"</strong>: building a narrative, simplifying migration, demonstrating through proof. He proposes concrete actions: migration kits, public demos, ambassadors, enterprise adoption proof points, self-hosting packages, multilingual communication.</p>
+
+        <blockquote>
+          <p>Migration is a psychological act before it is a technical one. We must reassure those who doubt, those who lack time, those who fear losing their habits.</p>
+        </blockquote>
+
+        <p>LINAGORA has been building open source solutions for European institutions and French ministries for over 25 years. Large-scale migrations, compliance requirements, resistance to change&mdash;this is daily reality. Mass adoption will be built step by step, through trust, through a credible narrative and concrete progress. Not through a big bang.</p>
+
+        <h2>We Are Closer Than Ever</h2>
+
+        <p>The reviewer writes: <em>"We are close. Closer than we have ever been."</em></p>
+
+        <p>And: <em>"2026 is the year of digital sovereignty, not 2027."</em></p>
+
+        <p>We share this urgency and this clear-eyed optimism. The transition cannot be decreed. It must be built. <strong>Brick by brick, workflow by workflow, trust by trust.</strong></p>
+
+        <!-- Back link -->
+        <a href="../index.html#news" class="article-back">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          Back to all news
+        </a>
+
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">Open Buro</div>
+        <p class="footer-tagline">European open source ecosystem</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <h4>Navigation</h4>
+        <a href="../index.html#problem">Problem</a>
+        <a href="../index.html#vision">Vision</a>
+        <a href="../index.html#pillars">Pillars</a>
+        <a href="../index.html#timeline">Timeline</a>
+        <a href="../index.html#news">News</a>
+      </nav>
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <a href="mailto:hello@openburo.eu">hello@openburo.eu</a>
+        <div class="social-links">
+          <a href="#" aria-label="GitHub">GitHub</a>
+          <a href="#" aria-label="LinkedIn">LinkedIn</a>
+          <a href="#" aria-label="Mastodon">Mastodon</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Open Buro Alliance. Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
+    </div>
+  </footer>
+
+  <!-- Dark Mode Toggle Script -->
+  <script>
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'd' && e.altKey) {
+        document.documentElement.classList.toggle('dark');
+        const isDark = document.documentElement.classList.contains('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      }
+    });
+  </script>
+
+</body>
+</html>

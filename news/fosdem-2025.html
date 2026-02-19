@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- FOUC Prevention: Dark Mode Script -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = savedTheme === 'dark' || (!savedTheme && systemPrefersDark);
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+
+  <!-- Primary Meta Tags -->
+  <title>Open Buro Presented at FOSDEM 2025 - Open Buro</title>
+  <meta name="description" content="Benjamin Andre and Samuel Paccoud presented Open Buro at FOSDEM 2025 in Brussels, introducing a European open orchestration standard as the answer to Microsoft 365 dependency.">
+  <link rel="canonical" href="https://openburo.eu/news/fosdem-2025.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://openburo.eu/news/fosdem-2025.html">
+  <meta property="og:title" content="Open Buro Presented at FOSDEM 2025">
+  <meta property="og:description" content="Benjamin Andre and Samuel Paccoud presented Open Buro at FOSDEM 2025 in Brussels, introducing a European open orchestration standard as the answer to Microsoft 365 dependency.">
+
+  <!-- Color Scheme & Theme -->
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='none' stroke='%234f46e5' stroke-width='1.5'/><line x1='16' y1='8' x2='16' y2='24' stroke='%234f46e5' stroke-width='1'/><line x1='8' y1='16' x2='24' y2='16' stroke='%234f46e5' stroke-width='1'/><line x1='10' y1='10' x2='22' y2='22' stroke='%234f46e5' stroke-width='1'/><line x1='22' y1='10' x2='10' y2='22' stroke='%234f46e5' stroke-width='1'/><circle cx='16' cy='8' r='2.5' fill='%234f46e5'/><circle cx='16' cy='24' r='2.5' fill='%234f46e5'/><circle cx='8' cy='16' r='2.5' fill='%234f46e5'/><circle cx='24' cy='16' r='2.5' fill='%234f46e5'/><circle cx='10' cy='10' r='2' fill='%236366f1'/><circle cx='22' cy='10' r='2' fill='%236366f1'/><circle cx='10' cy='22' r='2' fill='%236366f1'/><circle cx='22' cy='22' r='2' fill='%236366f1'/><circle cx='16' cy='16' r='3' fill='%234f46e5'/></svg>">
+
+  <!-- External Resources -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css">
+
+  <style>
+    /* Design Tokens */
+    :root {
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-900: #111827;
+      --gray-950: #0a0a0a;
+      --blue-500: #3b82f6;
+      --blue-600: #2563eb;
+      --indigo-600: #4f46e5;
+      --indigo-500: #6366f1;
+      --indigo-400: #818cf8;
+
+      --color-bg: var(--gray-50);
+      --color-bg-elevated: var(--gray-100);
+      --color-text: var(--gray-900);
+      --color-text-muted: var(--gray-500);
+      --color-primary: var(--indigo-600);
+      --color-accent: var(--blue-600);
+      --color-border: var(--gray-200);
+
+      --space-section-x: 1.5rem;
+      --container-max: 1200px;
+      --nav-height: 4rem;
+      --border-radius: 0.5rem;
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+
+      --font-heading: 'Plus Jakarta Sans', sans-serif;
+      --font-body: 'IBM Plex Sans', sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.25rem;
+      --text-2xl: 1.5rem;
+      --text-3xl: 1.875rem;
+      --text-4xl: 2.25rem;
+    }
+
+    .dark {
+      --color-bg: var(--gray-950);
+      --color-bg-elevated: var(--gray-900);
+      --color-text: var(--gray-50);
+      --color-text-muted: var(--gray-400);
+      --color-primary: var(--indigo-500);
+      --color-accent: #60a5fa;
+      --color-border: #374151;
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+    }
+
+    /* Reset & Base */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 1rem;
+      color: var(--color-text);
+    }
+
+    h1 { font-size: var(--text-4xl); }
+    h2 { font-size: var(--text-3xl); }
+    h3 { font-size: var(--text-2xl); }
+
+    p { margin-bottom: 1rem; }
+
+    a {
+      color: var(--color-primary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    a:hover { text-decoration: underline; }
+
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+    :focus:not(:focus-visible) { outline: none; }
+
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* Navbar */
+    .article-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: var(--nav-height);
+      background: rgba(249, 250, 251, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--color-border);
+      transition: background-color 300ms ease-out;
+    }
+
+    .dark .article-nav {
+      background: rgba(10, 10, 10, 0.9);
+    }
+
+    .nav-container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      height: 100%;
+      padding: 0 var(--space-section-x);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .nav-logo {
+      font-family: var(--font-heading);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      color: var(--color-text);
+      text-decoration: none;
+    }
+    .nav-logo:hover { text-decoration: none; }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .nav-back:hover {
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+
+    /* Article Hero */
+    .article-hero {
+      position: relative;
+      width: 100%;
+      max-height: 480px;
+      overflow: hidden;
+    }
+
+    .article-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 240px;
+      max-height: 480px;
+    }
+
+    .article-hero-placeholder {
+      width: 100%;
+      min-height: 320px;
+      max-height: 480px;
+      background: linear-gradient(135deg, #10b981, #3b82f6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: var(--font-heading);
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .article-hero-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(to top, var(--color-bg), transparent);
+    }
+
+    /* Article Content */
+    .article-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 var(--space-section-x);
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .article-date {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    .article-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      background: rgba(99, 102, 241, 0.1);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+    }
+
+    .article-title {
+      font-size: var(--text-3xl);
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .article-subtitle {
+      font-size: var(--text-xl);
+      color: var(--color-text-muted);
+      font-weight: 400;
+      margin-bottom: 2.5rem;
+      line-height: 1.5;
+    }
+
+    .article-body {
+      font-size: var(--text-lg);
+      line-height: 1.8;
+    }
+
+    .article-body p {
+      margin-bottom: 1.5rem;
+    }
+
+    .article-body h2 {
+      font-size: var(--text-2xl);
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .article-body h3 {
+      font-size: var(--text-xl);
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .article-body blockquote {
+      border-left: 3px solid var(--color-primary);
+      padding: 1rem 1.5rem;
+      margin: 2rem 0;
+      background: var(--color-bg-elevated);
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      font-style: italic;
+      color: var(--color-text-muted);
+    }
+
+    .article-body blockquote p {
+      margin-bottom: 0;
+    }
+
+    .article-body ul {
+      margin: 1rem 0 1.5rem 1.5rem;
+      list-style: disc;
+    }
+
+    .article-body li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Photo Gallery */
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .photo-gallery img {
+      width: 100%;
+      border-radius: var(--border-radius);
+      border: 1px solid var(--color-border);
+    }
+
+    .photo-gallery .photo-full {
+      grid-column: 1 / -1;
+    }
+
+    .photo-caption {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      text-align: center;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    /* Speaker Cards */
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin: 2rem 0 2.5rem;
+    }
+
+    .speaker-card {
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .speaker-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--color-primary);
+    }
+
+    .speaker-icon {
+      width: 64px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .speaker-icon img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .speaker-info { flex: 1; }
+
+    .speaker-name {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: var(--text-base);
+      margin-bottom: 0.25rem;
+    }
+
+    .speaker-role {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    /* Highlight Box */
+    .highlight-box {
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+    }
+
+    .highlight-box h3 {
+      color: var(--color-primary);
+      margin-top: 0;
+    }
+
+    /* Talk Info Box */
+    .talk-info {
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .talk-info-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: var(--text-sm);
+    }
+
+    .talk-info-row i {
+      font-size: 20px;
+      color: var(--color-primary);
+    }
+
+    .talk-info-label {
+      font-weight: 600;
+      min-width: 80px;
+    }
+
+    /* Back link */
+    .article-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 3rem 0 1rem;
+      font-weight: 500;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--color-bg-elevated);
+      border-top: 1px solid var(--color-border);
+      padding: 3rem var(--space-section-x);
+      margin-top: 4rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .footer-brand, .footer-nav, .footer-contact { flex: 1 1 200px; }
+
+    .footer-logo {
+      font-family: var(--font-heading);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-tagline {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .footer-nav h4, .footer-contact h4 {
+      font-size: var(--text-base);
+      margin-bottom: 1rem;
+    }
+
+    .footer-nav a, .footer-contact a {
+      display: block;
+      color: var(--color-text-muted);
+      margin-bottom: 0.5rem;
+      font-size: var(--text-sm);
+    }
+
+    .footer-nav a:hover, .footer-contact a:hover {
+      color: var(--color-primary);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 2rem 1.5rem 1rem;
+      margin: 2rem auto 0;
+      max-width: var(--container-max);
+      width: 100%;
+      border-top: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) {
+      :root {
+        --text-4xl: 3rem;
+      }
+
+      .article-title {
+        font-size: var(--text-4xl);
+      }
+
+      .article-subtitle {
+        font-size: var(--text-2xl);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .speaker-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .article-container {
+        padding: 0 3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="article-nav">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">Open Buro</a>
+      <a href="../index.html#news" class="nav-back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Back to news
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Image -->
+  <div class="article-hero">
+    <img src="../assets/images/news/fosdem-2025-montage.jpeg" alt="Benjamin Andre and Samuel Paccoud presenting Open Buro at FOSDEM 2025 in Brussels - photo montage showing the speakers, audience, and presentation slides" loading="eager">
+    <div class="article-hero-overlay"></div>
+  </div>
+
+  <!-- Article -->
+  <main>
+    <article class="article-container" style="padding-top: 2.5rem; padding-bottom: 2rem;">
+
+      <div class="article-meta">
+        <span class="article-tag">FOSDEM</span>
+        <span class="article-tag">Open Standard</span>
+        <time class="article-date" datetime="2025-02-02">February 2025</time>
+      </div>
+
+      <h1 class="article-title">Open Buro Presented at FOSDEM 2025</h1>
+      <p class="article-subtitle">There is no alternative to Microsoft 365. What if the problem isn't where we think?</p>
+
+      <div class="article-body">
+
+        <p>On February 1-2, 2025, <strong>Benjamin Andre</strong>, Twake strategic director at LINAGORA, and <strong>Samuel Paccoud</strong> from DINUM (the French Interministerial Digital Directorate) took the stage at <strong>FOSDEM 2025</strong> in Brussels to address one of the most pressing questions in European digital sovereignty: why does Europe remain dependent on Microsoft 365 despite having quality open source collaborative solutions?</p>
+
+        <div class="speaker-grid">
+          <div class="speaker-card">
+            <div class="speaker-icon"><img src="../assets/images/news/linagora-logo.png" alt="LINAGORA"></div>
+            <div class="speaker-info">
+              <div class="speaker-name">Benjamin Andre</div>
+              <div class="speaker-role">Twake Strategic Director, LINAGORA</div>
+            </div>
+          </div>
+          <div class="speaker-card">
+            <div class="speaker-icon"><img src="../assets/images/news/dinum-logo.webp" alt="DINUM"></div>
+            <div class="speaker-info">
+              <div class="speaker-name">Samuel Paccoud</div>
+              <div class="speaker-role">DINUM</div>
+            </div>
+          </div>
+        </div>
+
+        <h2>The Structural Barrier</h2>
+
+        <p>The talk challenged a widespread assumption. Europe has no shortage of excellent open source tools: email, document collaboration, project management, video conferencing. Individually, these solutions often match or exceed the functionality of their proprietary counterparts. So why hasn't a credible alternative emerged?</p>
+
+        <blockquote>
+          <p>The barrier is structural, not technical. Individual apps are not the problem. The absence of an orchestration layer is.</p>
+        </blockquote>
+
+        <p>Microsoft 365 doesn't win because Word is better than LibreOffice or because Teams is better than any single open source video tool. It wins because everything is <strong>connected</strong>: identity, navigation, data, and workflows flow seamlessly across applications. Open source tools, despite their quality, remain isolated islands.</p>
+
+        <h2>AI Changes the Game</h2>
+
+        <p>The speakers highlighted a critical inflection point: <strong>artificial intelligence is rapidly closing the functional gap</strong> between open source and proprietary solutions. Features that once took years to develop can now be integrated in months. The technical differentiator is shrinking fast.</p>
+
+        <p>But AI alone doesn't solve the orchestration problem. An AI assistant that only understands one app's context is far less useful than one that can reason across your entire workspace. This makes the case for an orchestration standard even more urgent.</p>
+
+        <h2>Introducing Open Buro</h2>
+
+        <p>This is where <strong>Open Buro</strong> was introduced to the FOSDEM audience: an <strong>open orchestration standard</strong> enabling independent open source services to integrate into a fluid, interoperable work environment&mdash;without creating new proprietary silos.</p>
+
+        <div class="highlight-box">
+          <h3>The Open Buro Approach</h3>
+          <p>Rather than building yet another suite, Open Buro provides the missing orchestration layer: a shared standard for identity, navigation, data exchange, and AI integration. Publishers keep their independence. Users get a unified experience.</p>
+        </div>
+
+        <p>The presentation drew a clear line between two approaches:</p>
+
+        <ul>
+          <li><strong>The suite approach</strong>: build everything from scratch under one vendor (creates new lock-in)</li>
+          <li><strong>The standard approach</strong>: define interoperability protocols that let existing apps work together (preserves freedom)</li>
+        </ul>
+
+        <p>Open Buro takes the second path, inspired by how the web itself works: shared standards, independent implementations, collective benefit.</p>
+
+        <h2>Making Workspaces Work Together</h2>
+
+        <p>The presentation was part of the <em>"Open Source In The European Legislative Landscape and Beyond"</em> track, alongside a complementary talk by Samuel Paccoud and Alexander Smolianitski (ZenDiS) titled <strong>"Making Workspaces Work Together (And Across Borders)"</strong>. This session explored how France's <strong>La Suite numerique</strong> and Germany's <strong>openDesk</strong> are pioneering cross-border collaboration between sovereign digital workspace initiatives.</p>
+
+        <div class="talk-info">
+          <div class="talk-info-row">
+            <i class="ph-duotone ph-calendar-blank"></i>
+            <span class="talk-info-label">Date</span>
+            <span>Sunday, February 2, 2025</span>
+          </div>
+          <div class="talk-info-row">
+            <i class="ph-duotone ph-clock"></i>
+            <span class="talk-info-label">Time</span>
+            <span>11:20 &ndash; 11:35 CET</span>
+          </div>
+          <div class="talk-info-row">
+            <i class="ph-duotone ph-map-pin"></i>
+            <span class="talk-info-label">Room</span>
+            <span>AW1.120, ULB Campus Solbosch, Brussels</span>
+          </div>
+          <div class="talk-info-row">
+            <i class="ph-duotone ph-tag"></i>
+            <span class="talk-info-label">Track</span>
+            <span>Open Source In The European Legislative Landscape and Beyond</span>
+          </div>
+        </div>
+
+        <h2>The Question That Remains</h2>
+
+        <p>The presentation concluded with a challenge to the audience&mdash;one that remains at the heart of the Open Buro project:</p>
+
+        <blockquote>
+          <p>Where do you see the real obstacle to building a credible European alternative to Microsoft 365?</p>
+        </blockquote>
+
+        <p>The response at FOSDEM was clear: the open source community is ready for orchestration. What was missing was a standard and a coalition to build it. Open Buro intends to be both.</p>
+
+        <!-- Back link -->
+        <a href="../index.html#news" class="article-back">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          Back to all news
+        </a>
+
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">Open Buro</div>
+        <p class="footer-tagline">European open source ecosystem</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <h4>Navigation</h4>
+        <a href="../index.html#problem">Problem</a>
+        <a href="../index.html#vision">Vision</a>
+        <a href="../index.html#pillars">Pillars</a>
+        <a href="../index.html#timeline">Timeline</a>
+        <a href="../index.html#news">News</a>
+      </nav>
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <a href="mailto:hello@openburo.eu">hello@openburo.eu</a>
+        <div class="social-links">
+          <a href="#" aria-label="GitHub">GitHub</a>
+          <a href="#" aria-label="LinkedIn">LinkedIn</a>
+          <a href="#" aria-label="Mastodon">Mastodon</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Open Buro Alliance. Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
+    </div>
+  </footer>
+
+  <!-- Dark Mode Toggle Script -->
+  <script>
+    // Minimal dark mode toggle support (if user navigates from main page with toggle)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'd' && e.altKey) {
+        document.documentElement.classList.toggle('dark');
+        const isDark = document.documentElement.classList.contains('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      }
+    });
+  </script>
+
+</body>
+</html>
