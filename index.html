@@ -1509,7 +1509,8 @@
        ======================================== */
 
     .problem-layout {
-      display: grid;
+      display: flex;
+      flex-direction: column;
       gap: 3rem;
       margin-top: 2rem;
       text-align: left;
@@ -1517,13 +1518,50 @@
 
     .problem-text {
       font-size: var(--text-lg);
-      line-height: 1.7;
+      line-height: 1.8;
+      color: var(--color-text);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .problem-text p {
+      margin-bottom: 1rem;
+    }
+
+    .problem-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .problem-text ul {
+      list-style: none;
+      padding: 0;
+      margin: 1.25rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .problem-text ul li {
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--color-text-muted);
+    }
+
+    .problem-text ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    .problem-text ul li strong {
       color: var(--color-text);
     }
 
     .constat-cards {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr;
       gap: 1.5rem;
     }
 
@@ -1576,9 +1614,8 @@
     }
 
     @media (min-width: 768px) {
-      .problem-layout {
-        grid-template-columns: 40% 60%;
-        align-items: start;
+      .constat-cards {
+        grid-template-columns: repeat(3, 1fr);
       }
 
       #problem {
@@ -2075,9 +2112,16 @@
       <h2>The Workplace Tech Paradox</h2>
 
       <div class="problem-layout">
-        <!-- Left column: Problem text -->
+        <!-- Problem text (full width) -->
         <div class="problem-text">
-          <p>Europe now has serious open source workplace tools — email, docs, project management, video, chat. Yet dependency on dominant suites keeps growing. Not because the alternatives are bad, but because Microsoft and Google have something more: the <strong>platform effect</strong>. An interlocked ecosystem designed to work as one. Leaving feels like a risk, not a project. What's missing isn't better apps — it's the glue between them.</p>
+          <p>Europe now has <strong>serious open source workplace tools</strong> — email, docs, project management, video, chat. They're mature, deployable, and increasingly adopted. Yet <strong>dependency on dominant suites keeps growing</strong>.</p>
+          <p>Why? Not because the alternatives are bad — but because Microsoft and Google have something more: the <strong>platform effect</strong>.</p>
+          <ul>
+            <li><strong>It's not "a software"</strong> — it's an interlocked ecosystem designed to work as one</li>
+            <li><strong>Leaving feels like a risk</strong>, not a project: cost, complexity, habits, continuity</li>
+            <li><strong>SSO across apps isn't enough</strong> — a shared login only produces an app catalog, not a platform</li>
+          </ul>
+          <p>What's missing isn't better apps — it's <strong>the orchestration layer between them</strong>.</p>
         </div>
 
         <!-- Right column: 3 constat cards -->
