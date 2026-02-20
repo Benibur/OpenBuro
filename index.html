@@ -25,8 +25,12 @@
 
       // Set language attribute early to prevent FOUC
       const supportedLangs = ['en','fr','de','it','es'];
-      const savedLang = localStorage.getItem('lang');
-      document.documentElement.lang = supportedLangs.includes(savedLang) ? savedLang : 'en';
+      const cookieMatch = document.cookie.match(/(?:^|;\s*)lang=(\w+)/);
+      const savedLang = cookieMatch ? cookieMatch[1] : null;
+      const browserLang = (navigator.language || '').slice(0, 2).toLowerCase();
+      const detectedLang = savedLang && supportedLangs.includes(savedLang) ? savedLang
+        : supportedLangs.includes(browserLang) ? browserLang : 'en';
+      document.documentElement.lang = detectedLang;
     })();
   </script>
 
@@ -3852,8 +3856,8 @@
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) metaDesc.setAttribute('content', translations[lang]['meta.description']);
 
-      // Save preference
-      localStorage.setItem('lang', lang);
+      // Save preference in cookie (365 days, SameSite=Lax, no tracking)
+      document.cookie = 'lang=' + lang + ';path=/;max-age=31536000;SameSite=Lax';
 
       // Update ALL dropdown instances (desktop + mobile)
       document.querySelectorAll('.lang-dropdown').forEach(dropdown => {
@@ -3898,10 +3902,14 @@
       // Initialize mobile drawer (Phase 6)
       initMobileDrawer();
 
-      // Initialize i18n system
+      // Initialize i18n system: cookie > browser language > fallback 'en'
       const supportedLangs = ['en', 'fr', 'de', 'it', 'es'];
-      const savedLang = localStorage.getItem('lang');
-      setLanguage(supportedLangs.includes(savedLang) ? savedLang : 'en');
+      const cookieMatch = document.cookie.match(/(?:^|;\s*)lang=(\w+)/);
+      const savedLang = cookieMatch ? cookieMatch[1] : null;
+      const browserLang = (navigator.language || '').slice(0, 2).toLowerCase();
+      const initLang = savedLang && supportedLangs.includes(savedLang) ? savedLang
+        : supportedLangs.includes(browserLang) ? browserLang : 'en';
+      setLanguage(initLang);
 
       // Initialize language dropdowns (desktop + mobile)
       document.querySelectorAll('.lang-dropdown').forEach(dropdown => {
