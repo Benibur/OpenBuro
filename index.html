@@ -24,8 +24,9 @@
       }
 
       // Set language attribute early to prevent FOUC
-      const savedLang = localStorage.getItem('lang') || 'en';
-      document.documentElement.lang = savedLang;
+      const supportedLangs = ['en','fr','de','it','es'];
+      const savedLang = localStorage.getItem('lang');
+      document.documentElement.lang = supportedLangs.includes(savedLang) ? savedLang : 'en';
     })();
   </script>
 
@@ -2060,43 +2061,131 @@
     }
 
     /* ========================================
-       22. LANGUAGE TOGGLE
+       22. LANGUAGE DROPDOWN
        ======================================== */
 
-    .lang-toggle {
+    .lang-dropdown {
+      position: relative;
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+    }
+
+    .lang-dropdown-trigger {
       display: flex;
       align-items: center;
-      gap: 0;
+      gap: 0.4rem;
+      background: none;
       border: 1px solid var(--color-border);
-      border-radius: 999px;
-      overflow: hidden;
-      font-size: var(--text-sm);
-      font-family: var(--font-body);
+      border-radius: 0.5rem;
+      padding: 0.4rem 0.65rem;
+      cursor: pointer;
+      color: var(--color-text);
+      font-family: inherit;
       font-weight: 600;
+      font-size: inherit;
+      transition: border-color 0.2s ease, background 0.2s ease;
+      min-height: 36px;
     }
 
-    .lang-toggle button {
+    .lang-dropdown-trigger:hover {
+      border-color: var(--color-primary);
+    }
+
+    .lang-dropdown-trigger svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .lang-dropdown-trigger .chevron {
+      width: 12px;
+      height: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .lang-dropdown[aria-expanded="true"] .chevron {
+      transform: rotate(180deg);
+    }
+
+    .lang-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 4px);
+      right: 0;
+      min-width: 160px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      z-index: 1000;
+      padding: 0.25rem 0;
+      list-style: none;
+      margin: 0;
+    }
+
+    .dark .lang-dropdown-menu {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .lang-dropdown[aria-expanded="true"] .lang-dropdown-menu {
+      display: block;
+    }
+
+    .lang-dropdown-menu li {
+      margin: 0;
+    }
+
+    .lang-dropdown-menu button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0.5rem 0.75rem;
       background: none;
       border: none;
-      padding: 0.35rem 0.75rem;
       cursor: pointer;
-      color: var(--color-text-muted);
-      transition: all 0.2s ease;
-      font-family: inherit;
-      font-weight: inherit;
-      font-size: inherit;
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-align: left;
+      transition: background 0.15s ease;
     }
 
-    .lang-toggle button.lang-active {
-      background: var(--color-primary);
-      color: #fff;
+    .lang-dropdown-menu button:hover,
+    .lang-dropdown-menu button:focus-visible {
+      background: var(--color-bg-alt);
     }
 
+    .lang-dropdown-menu button[aria-checked="true"] {
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .lang-dropdown-menu .check-icon {
+      width: 14px;
+      height: 14px;
+      opacity: 0;
+    }
+
+    .lang-dropdown-menu button[aria-checked="true"] .check-icon {
+      opacity: 1;
+    }
+
+    /* Mobile drawer override: center the dropdown and open upward to avoid overflow */
     .mobile-lang-toggle {
       display: flex;
       justify-content: center;
       margin-top: 1rem;
       margin-bottom: 0.5rem;
+    }
+
+    .mobile-lang-toggle .lang-dropdown-menu {
+      bottom: calc(100% + 4px);
+      top: auto;
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
     }
   </style>
 </head>
@@ -2115,9 +2204,19 @@
         <a href="#news" class="link-underline" data-i18n="nav.news">News</a>
         <a href="#newsletter" class="link-underline" data-i18n="nav.newsletter">Newsletter</a>
       </div>
-      <div class="lang-toggle" role="radiogroup" aria-label="Language selection">
-        <button id="lang-en" class="lang-active" role="radio" aria-checked="true" aria-label="English">EN</button>
-        <button id="lang-fr" role="radio" aria-checked="false" aria-label="Francais">FR</button>
+      <div class="lang-dropdown" aria-expanded="false">
+        <button class="lang-dropdown-trigger" aria-haspopup="listbox" aria-label="Select language">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+          <span class="lang-code">EN</span>
+          <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="lang-dropdown-menu" role="listbox" aria-label="Languages">
+          <li role="option"><button data-lang="en" role="option" aria-checked="true">English<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button></li>
+          <li role="option"><button data-lang="fr" role="option" aria-checked="false">Fran&#231;ais<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button></li>
+          <li role="option"><button data-lang="de" role="option" aria-checked="false">Deutsch<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button></li>
+          <li role="option"><button data-lang="it" role="option" aria-checked="false">Italiano<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button></li>
+          <li role="option"><button data-lang="es" role="option" aria-checked="false">Espa&#241;ol<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button></li>
+        </ul>
       </div>
       <a href="mailto:hello@open-buro.eu?subject=%5BOpen-buro.eu%5D%20I'm%20interested%20to%20join" class="btn-primary nav-cta-desktop" data-i18n="nav.cta">Join the Alliance</a>
       <button class="nav-mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -2149,9 +2248,19 @@
       <a href="#news" data-i18n="nav.news">News</a>
       <a href="#newsletter" data-i18n="nav.newsletter">Newsletter</a>
       <div class="mobile-lang-toggle">
-        <div class="lang-toggle" role="radiogroup" aria-label="Language selection">
-          <button id="lang-en-mobile" role="radio" aria-checked="true" aria-label="English">EN</button>
-          <button id="lang-fr-mobile" role="radio" aria-checked="false" aria-label="Francais">FR</button>
+        <div class="lang-dropdown" aria-expanded="false">
+          <button class="lang-dropdown-trigger" aria-haspopup="listbox" aria-label="Select language">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+            <span class="lang-code">EN</span>
+            <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <ul class="lang-dropdown-menu" role="listbox" aria-label="Languages">
+            <li role="option"><button data-lang="en" role="option" aria-checked="true">English<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button></li>
+            <li role="option"><button data-lang="fr" role="option" aria-checked="false">Fran&#231;ais<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button></li>
+            <li role="option"><button data-lang="de" role="option" aria-checked="false">Deutsch<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button></li>
+            <li role="option"><button data-lang="it" role="option" aria-checked="false">Italiano<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button></li>
+            <li role="option"><button data-lang="es" role="option" aria-checked="false">Espa&#241;ol<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button></li>
+          </ul>
         </div>
       </div>
     </div>
