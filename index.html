@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- FOUC Prevention: Dark Mode Script (MUST BE INLINE AND BLOCKING) -->
+  <!-- FOUC Prevention: Dark Mode + Language Script (MUST BE INLINE AND BLOCKING) -->
   <script>
-    // CRITICAL: Runs before page renders to prevent dark mode FOUC
+    // CRITICAL: Runs before page renders to prevent dark mode FOUC and language FOUC
     // Must be inline and blocking (no defer, no async, no external file)
     (function() {
-      // Check localStorage for saved preference
+      // Check localStorage for saved theme preference
       const savedTheme = localStorage.getItem('theme');
 
       // Check system preference
@@ -22,6 +22,11 @@
       if (isDark) {
         document.documentElement.classList.add('dark');
       }
+
+      // Set language attribute early to prevent FOUC
+      const supportedLangs = ['en','fr','de','it','es'];
+      const savedLang = localStorage.getItem('lang');
+      document.documentElement.lang = supportedLangs.includes(savedLang) ? savedLang : 'en';
     })();
   </script>
 
@@ -2072,6 +2077,134 @@
         padding: 0.1rem 0.5rem;
       }
     }
+
+    /* ========================================
+       22. LANGUAGE DROPDOWN
+       ======================================== */
+
+    .lang-dropdown {
+      position: relative;
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+    }
+
+    .lang-dropdown-trigger {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: none;
+      border: 1px solid var(--color-border);
+      border-radius: 0.5rem;
+      padding: 0.4rem 0.65rem;
+      cursor: pointer;
+      color: var(--color-text);
+      font-family: inherit;
+      font-weight: 600;
+      font-size: inherit;
+      transition: border-color 0.2s ease, background 0.2s ease;
+      min-height: 36px;
+    }
+
+    .lang-dropdown-trigger:hover {
+      border-color: var(--color-primary);
+    }
+
+    .lang-dropdown-trigger svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .lang-dropdown-trigger .chevron {
+      width: 12px;
+      height: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .lang-dropdown[aria-expanded="true"] .chevron {
+      transform: rotate(180deg);
+    }
+
+    .lang-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 4px);
+      right: 0;
+      min-width: 160px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      z-index: 1000;
+      padding: 0.25rem 0;
+      list-style: none;
+      margin: 0;
+    }
+
+    .dark .lang-dropdown-menu {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .lang-dropdown[aria-expanded="true"] .lang-dropdown-menu {
+      display: block;
+    }
+
+    .lang-dropdown-menu li {
+      margin: 0;
+    }
+
+    .lang-dropdown-menu button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-align: left;
+      transition: background 0.15s ease;
+    }
+
+    .lang-dropdown-menu button:hover,
+    .lang-dropdown-menu button:focus-visible {
+      background: var(--color-bg-alt);
+    }
+
+    .lang-dropdown-menu button[aria-checked="true"] {
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .lang-dropdown-menu .check-icon {
+      width: 14px;
+      height: 14px;
+      opacity: 0;
+    }
+
+    .lang-dropdown-menu button[aria-checked="true"] .check-icon {
+      opacity: 1;
+    }
+
+    /* Mobile drawer override: center the dropdown and open upward to avoid overflow */
+    .mobile-lang-toggle {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .mobile-lang-toggle .lang-dropdown-menu {
+      bottom: calc(100% + 4px);
+      top: auto;
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+    }
   </style>
 </head>
 <body>
@@ -2080,16 +2213,30 @@
     <div class="nav-container">
       <div class="nav-logo">Open Buro</div>
       <div class="nav-desktop">
-        <a href="#problem" class="link-underline">Problem</a>
-        <a href="#vision" class="link-underline">Vision</a>
-        <a href="#pillars" class="link-underline">Pillars</a>
-        <a href="#timeline" class="link-underline">Timeline</a>
+        <a href="#problem" class="link-underline" data-i18n="nav.problem">Problem</a>
+        <a href="#vision" class="link-underline" data-i18n="nav.vision">Vision</a>
+        <a href="#pillars" class="link-underline" data-i18n="nav.pillars">Pillars</a>
+        <a href="#timeline" class="link-underline" data-i18n="nav.timeline">Timeline</a>
         <!-- <a href="#first-implementation" class="link-underline">1st Implementation</a> -->
-        <a href="#ecosystem" class="link-underline">Ecosystem</a>
-        <a href="#news" class="link-underline">News</a>
-        <a href="#newsletter" class="link-underline">Newsletter</a>
+        <a href="#ecosystem" class="link-underline" data-i18n="nav.ecosystem">Ecosystem</a>
+        <a href="#news" class="link-underline" data-i18n="nav.news">News</a>
+        <a href="#newsletter" class="link-underline" data-i18n="nav.newsletter">Newsletter</a>
       </div>
-      <a href="mailto:hello@open-buro.eu?subject=%5BOpen-buro.eu%5D%20I'm%20interested%20to%20join" class="btn-primary nav-cta-desktop">Join the Alliance</a>
+      <div class="lang-dropdown" aria-expanded="false">
+        <button class="lang-dropdown-trigger" aria-haspopup="listbox" aria-label="Select language">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+          <span class="lang-code">EN</span>
+          <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="lang-dropdown-menu" role="listbox" aria-label="Languages">
+          <li role="option"><button data-lang="en" role="option" aria-checked="true">English<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button></li>
+          <li role="option"><button data-lang="fr" role="option" aria-checked="false">Fran&#231;ais<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button></li>
+          <li role="option"><button data-lang="de" role="option" aria-checked="false">Deutsch<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button></li>
+          <li role="option"><button data-lang="it" role="option" aria-checked="false">Italiano<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button></li>
+          <li role="option"><button data-lang="es" role="option" aria-checked="false">Espa&#241;ol<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button></li>
+        </ul>
+      </div>
+      <a href="mailto:hello@open-buro.eu?subject=%5BOpen-buro.eu%5D%20I'm%20interested%20to%20join" class="btn-primary nav-cta-desktop" data-i18n="nav.cta">Join the Alliance</a>
       <button class="nav-mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
         <span></span>
         <span></span>
@@ -2110,16 +2257,32 @@
       </button>
     </div>
     <div class="mobile-drawer-links">
-      <a href="#problem">Problem</a>
-      <a href="#vision">Vision</a>
-      <a href="#pillars">Pillars</a>
-      <a href="#timeline">Timeline</a>
+      <a href="#problem" data-i18n="nav.problem">Problem</a>
+      <a href="#vision" data-i18n="nav.vision">Vision</a>
+      <a href="#pillars" data-i18n="nav.pillars">Pillars</a>
+      <a href="#timeline" data-i18n="nav.timeline">Timeline</a>
       <!-- <a href="#first-implementation">1st Implementation</a> -->
-      <a href="#ecosystem">Ecosystem</a>
-      <a href="#news">News</a>
-      <a href="#newsletter">Newsletter</a>
+      <a href="#ecosystem" data-i18n="nav.ecosystem">Ecosystem</a>
+      <a href="#news" data-i18n="nav.news">News</a>
+      <a href="#newsletter" data-i18n="nav.newsletter">Newsletter</a>
+      <div class="mobile-lang-toggle">
+        <div class="lang-dropdown" aria-expanded="false">
+          <button class="lang-dropdown-trigger" aria-haspopup="listbox" aria-label="Select language">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+            <span class="lang-code">EN</span>
+            <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <ul class="lang-dropdown-menu" role="listbox" aria-label="Languages">
+            <li role="option"><button data-lang="en" role="option" aria-checked="true">English<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button></li>
+            <li role="option"><button data-lang="fr" role="option" aria-checked="false">Fran&#231;ais<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button></li>
+            <li role="option"><button data-lang="de" role="option" aria-checked="false">Deutsch<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button></li>
+            <li role="option"><button data-lang="it" role="option" aria-checked="false">Italiano<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button></li>
+            <li role="option"><button data-lang="es" role="option" aria-checked="false">Espa&#241;ol<svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button></li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <a href="mailto:hello@open-buro.eu?subject=%5BOpen-buro.eu%5D%20I'm%20interested%20to%20join" class="btn-primary mobile-drawer-cta">Join the Alliance</a>
+    <a href="mailto:hello@open-buro.eu?subject=%5BOpen-buro.eu%5D%20I'm%20interested%20to%20join" class="btn-primary mobile-drawer-cta" data-i18n="nav.cta">Join the Alliance</a>
   </div>
 
   <main>
@@ -2127,12 +2290,12 @@
   <section id="hero" aria-label="Hero introduction">
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-content">
-      <div class="badge hero-text">EUROPEAN OPEN STANDARD <span class="beta-badge" aria-label="Beta version">BETA</span></div>
-      <h1 class="hero-text" style="color: #ffffff;">The European Standard for Workplace Orchestration</h1>
-      <p class="subtitle hero-text">Unifying open source workplace apps into a true platform alternative to Microsoft 365</p>
+      <div class="badge hero-text" data-i18n="hero.badge">EUROPEAN OPEN STANDARD <span class="beta-badge" aria-label="Beta version">BETA</span></div>
+      <h1 class="hero-text" style="color: #ffffff;" data-i18n="hero.title">The European Standard for Workplace Orchestration</h1>
+      <p class="subtitle hero-text" data-i18n="hero.subtitle">Unifying open source workplace apps into a true platform alternative to Microsoft 365</p>
       <div class="hero-cta hero-text">
-        <a href="mailto:hello@open-buro.eu?subject=%5BOpen-buro.eu%5D%20I'm%20interested%20to%20join" class="btn-primary">Join the Alliance</a>
-        <a href="#vision" class="btn-secondary">Learn More</a>
+        <a href="mailto:hello@open-buro.eu?subject=%5BOpen-buro.eu%5D%20I'm%20interested%20to%20join" class="btn-primary" data-i18n="hero.cta.join">Join the Alliance</a>
+        <a href="#vision" class="btn-secondary" data-i18n="hero.cta.learn">Learn More</a>
       </div>
       <!-- <div class="origin-credit hero-text">
         <p>Born from the collaboration between</p>
@@ -2153,38 +2316,38 @@
   <!-- Problem Section -->
   <section id="problem" aria-label="Problem statement" class="animate-on-scroll">
     <div class="container">
-      <div class="badge animate-on-scroll scale-in">THE PROBLEM</div>
-      <h2>The Workplace Tech Paradox</h2>
+      <div class="badge animate-on-scroll scale-in" data-i18n="problem.badge">THE PROBLEM</div>
+      <h2 data-i18n="problem.title">The Workplace Tech Paradox</h2>
 
       <div class="problem-layout">
         <!-- Problem text (full width) -->
         <div class="problem-text">
-          <p>Europe now has <strong>serious open source workplace tools</strong> — email, docs, project management, video, chat. They're mature, deployable, and increasingly adopted. Yet <strong>dependency on dominant suites keeps growing</strong>.</p>
-          <p>Why? Not because the alternatives are bad — but because Microsoft and Google have something more: the <strong>platform effect</strong>.</p>
+          <p data-i18n="problem.text1" data-i18n-html="true">Europe now has <strong>serious open source workplace tools</strong> — email, docs, project management, video, chat. They're mature, deployable, and increasingly adopted. Yet <strong>dependency on dominant suites keeps growing</strong>.</p>
+          <p data-i18n="problem.text2" data-i18n-html="true">Why? Not because the alternatives are bad — but because Microsoft and Google have something more: the <strong>platform effect</strong>.</p>
           <ul>
-            <li><strong>It's not "a software"</strong> — it's an interlocked ecosystem designed to work as one</li>
-            <li><strong>Leaving feels like a risk</strong>, not a project: cost, complexity, habits, continuity</li>
-            <li><strong>SSO across apps isn't enough</strong> — a shared login only produces an app catalog, not a platform</li>
+            <li data-i18n="problem.li1" data-i18n-html="true"><strong>It's not "a software"</strong> — it's an interlocked ecosystem designed to work as one</li>
+            <li data-i18n="problem.li2" data-i18n-html="true"><strong>Leaving feels like a risk</strong>, not a project: cost, complexity, habits, continuity</li>
+            <li data-i18n="problem.li3" data-i18n-html="true"><strong>SSO across apps isn't enough</strong> — a shared login only produces an app catalog, not a platform</li>
           </ul>
-          <p>What's missing isn't better apps — it's <strong>the orchestration layer between them</strong>.</p>
+          <p data-i18n="problem.conclusion" data-i18n-html="true">What's missing isn't better apps — it's <strong>the orchestration layer between them</strong>.</p>
         </div>
 
         <!-- Right column: 3 constat cards -->
         <div class="constat-cards">
           <article class="constat-card animate-on-scroll stagger-1">
             <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-puzzle-piece"></i></div>
-            <h3>The Platform Effect Gap</h3>
-            <p>Open source apps work — individually. But dominant suites win because they feel like one product: shared context, seamless workflows, unified experience. Individual excellence doesn't beat ecosystem cohesion.</p>
+            <h3 data-i18n="problem.card1.title">The Platform Effect Gap</h3>
+            <p data-i18n="problem.card1.desc">Open source apps work — individually. But dominant suites win because they feel like one product: shared context, seamless workflows, unified experience. Individual excellence doesn't beat ecosystem cohesion.</p>
           </article>
           <article class="constat-card animate-on-scroll stagger-2">
             <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-database"></i></div>
-            <h3>SSO Is Not a Platform</h3>
-            <p>A single login across multiple tools sounds like progress — but it only produces an app catalog behind one door. What's missing is the orchestration layer: identity, rights, notifications, documents and workflows circulating between services.</p>
+            <h3 data-i18n="problem.card2.title">SSO Is Not a Platform</h3>
+            <p data-i18n="problem.card2.desc">A single login across multiple tools sounds like progress — but it only produces an app catalog behind one door. What's missing is the orchestration layer: identity, rights, notifications, documents and workflows circulating between services.</p>
           </article>
           <article class="constat-card animate-on-scroll stagger-3">
             <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-flag"></i></div>
-            <h3>Strategic Dependency</h3>
-            <p>The lock-in isn't just budgetary — it's political. Roadmaps, integrations, and platform orientations are decided outside Europe, durably structuring organizations that have no seat at the table. Sovereignty requires infrastructure, not just intentions.</p>
+            <h3 data-i18n="problem.card3.title">Strategic Dependency</h3>
+            <p data-i18n="problem.card3.desc">The lock-in isn't just budgetary — it's political. Roadmaps, integrations, and platform orientations are decided outside Europe, durably structuring organizations that have no seat at the table. Sovereignty requires infrastructure, not just intentions.</p>
           </article>
         </div>
       </div>
@@ -2194,9 +2357,9 @@
   <!-- Vision Section -->
   <section id="vision" aria-label="Vision statement" class="animate-on-scroll">
     <div class="container">
-      <div class="badge animate-on-scroll scale-in">THE VISION</div>
-      <h2>From Fragmentation to Unity</h2>
-      <p class="subtitle">Open Buro orchestrates existing apps into a cohesive platform—no vendor lock-in, no rip-and-replace.</p>
+      <div class="badge animate-on-scroll scale-in" data-i18n="vision.badge">THE VISION</div>
+      <h2 data-i18n="vision.title">From Fragmentation to Unity</h2>
+      <p class="subtitle" data-i18n="vision.subtitle">Open Buro orchestrates existing apps into a cohesive platform—no vendor lock-in, no rip-and-replace.</p>
 
       <!-- Transformation Diagram (SVG) -->
       <div class="transformation-diagram">
@@ -2206,13 +2369,13 @@
 
           <!-- Stage 1: Isolated Apps -->
           <g id="stage-1">
-            <text x="100" y="40" text-anchor="middle" class="diagram-label">Isolated Apps</text>
+            <text x="100" y="40" text-anchor="middle" class="diagram-label" data-i18n="diagram.isolated">Isolated Apps</text>
             <rect x="70" y="80" width="60" height="40" class="diagram-box isolated" rx="4"/>
-            <text x="100" y="105" text-anchor="middle" class="diagram-text">Email</text>
+            <text x="100" y="105" text-anchor="middle" class="diagram-text" data-i18n="diagram.email">Email</text>
             <rect x="70" y="130" width="60" height="40" class="diagram-box isolated" rx="4"/>
-            <text x="100" y="155" text-anchor="middle" class="diagram-text">Docs</text>
+            <text x="100" y="155" text-anchor="middle" class="diagram-text" data-i18n="diagram.docs">Docs</text>
             <rect x="70" y="180" width="60" height="40" class="diagram-box isolated" rx="4"/>
-            <text x="100" y="205" text-anchor="middle" class="diagram-text">Tasks</text>
+            <text x="100" y="205" text-anchor="middle" class="diagram-text" data-i18n="diagram.tasks">Tasks</text>
           </g>
 
           <!-- Arrow 1: Isolated → Open Buro -->
@@ -2222,12 +2385,12 @@
 
           <!-- Stage 2: Open Buro Layer -->
           <g id="stage-2">
-            <text x="500" y="40" text-anchor="middle" class="diagram-label">Open Buro Layer</text>
+            <text x="500" y="40" text-anchor="middle" class="diagram-label" data-i18n="diagram.layer">Open Buro Layer</text>
             <rect x="400" y="80" width="200" height="140" class="diagram-box orchestration" rx="8"/>
-            <text x="500" y="140" text-anchor="middle" class="diagram-text-large">Open Buro Standard</text>
+            <text x="500" y="140" text-anchor="middle" class="diagram-text-large" data-i18n="diagram.standard">Open Buro Standard</text>
             <text x="500" y="170" text-anchor="middle" class="diagram-callout">SSO</text>
-            <text x="500" y="190" text-anchor="middle" class="diagram-callout">Unified Nav</text>
-            <text x="500" y="210" text-anchor="middle" class="diagram-callout">Cross-app Data</text>
+            <text x="500" y="190" text-anchor="middle" class="diagram-callout" data-i18n="diagram.unifiedNav">Unified Nav</text>
+            <text x="500" y="210" text-anchor="middle" class="diagram-callout" data-i18n="diagram.crossApp">Cross-app Data</text>
           </g>
 
           <!-- Arrow 2: Open Buro → Unified Workplace -->
@@ -2237,10 +2400,10 @@
 
           <!-- Stage 3: Unified Workplace -->
           <g id="stage-3">
-            <text x="870" y="40" text-anchor="middle" class="diagram-label">Unified Workplace</text>
+            <text x="870" y="40" text-anchor="middle" class="diagram-label" data-i18n="diagram.unified">Unified Workplace</text>
             <rect x="800" y="80" width="140" height="140" class="diagram-box unified" rx="8"/>
-            <text x="870" y="140" text-anchor="middle" class="diagram-text-large">Seamless</text>
-            <text x="870" y="165" text-anchor="middle" class="diagram-text-large">Experience</text>
+            <text x="870" y="140" text-anchor="middle" class="diagram-text-large" data-i18n="diagram.seamless">Seamless</text>
+            <text x="870" y="165" text-anchor="middle" class="diagram-text-large" data-i18n="diagram.experience">Experience</text>
             <!-- Connected nodes inside -->
             <circle cx="840" cy="190" r="4" class="diagram-node"/>
             <circle cx="870" cy="190" r="4" class="diagram-node"/>
@@ -2262,13 +2425,13 @@
 
           <!-- Stage 1: Isolated Apps -->
           <g>
-            <text x="140" y="30" text-anchor="middle" class="diagram-label">Isolated Apps</text>
+            <text x="140" y="30" text-anchor="middle" class="diagram-label" data-i18n="diagram.isolated">Isolated Apps</text>
             <rect x="20" y="50" width="70" height="40" class="diagram-box isolated" rx="4"/>
-            <text x="55" y="75" text-anchor="middle" class="diagram-text">Email</text>
+            <text x="55" y="75" text-anchor="middle" class="diagram-text" data-i18n="diagram.email">Email</text>
             <rect x="105" y="50" width="70" height="40" class="diagram-box isolated" rx="4"/>
-            <text x="140" y="75" text-anchor="middle" class="diagram-text">Docs</text>
+            <text x="140" y="75" text-anchor="middle" class="diagram-text" data-i18n="diagram.docs">Docs</text>
             <rect x="190" y="50" width="70" height="40" class="diagram-box isolated" rx="4"/>
-            <text x="225" y="75" text-anchor="middle" class="diagram-text">Tasks</text>
+            <text x="225" y="75" text-anchor="middle" class="diagram-text" data-i18n="diagram.tasks">Tasks</text>
           </g>
 
           <!-- Arrow 1: down -->
@@ -2276,12 +2439,12 @@
 
           <!-- Stage 2: Open Buro Layer -->
           <g>
-            <text x="140" y="220" text-anchor="middle" class="diagram-label">Open Buro Layer</text>
+            <text x="140" y="220" text-anchor="middle" class="diagram-label" data-i18n="diagram.layer">Open Buro Layer</text>
             <rect x="40" y="235" width="200" height="140" class="diagram-box orchestration" rx="8"/>
-            <text x="140" y="295" text-anchor="middle" class="diagram-text-large">Open Buro Standard</text>
+            <text x="140" y="295" text-anchor="middle" class="diagram-text-large" data-i18n="diagram.standard">Open Buro Standard</text>
             <text x="140" y="325" text-anchor="middle" class="diagram-callout">SSO</text>
-            <text x="140" y="345" text-anchor="middle" class="diagram-callout">Unified Nav</text>
-            <text x="140" y="365" text-anchor="middle" class="diagram-callout">Cross-app Data</text>
+            <text x="140" y="345" text-anchor="middle" class="diagram-callout" data-i18n="diagram.unifiedNav">Unified Nav</text>
+            <text x="140" y="365" text-anchor="middle" class="diagram-callout" data-i18n="diagram.crossApp">Cross-app Data</text>
           </g>
 
           <!-- Arrow 2: down -->
@@ -2289,10 +2452,10 @@
 
           <!-- Stage 3: Unified Workplace -->
           <g>
-            <text x="140" y="490" text-anchor="middle" class="diagram-label">Unified Workplace</text>
+            <text x="140" y="490" text-anchor="middle" class="diagram-label" data-i18n="diagram.unified">Unified Workplace</text>
             <rect x="65" y="505" width="150" height="80" class="diagram-box unified" rx="8"/>
-            <text x="140" y="535" text-anchor="middle" class="diagram-text-large">Seamless</text>
-            <text x="140" y="558" text-anchor="middle" class="diagram-text-large">Experience</text>
+            <text x="140" y="535" text-anchor="middle" class="diagram-text-large" data-i18n="diagram.seamless">Seamless</text>
+            <text x="140" y="558" text-anchor="middle" class="diagram-text-large" data-i18n="diagram.experience">Experience</text>
             <circle cx="110" cy="575" r="4" class="diagram-node"/>
             <circle cx="140" cy="575" r="4" class="diagram-node"/>
             <circle cx="170" cy="575" r="4" class="diagram-node"/>
@@ -2312,29 +2475,29 @@
       <div class="features-grid">
         <article class="feature-card animate-on-scroll stagger-1">
           <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-package"></i></div>
-          <h3>Universal Packaging</h3>
-          <p>Standard app format. One registry. Any publisher can contribute.</p>
+          <h3 data-i18n="vision.feat1.title">Universal Packaging</h3>
+          <p data-i18n="vision.feat1.desc">Standard app format. One registry. Any publisher can contribute.</p>
         </article>
         <article class="feature-card animate-on-scroll stagger-2">
           <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-compass"></i></div>
-          <h3>Shared Navigation</h3>
-          <p>Common home, unified app grid, global search. Users never lost.</p>
+          <h3 data-i18n="vision.feat2.title">Shared Navigation</h3>
+          <p data-i18n="vision.feat2.desc">Common home, unified app grid, global search. Users never lost.</p>
         </article>
         <article class="feature-card animate-on-scroll stagger-3">
           <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-graph"></i></div>
-          <h3>Cross-App Data</h3>
-          <p>Business objects flow between apps. Semantic graph connects knowledge.</p>
+          <h3 data-i18n="vision.feat3.title">Cross-App Data</h3>
+          <p data-i18n="vision.feat3.desc">Business objects flow between apps. Semantic graph connects knowledge.</p>
         </article>
         <article class="feature-card animate-on-scroll stagger-4">
           <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-users-three"></i></div>
-          <h3>Collective Identity</h3>
-          <p>Organization-wide groups, permissions, presence. Manage once, apply everywhere.</p>
+          <h3 data-i18n="vision.feat4.title">Collective Identity</h3>
+          <p data-i18n="vision.feat4.desc">Organization-wide groups, permissions, presence. Manage once, apply everywhere.</p>
         </article>
       </div>
 
       <!-- Conclusion Quote -->
       <blockquote class="vision-quote">
-        <p>Open Buro doesn't replace your apps. It makes them work together.</p>
+        <p data-i18n="vision.quote">Open Buro doesn't replace your apps. It makes them work together.</p>
       </blockquote>
     </div>
   </section>
@@ -2342,83 +2505,83 @@
   <!-- Pillars Section -->
   <section id="pillars" aria-label="Standard and Alliance pillars" class="animate-on-scroll">
     <div class="container">
-      <div class="badge animate-on-scroll scale-in">TWO PILLARS</div>
-      <h2>Standard + Alliance</h2>
-      <p class="subtitle">Technical orchestration meets ecosystem coordination</p>
+      <div class="badge animate-on-scroll scale-in" data-i18n="pillars.badge">TWO PILLARS</div>
+      <h2 data-i18n="pillars.title">Standard + Alliance</h2>
+      <p class="subtitle" data-i18n="pillars.subtitle">Technical orchestration meets ecosystem coordination</p>
 
       <div class="pillars-layout">
         <!-- Left Column: Technical Standard (7 Accordions) -->
         <div class="pillar-standard">
-          <h3>The Standard</h3>
+          <h3 data-i18n="pillars.standard.heading">The Standard</h3>
 
           <div class="accordion">
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <h3>🔗 Application Integration</h3>
+                <h3 data-i18n="pillars.acc1.title">🔗 Application Integration</h3>
                 <span class="accordion-icon">›</span>
               </button>
               <div class="accordion-content" role="region">
-                <p>Unified SSO with OIDC flow, standard app packaging format, centralized registry for discovery, common settings API for consistent UX. Publishers integrate once, users authenticate once.</p>
+                <p data-i18n="pillars.acc1.desc">Unified SSO with OIDC flow, standard app packaging format, centralized registry for discovery, common settings API for consistent UX. Publishers integrate once, users authenticate once.</p>
               </div>
             </div>
 
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <h3>🧭 Cross-service Navigation</h3>
+                <h3 data-i18n="pillars.acc2.title">🧭 Cross-service Navigation</h3>
                 <span class="accordion-icon">›</span>
               </button>
               <div class="accordion-content" role="region">
-                <p>Shared home screen, unified navigation bars, global app grid with search, cross-app command palette, integrated support system. Users navigate the platform, not individual apps.</p>
+                <p data-i18n="pillars.acc2.desc">Shared home screen, unified navigation bars, global app grid with search, cross-app command palette, integrated support system. Users navigate the platform, not individual apps.</p>
               </div>
             </div>
 
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <h3>🧠 Data Intelligence</h3>
+                <h3 data-i18n="pillars.acc3.title">🧠 Data Intelligence</h3>
                 <span class="accordion-icon">›</span>
               </button>
               <div class="accordion-content" role="region">
-                <p>Business object definitions (contacts, documents, tasks), cross-app event streaming, semantic knowledge graph, unified RAG/search APIs. Data flows between apps with context preserved.</p>
+                <p data-i18n="pillars.acc3.desc">Business object definitions (contacts, documents, tasks), cross-app event streaming, semantic knowledge graph, unified RAG/search APIs. Data flows between apps with context preserved.</p>
               </div>
             </div>
 
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <h3>🤝 Platform Collaboration</h3>
+                <h3 data-i18n="pillars.acc4.title">🤝 Platform Collaboration</h3>
                 <span class="accordion-icon">›</span>
               </button>
               <div class="accordion-content" role="region">
-                <p>Cross-service workspaces, threaded comments on any object, notification center aggregating all apps, shared presence and status. Collaboration transcends app boundaries.</p>
+                <p data-i18n="pillars.acc4.desc">Cross-service workspaces, threaded comments on any object, notification center aggregating all apps, shared presence and status. Collaboration transcends app boundaries.</p>
               </div>
             </div>
 
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <h3>🤖 Inter-apps & AI</h3>
+                <h3 data-i18n="pillars.acc5.title">🤖 Inter-apps &amp; AI</h3>
                 <span class="accordion-icon">›</span>
               </button>
               <div class="accordion-content" role="region">
-                <p>Capability/intent casting (apps expose functions to platform), unified video conferencing, shared file picker, integrated image editing. Apps compose into workflows, AI agents orchestrate across tools.</p>
+                <p data-i18n="pillars.acc5.desc">Capability/intent casting (apps expose functions to platform), unified video conferencing, shared file picker, integrated image editing. Apps compose into workflows, AI agents orchestrate across tools.</p>
               </div>
             </div>
 
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <h3>🔒 Security & Encryption</h3>
+                <h3 data-i18n="pillars.acc6.title">🔒 Security &amp; Encryption</h3>
                 <span class="accordion-icon">›</span>
               </button>
               <div class="accordion-content" role="region">
-                <p>Platform-level end-to-end encryption vault, granular permission models, audit logging, secure secret storage. Security is orchestrated, not fragmented across apps.</p>
+                <p data-i18n="pillars.acc6.desc">Platform-level end-to-end encryption vault, granular permission models, audit logging, secure secret storage. Security is orchestrated, not fragmented across apps.</p>
               </div>
             </div>
 
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <h3>📱 Mobile & Desktop</h3>
+                <h3 data-i18n="pillars.acc7.title">📱 Mobile &amp; Desktop</h3>
                 <span class="accordion-icon">›</span>
               </button>
               <div class="accordion-content" role="region">
-                <p>Flagship mobile app (iOS/Android) with embedded webviews, dedicated native apps for core tools, desktop client (Electron/Tauri), augmented browser extension. One platform, all devices.</p>
+                <p data-i18n="pillars.acc7.desc">Flagship mobile app (iOS/Android) with embedded webviews, dedicated native apps for core tools, desktop client (Electron/Tauri), augmented browser extension. One platform, all devices.</p>
               </div>
             </div>
           </div>
@@ -2426,37 +2589,37 @@
 
         <!-- Right Column: The Alliance (5 Mission Blocks) -->
         <div class="pillar-alliance">
-          <h3>The Alliance</h3>
+          <h3 data-i18n="pillars.alliance.heading">The Alliance</h3>
 
           <div class="alliance-mission">
             <a href="pages/manifesto.html" class="mission-block mission-block-link">
               <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-scroll"></i></div>
-              <h4>A Manifesto</h4>
-              <p>Open Buro exists to prevent European workplace fragmentation. Open source without orchestration creates chaos. We establish founding principles before code.</p>
+              <h4 data-i18n="pillars.alliance1.title">A Manifesto</h4>
+              <p data-i18n="pillars.alliance1.desc">Open Buro exists to prevent European workplace fragmentation. Open source without orchestration creates chaos. We establish founding principles before code.</p>
             </a>
 
             <a href="pages/governance.html" class="mission-block mission-block-link">
               <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-scales"></i></div>
-              <h4>Open Governance</h4>
-              <p>Neutral foundation structure modeled on Linux Foundation, CNCF. No single vendor controls the standard. Transparent decision-making, public roadmap.</p>
+              <h4 data-i18n="pillars.alliance2.title">Open Governance</h4>
+              <p data-i18n="pillars.alliance2.desc">Neutral foundation structure modeled on Linux Foundation, CNCF. No single vendor controls the standard. Transparent decision-making, public roadmap.</p>
             </a>
 
             <div class="mission-block">
               <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-rocket-launch"></i></div>
-              <h4>Adoption Actions</h4>
-              <p>Implementation support for publishers: reference architectures, migration guides, certification program. Alliance members don't just endorse—they implement.</p>
+              <h4 data-i18n="pillars.alliance3.title">Adoption Actions</h4>
+              <p data-i18n="pillars.alliance3.desc">Implementation support for publishers: reference architectures, migration guides, certification program. Alliance members don't just endorse—they implement.</p>
             </div>
 
             <div class="mission-block">
               <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-globe-hemisphere-west"></i></div>
-              <h4>International Visibility</h4>
-              <p>European-scale promotion: conferences, government outreach, media relations. Make Open Buro the default assumption for workplace tech procurement.</p>
+              <h4 data-i18n="pillars.alliance4.title">International Visibility</h4>
+              <p data-i18n="pillars.alliance4.desc">European-scale promotion: conferences, government outreach, media relations. Make Open Buro the default assumption for workplace tech procurement.</p>
             </div>
 
             <div class="mission-block">
               <div class="card-icon" aria-hidden="true"><i class="ph-duotone ph-coins"></i></div>
-              <h4>Funding</h4>
-              <p>Resource mobilization through member contributions, public grants (EU innovation funds), commercial services. Sustainable funding model ensures long-term viability.</p>
+              <h4 data-i18n="pillars.alliance5.title">Funding</h4>
+              <p data-i18n="pillars.alliance5.desc">Resource mobilization through member contributions, public grants (EU innovation funds), commercial services. Sustainable funding model ensures long-term viability.</p>
             </div>
           </div>
         </div>
@@ -2464,8 +2627,8 @@
 
       <!-- Pull Quote -->
       <blockquote class="pull-quote">
-        <p>"Code is Law... but Architecture is Politics"</p>
-        <cite>— Open Buro founding principle</cite>
+        <p data-i18n="pillars.quote">"Code is Law... but Architecture is Politics"</p>
+        <cite data-i18n="pillars.quote.cite">— Open Buro founding principle</cite>
       </blockquote>
     </div>
   </section>
@@ -2473,9 +2636,9 @@
   <!-- Timeline Section -->
   <section id="timeline" aria-label="Project timeline" class="animate-on-scroll">
     <div class="container">
-      <div class="badge animate-on-scroll scale-in">IN MOTION</div>
-      <h2>Project Timeline</h2>
-      <p class="intro">From vision to reality, tracking our progress</p>
+      <div class="badge animate-on-scroll scale-in" data-i18n="timeline.badge">IN MOTION</div>
+      <h2 data-i18n="timeline.title">Project Timeline</h2>
+      <p class="intro" data-i18n="timeline.intro">From vision to reality, tracking our progress</p>
 
       <div class="timeline-container">
         <div class="timeline-line" aria-hidden="true"></div>
@@ -2484,8 +2647,8 @@
             <div class="milestone-node" aria-hidden="true"></div>
             <div class="milestone-content">
               <div class="milestone-date">2025 Q2</div>
-              <h3 class="milestone-title">Foundational work</h3>
-              <p class="milestone-desc">La Suite x Twake.ai collaboration begins</p>
+              <h3 class="milestone-title" data-i18n="timeline.m1.title">Foundational work</h3>
+              <p class="milestone-desc" data-i18n="timeline.m1.desc">La Suite x Twake.ai collaboration begins</p>
             </div>
           </div>
 
@@ -2493,8 +2656,8 @@
             <div class="milestone-node" aria-hidden="true"></div>
             <div class="milestone-content">
               <div class="milestone-date">2025 Q4</div>
-              <h3 class="milestone-title">Advanced integration</h3>
-              <p class="milestone-desc">La Suite x Twake.ai technical integration</p>
+              <h3 class="milestone-title" data-i18n="timeline.m2.title">Advanced integration</h3>
+              <p class="milestone-desc" data-i18n="timeline.m2.desc">La Suite x Twake.ai technical integration</p>
             </div>
           </div>
 
@@ -2502,8 +2665,8 @@
             <div class="milestone-node" aria-hidden="true"></div>
             <div class="milestone-content">
               <div class="milestone-date">2026 Q1</div>
-              <h3 class="milestone-title">First specifications</h3>
-              <p class="milestone-desc">Open Buro draft specifications published at FOSDEM</p>
+              <h3 class="milestone-title" data-i18n="timeline.m3.title">First specifications</h3>
+              <p class="milestone-desc" data-i18n="timeline.m3.desc">Open Buro draft specifications published at FOSDEM</p>
             </div>
           </div>
 
@@ -2511,8 +2674,8 @@
             <div class="milestone-node" aria-hidden="true"></div>
             <div class="milestone-content">
               <div class="milestone-date">2026 Q2</div>
-              <h3 class="milestone-title">Standard V1.0 publication</h3>
-              <p class="milestone-desc">Official standard release and governance setup</p>
+              <h3 class="milestone-title" data-i18n="timeline.m4.title">Standard V1.0 publication</h3>
+              <p class="milestone-desc" data-i18n="timeline.m4.desc">Official standard release and governance setup</p>
             </div>
           </div>
 
@@ -2520,8 +2683,8 @@
             <div class="milestone-node" aria-hidden="true"></div>
             <div class="milestone-content">
               <div class="milestone-date">2026 Q2</div>
-              <h3 class="milestone-title">Alliance expansion</h3>
-              <p class="milestone-desc">Growing membership across European markets</p>
+              <h3 class="milestone-title" data-i18n="timeline.m5.title">Alliance expansion</h3>
+              <p class="milestone-desc" data-i18n="timeline.m5.desc">Growing membership across European markets</p>
             </div>
           </div>
         </div>
@@ -2547,50 +2710,50 @@
   <!-- Ecosystem Section -->
   <section id="ecosystem" aria-label="Alliance ecosystem" class="animate-on-scroll">
     <div class="container">
-      <div class="badge animate-on-scroll scale-in">THE ECOSYSTEM</div>
-      <h2>The Alliance</h2>
-      <p class="intro">Growing the European open source workplace ecosystem together</p>
+      <div class="badge animate-on-scroll scale-in" data-i18n="ecosystem.badge">THE ECOSYSTEM</div>
+      <h2 data-i18n="ecosystem.title">The Alliance</h2>
+      <p class="intro" data-i18n="ecosystem.intro">Growing the European open source workplace ecosystem together</p>
 
       <div class="ecosystem-grid">
         <!-- Founding Members -->
         <div class="member-card member-founding">
           <div class="member-logo-placeholder">LINAGORA</div>
-          <div class="member-subtitle">Twake.ai Platform</div>
-          <span class="member-badge">Founding Member</span>
-          <p class="member-desc">Enterprise collaboration platform powering La Suite numerique</p>
+          <div class="member-subtitle" data-i18n="ecosystem.linagora.subtitle">Twake.ai Platform</div>
+          <span class="member-badge" data-i18n="ecosystem.founding">Founding Member</span>
+          <p class="member-desc" data-i18n="ecosystem.linagora.desc">Enterprise collaboration platform powering La Suite numerique</p>
         </div>
 
         <div class="member-card member-founding">
           <div class="member-logo-placeholder">DINUM</div>
-          <div class="member-subtitle">La Suite numerique</div>
-          <span class="member-badge">Founding Member</span>
-          <p class="member-desc">French government digital workplace for public sector</p>
+          <div class="member-subtitle" data-i18n="ecosystem.dinum.subtitle">La Suite numerique</div>
+          <span class="member-badge" data-i18n="ecosystem.founding">Founding Member</span>
+          <p class="member-desc" data-i18n="ecosystem.dinum.desc">French government digital workplace for public sector</p>
         </div>
 
         <!-- Future Member Placeholders -->
         <div class="member-card member-placeholder" aria-label="Future member placeholder">
           <div class="placeholder-icon" aria-hidden="true">+</div>
-          <p class="placeholder-text">Your organization here</p>
+          <p class="placeholder-text" data-i18n="ecosystem.placeholder">Your organization here</p>
         </div>
 
         <div class="member-card member-placeholder" aria-label="Future member placeholder">
           <div class="placeholder-icon" aria-hidden="true">+</div>
-          <p class="placeholder-text">Your organization here</p>
+          <p class="placeholder-text" data-i18n="ecosystem.placeholder">Your organization here</p>
         </div>
 
         <div class="member-card member-placeholder" aria-label="Future member placeholder">
           <div class="placeholder-icon" aria-hidden="true">+</div>
-          <p class="placeholder-text">Your organization here</p>
+          <p class="placeholder-text" data-i18n="ecosystem.placeholder">Your organization here</p>
         </div>
       </div>
 
       <div class="ecosystem-cta">
         <div class="cta-content">
-          <h3 class="cta-title">Join the Open Buro Alliance</h3>
-          <p class="cta-desc">Whether you're an open source publisher, institution, or enterprise, help us build the European alternative to proprietary workplace platforms.</p>
+          <h3 class="cta-title" data-i18n="ecosystem.cta.title">Join the Open Buro Alliance</h3>
+          <p class="cta-desc" data-i18n="ecosystem.cta.desc">Whether you're an open source publisher, institution, or enterprise, help us build the European alternative to proprietary workplace platforms.</p>
           <div class="cta-buttons">
-            <a href="mailto:hello@open-buro.eu?subject=%5BOpen-buro.eu%5D%20I'm%20interested%20to%20join" class="btn-primary">Become a Member</a>
-            <a href="#learn" class="btn-eco-ghost">Learn More</a>
+            <a href="mailto:hello@open-buro.eu?subject=%5BOpen-buro.eu%5D%20I'm%20interested%20to%20join" class="btn-primary" data-i18n="ecosystem.cta.join">Become a Member</a>
+            <a href="#learn" class="btn-eco-ghost" data-i18n="ecosystem.cta.learn">Learn More</a>
           </div>
         </div>
       </div>
@@ -2600,45 +2763,45 @@
   <!-- News Section -->
   <section id="news" aria-label="Latest news" class="animate-on-scroll">
     <div class="container">
-      <div class="badge animate-on-scroll scale-in">LATEST NEWS</div>
-      <h2>Latest News</h2>
-      <p class="intro">Updates from the Open Buro project and Alliance</p>
+      <div class="badge animate-on-scroll scale-in" data-i18n="news.badge">LATEST NEWS</div>
+      <h2 data-i18n="news.title">Latest News</h2>
+      <p class="intro" data-i18n="news.intro">Updates from the Open Buro project and Alliance</p>
 
       <div class="news-cards-wrapper">
         <div class="news-cards">
           <article class="news-card animate-on-scroll stagger-1">
             <div class="news-image-wrapper">
               <div class="news-image" style="background: url('assets/images/news/openburo-orchestration-diagram.png') center/cover no-repeat;"></div>
-              <span class="news-date-tag">Feb 2026</span>
+              <span class="news-date-tag" data-i18n="news.art1.date">Feb 2026</span>
             </div>
             <div class="news-card-body">
-              <h3>When an Independent Observer Asks the Right Questions</h3>
-              <p class="news-excerpt">An independent review crystallizes what European sovereign suites have been missing: not better apps, but better orchestration.</p>
-              <a href="news/twake-openburo-independent-review.html" class="read-more" aria-label="Read more about the independent review">Read <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: middle; margin-left: 4px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+              <h3 data-i18n="news.art1.title">When an Independent Observer Asks the Right Questions</h3>
+              <p class="news-excerpt" data-i18n="news.art1.excerpt">An independent review crystallizes what European sovereign suites have been missing: not better apps, but better orchestration.</p>
+              <a href="news/twake-openburo-independent-review.html" class="read-more" aria-label="Read more about the independent review"><span data-i18n="news.read">Read</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: middle; margin-left: 4px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
             </div>
           </article>
 
           <article class="news-card animate-on-scroll stagger-2">
             <div class="news-image-wrapper">
               <div class="news-image" style="background: url('assets/images/news/fosdem-2025-montage.jpeg') center/cover no-repeat;"></div>
-              <span class="news-date-tag">Feb 2025</span>
+              <span class="news-date-tag" data-i18n="news.art2.date">Feb 2025</span>
             </div>
             <div class="news-card-body">
-              <h3>Open Buro Presented at FOSDEM 2025</h3>
-              <p class="news-excerpt">The project was introduced to the open source community at Europe's largest developer conference.</p>
-              <a href="news/fosdem-2025.html" class="read-more" aria-label="Read more about Open Buro at FOSDEM 2025">Read <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: middle; margin-left: 4px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+              <h3 data-i18n="news.art2.title">Open Buro Presented at FOSDEM 2025</h3>
+              <p class="news-excerpt" data-i18n="news.art2.excerpt">The project was introduced to the open source community at Europe's largest developer conference.</p>
+              <a href="news/fosdem-2025.html" class="read-more" aria-label="Read more about Open Buro at FOSDEM 2025"><span data-i18n="news.read">Read</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: middle; margin-left: 4px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
             </div>
           </article>
 
           <article class="news-card animate-on-scroll stagger-3">
             <div class="news-image-wrapper">
               <div class="news-image" style="background: url('assets/images/news/hackathon-header.jpg') center/cover no-repeat;"></div>
-              <span class="news-date-tag">Juin 2025</span>
+              <span class="news-date-tag" data-i18n="news.art3.date">Jun 2025</span>
             </div>
             <div class="news-card-body">
-              <h3>La Suite numerique & Twake: Genesis of a Standard</h3>
-              <p class="news-excerpt">How collaboration between French government and LINAGORA created the foundation for Open Buro.</p>
-              <a href="news/la-suite-numerique-twake-genesis.html" class="read-more" aria-label="Read more about La Suite numerique and Twake genesis">Read <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: middle; margin-left: 4px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+              <h3 data-i18n="news.art3.title">La Suite numerique &amp; Twake: Genesis of a Standard</h3>
+              <p class="news-excerpt" data-i18n="news.art3.excerpt">How collaboration between French government and LINAGORA created the foundation for Open Buro.</p>
+              <a href="news/la-suite-numerique-twake-genesis.html" class="read-more" aria-label="Read more about La Suite numerique and Twake genesis"><span data-i18n="news.read">Read</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: middle; margin-left: 4px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
             </div>
           </article>
         </div>
@@ -2652,8 +2815,8 @@
       <div class="newsletter-icon" aria-hidden="true">
         <i class="ph-duotone ph-envelope-simple"></i>
       </div>
-      <h2>Stay Informed</h2>
-      <p class="newsletter-desc">Receive project updates, Alliance news, and ecosystem developments directly in your inbox.</p>
+      <h2 data-i18n="newsletter.title">Stay Informed</h2>
+      <p class="newsletter-desc" data-i18n="newsletter.desc">Receive project updates, Alliance news, and ecosystem developments directly in your inbox.</p>
 
       <!-- <form class="newsletter-form" action="#" method="POST" aria-label="Newsletter subscription">
         <label for="newsletter-email" class="sr-only">Email address</label>
@@ -2671,7 +2834,7 @@
 
       <p class="gdpr-notice">By subscribing, you agree to receive occasional updates about Open Buro. We respect your privacy and will never share your email address. You can unsubscribe at any time.</p> -->
 
-      <p style="font-size: var(--text-xl); color: var(--color-primary); font-weight: 600; margin-top: 2rem;">Coming soon !</p>
+      <p style="font-size: var(--text-xl); color: var(--color-primary); font-weight: 600; margin-top: 2rem;" data-i18n="newsletter.coming">Coming soon !</p>
     </div>
   </section>
 
@@ -2683,23 +2846,23 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="footer-logo">Open Buro</div>
-          <p class="footer-tagline">European open source ecosystem</p>
+          <p class="footer-tagline" data-i18n="footer.tagline">European open source ecosystem</p>
         </div>
 
         <nav class="footer-nav" aria-label="Footer navigation">
-          <h4>Navigation</h4>
-          <a href="#problem">Problem</a>
-          <a href="#vision">Vision</a>
-          <a href="#pillars">Pillars</a>
-          <a href="#timeline">Timeline</a>
+          <h4 data-i18n="footer.nav.heading">Navigation</h4>
+          <a href="#problem" data-i18n="nav.problem">Problem</a>
+          <a href="#vision" data-i18n="nav.vision">Vision</a>
+          <a href="#pillars" data-i18n="nav.pillars">Pillars</a>
+          <a href="#timeline" data-i18n="nav.timeline">Timeline</a>
           <!-- <a href="#first-implementation">1st Implementation</a> -->
-          <a href="#ecosystem">Ecosystem</a>
-          <a href="#news">News</a>
-          <a href="#newsletter">Newsletter</a>
+          <a href="#ecosystem" data-i18n="nav.ecosystem">Ecosystem</a>
+          <a href="#news" data-i18n="nav.news">News</a>
+          <a href="#newsletter" data-i18n="nav.newsletter">Newsletter</a>
         </nav>
 
         <div class="footer-contact">
-          <h4>Contact</h4>
+          <h4 data-i18n="footer.contact.heading">Contact</h4>
           <a href="mailto:hello@openburo.eu">hello@openburo.eu</a>
           <div class="social-links">
             <a href="#" aria-label="GitHub">GitHub</a>
@@ -2709,7 +2872,7 @@
         </div>
       </div>
       <div style="text-align: center; padding-top: 2rem; margin-top: 2rem; border-top: 1px solid var(--color-border); color: var(--color-text-muted); font-size: 0.875rem;">
-        <p>&copy; 2026 Open Buro Alliance. Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
+        <p data-i18n="footer.copyright" data-i18n-html="true">&copy; 2026 Open Buro Alliance. Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
       </div>
     </div>
   </footer>
@@ -3203,6 +3366,423 @@
       });
     }
 
+    /**
+     * i18n: Multi-language system (EN/FR/DE/IT/ES)
+     * Supports data-i18n (textContent) and data-i18n-html (innerHTML) attributes
+     * Persists language choice in localStorage, updates html lang attribute
+     */
+    const translations = {
+      en: {
+        // Meta
+        'meta.title': 'Open Buro - European Workplace Orchestration Standard',
+        'meta.description': 'An open European standard for workplace orchestration, providing the missing layer that turns isolated open source apps into a unified digital workplace platform.',
+
+        // Nav
+        'nav.problem': 'Problem',
+        'nav.vision': 'Vision',
+        'nav.pillars': 'Pillars',
+        'nav.timeline': 'Timeline',
+        'nav.ecosystem': 'Ecosystem',
+        'nav.news': 'News',
+        'nav.newsletter': 'Newsletter',
+        'nav.cta': 'Join the Alliance',
+
+        // Hero
+        'hero.badge': 'EUROPEAN OPEN STANDARD',
+        'hero.title': 'The European Standard for Workplace Orchestration',
+        'hero.subtitle': 'Unifying open source workplace apps into a true platform alternative to Microsoft 365',
+        'hero.cta.join': 'Join the Alliance',
+        'hero.cta.learn': 'Learn More',
+
+        // Problem
+        'problem.badge': 'THE PROBLEM',
+        'problem.title': 'The Workplace Tech Paradox',
+        'problem.text1': 'Europe now has <strong>serious open source workplace tools</strong> \u2014 email, docs, project management, video, chat. They\'re mature, deployable, and increasingly adopted. Yet <strong>dependency on dominant suites keeps growing</strong>.',
+        'problem.text2': 'Why? Not because the alternatives are bad \u2014 but because Microsoft and Google have something more: the <strong>platform effect</strong>.',
+        'problem.li1': '<strong>It\'s not "a software"</strong> \u2014 it\'s an interlocked ecosystem designed to work as one',
+        'problem.li2': '<strong>Leaving feels like a risk</strong>, not a project: cost, complexity, habits, continuity',
+        'problem.li3': '<strong>SSO across apps isn\'t enough</strong> \u2014 a shared login only produces an app catalog, not a platform',
+        'problem.conclusion': 'What\'s missing isn\'t better apps \u2014 it\'s <strong>the orchestration layer between them</strong>.',
+        'problem.card1.title': 'The Platform Effect Gap',
+        'problem.card1.desc': 'Open source apps work \u2014 individually. But dominant suites win because they feel like one product: shared context, seamless workflows, unified experience. Individual excellence doesn\'t beat ecosystem cohesion.',
+        'problem.card2.title': 'SSO Is Not a Platform',
+        'problem.card2.desc': 'A single login across multiple tools sounds like progress \u2014 but it only produces an app catalog behind one door. What\'s missing is the orchestration layer: identity, rights, notifications, documents and workflows circulating between services.',
+        'problem.card3.title': 'Strategic Dependency',
+        'problem.card3.desc': 'The lock-in isn\'t just budgetary \u2014 it\'s political. Roadmaps, integrations, and platform orientations are decided outside Europe, durably structuring organizations that have no seat at the table. Sovereignty requires infrastructure, not just intentions.',
+
+        // Vision
+        'vision.badge': 'THE VISION',
+        'vision.title': 'From Fragmentation to Unity',
+        'vision.subtitle': 'Open Buro orchestrates existing apps into a cohesive platform\u2014no vendor lock-in, no rip-and-replace.',
+        'vision.feat1.title': 'Universal Packaging',
+        'vision.feat1.desc': 'Standard app format. One registry. Any publisher can contribute.',
+        'vision.feat2.title': 'Shared Navigation',
+        'vision.feat2.desc': 'Common home, unified app grid, global search. Users never lost.',
+        'vision.feat3.title': 'Cross-App Data',
+        'vision.feat3.desc': 'Business objects flow between apps. Semantic graph connects knowledge.',
+        'vision.feat4.title': 'Collective Identity',
+        'vision.feat4.desc': 'Organization-wide groups, permissions, presence. Manage once, apply everywhere.',
+        'vision.quote': 'Open Buro doesn\'t replace your apps. It makes them work together.',
+
+        // Diagram
+        'diagram.isolated': 'Isolated Apps',
+        'diagram.email': 'Email',
+        'diagram.docs': 'Docs',
+        'diagram.tasks': 'Tasks',
+        'diagram.layer': 'Open Buro Layer',
+        'diagram.standard': 'Open Buro Standard',
+        'diagram.unifiedNav': 'Unified Nav',
+        'diagram.crossApp': 'Cross-app Data',
+        'diagram.unified': 'Unified Workplace',
+        'diagram.seamless': 'Seamless',
+        'diagram.experience': 'Experience',
+
+        // Pillars
+        'pillars.badge': 'TWO PILLARS',
+        'pillars.title': 'Standard + Alliance',
+        'pillars.subtitle': 'Technical orchestration meets ecosystem coordination',
+        'pillars.standard.heading': 'The Standard',
+        'pillars.acc1.title': '\ud83d\udd17 Application Integration',
+        'pillars.acc1.desc': 'Unified SSO with OIDC flow, standard app packaging format, centralized registry for discovery, common settings API for consistent UX. Publishers integrate once, users authenticate once.',
+        'pillars.acc2.title': '\ud83e\udded Cross-service Navigation',
+        'pillars.acc2.desc': 'Shared home screen, unified navigation bars, global app grid with search, cross-app command palette, integrated support system. Users navigate the platform, not individual apps.',
+        'pillars.acc3.title': '\ud83e\udde0 Data Intelligence',
+        'pillars.acc3.desc': 'Business object definitions (contacts, documents, tasks), cross-app event streaming, semantic knowledge graph, unified RAG/search APIs. Data flows between apps with context preserved.',
+        'pillars.acc4.title': '\ud83e\udd1d Platform Collaboration',
+        'pillars.acc4.desc': 'Cross-service workspaces, threaded comments on any object, notification center aggregating all apps, shared presence and status. Collaboration transcends app boundaries.',
+        'pillars.acc5.title': '\ud83e\udd16 Inter-apps & AI',
+        'pillars.acc5.desc': 'Capability/intent casting (apps expose functions to platform), unified video conferencing, shared file picker, integrated image editing. Apps compose into workflows, AI agents orchestrate across tools.',
+        'pillars.acc6.title': '\ud83d\udd12 Security & Encryption',
+        'pillars.acc6.desc': 'Platform-level end-to-end encryption vault, granular permission models, audit logging, secure secret storage. Security is orchestrated, not fragmented across apps.',
+        'pillars.acc7.title': '\ud83d\udcf1 Mobile & Desktop',
+        'pillars.acc7.desc': 'Flagship mobile app (iOS/Android) with embedded webviews, dedicated native apps for core tools, desktop client (Electron/Tauri), augmented browser extension. One platform, all devices.',
+        'pillars.alliance.heading': 'The Alliance',
+        'pillars.alliance1.title': 'A Manifesto',
+        'pillars.alliance1.desc': 'Open Buro exists to prevent European workplace fragmentation. Open source without orchestration creates chaos. We establish founding principles before code.',
+        'pillars.alliance2.title': 'Open Governance',
+        'pillars.alliance2.desc': 'Neutral foundation structure modeled on Linux Foundation, CNCF. No single vendor controls the standard. Transparent decision-making, public roadmap.',
+        'pillars.alliance3.title': 'Adoption Actions',
+        'pillars.alliance3.desc': 'Implementation support for publishers: reference architectures, migration guides, certification program. Alliance members don\'t just endorse\u2014they implement.',
+        'pillars.alliance4.title': 'International Visibility',
+        'pillars.alliance4.desc': 'European-scale promotion: conferences, government outreach, media relations. Make Open Buro the default assumption for workplace tech procurement.',
+        'pillars.alliance5.title': 'Funding',
+        'pillars.alliance5.desc': 'Resource mobilization through member contributions, public grants (EU innovation funds), commercial services. Sustainable funding model ensures long-term viability.',
+        'pillars.quote': '"Code is Law... but Architecture is Politics"',
+        'pillars.quote.cite': '\u2014 Open Buro founding principle',
+
+        // Timeline
+        'timeline.badge': 'IN MOTION',
+        'timeline.title': 'Project Timeline',
+        'timeline.intro': 'From vision to reality, tracking our progress',
+        'timeline.m1.title': 'Foundational work',
+        'timeline.m1.desc': 'La Suite x Twake.ai collaboration begins',
+        'timeline.m2.title': 'Advanced integration',
+        'timeline.m2.desc': 'La Suite x Twake.ai technical integration',
+        'timeline.m3.title': 'First specifications',
+        'timeline.m3.desc': 'Open Buro draft specifications published at FOSDEM',
+        'timeline.m4.title': 'Standard V1.0 publication',
+        'timeline.m4.desc': 'Official standard release and governance setup',
+        'timeline.m5.title': 'Alliance expansion',
+        'timeline.m5.desc': 'Growing membership across European markets',
+
+        // Ecosystem
+        'ecosystem.badge': 'THE ECOSYSTEM',
+        'ecosystem.title': 'The Alliance',
+        'ecosystem.intro': 'Growing the European open source workplace ecosystem together',
+        'ecosystem.founding': 'Founding Member',
+        'ecosystem.linagora.subtitle': 'Twake.ai Platform',
+        'ecosystem.linagora.desc': 'Enterprise collaboration platform powering La Suite numerique',
+        'ecosystem.dinum.subtitle': 'La Suite numerique',
+        'ecosystem.dinum.desc': 'French government digital workplace for public sector',
+        'ecosystem.placeholder': 'Your organization here',
+        'ecosystem.cta.title': 'Join the Open Buro Alliance',
+        'ecosystem.cta.desc': 'Whether you\'re an open source publisher, institution, or enterprise, help us build the European alternative to proprietary workplace platforms.',
+        'ecosystem.cta.join': 'Become a Member',
+        'ecosystem.cta.learn': 'Learn More',
+
+        // News
+        'news.badge': 'LATEST NEWS',
+        'news.title': 'Latest News',
+        'news.intro': 'Updates from the Open Buro project and Alliance',
+        'news.read': 'Read',
+        'news.art1.date': 'Feb 2026',
+        'news.art1.title': 'When an Independent Observer Asks the Right Questions',
+        'news.art1.excerpt': 'An independent review crystallizes what European sovereign suites have been missing: not better apps, but better orchestration.',
+        'news.art2.date': 'Feb 2025',
+        'news.art2.title': 'Open Buro Presented at FOSDEM 2025',
+        'news.art2.excerpt': 'The project was introduced to the open source community at Europe\'s largest developer conference.',
+        'news.art3.date': 'Jun 2025',
+        'news.art3.title': 'La Suite numerique & Twake: Genesis of a Standard',
+        'news.art3.excerpt': 'How collaboration between French government and LINAGORA created the foundation for Open Buro.',
+
+        // Newsletter
+        'newsletter.title': 'Stay Informed',
+        'newsletter.desc': 'Receive project updates, Alliance news, and ecosystem developments directly in your inbox.',
+        'newsletter.coming': 'Coming soon !',
+
+        // Footer
+        'footer.tagline': 'European open source ecosystem',
+        'footer.nav.heading': 'Navigation',
+        'footer.contact.heading': 'Contact',
+        'footer.copyright': '&copy; 2026 Open Buro Alliance. Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>',
+      },
+
+      fr: {
+        // Meta
+        'meta.title': 'Open Buro - Standard Europ\u00e9en d\'Orchestration de l\'Espace de Travail',
+        'meta.description': 'Un standard europ\u00e9en ouvert pour l\'orchestration de l\'espace de travail, fournissant la couche manquante qui transforme des applications open source isol\u00e9es en une plateforme num\u00e9rique unifi\u00e9e.',
+
+        // Nav
+        'nav.problem': 'Probl\u00e8me',
+        'nav.vision': 'Vision',
+        'nav.pillars': 'Piliers',
+        'nav.timeline': 'Calendrier',
+        'nav.ecosystem': '\u00c9cosyst\u00e8me',
+        'nav.news': 'Actualit\u00e9s',
+        'nav.newsletter': 'Lettre d\'info',
+        'nav.cta': 'Rejoindre l\'Alliance',
+
+        // Hero
+        'hero.badge': 'STANDARD EUROP\u00c9EN OUVERT',
+        'hero.title': 'Le Standard Europ\u00e9en pour l\'Orchestration de l\'Espace de Travail',
+        'hero.subtitle': 'Unifier les applications open source de l\'espace de travail en une v\u00e9ritable plateforme alternative \u00e0 Microsoft 365',
+        'hero.cta.join': 'Rejoindre l\'Alliance',
+        'hero.cta.learn': 'En savoir plus',
+
+        // Problem
+        'problem.badge': 'LE PROBL\u00c8ME',
+        'problem.title': 'Le Paradoxe Technologique du Poste de Travail',
+        'problem.text1': 'L\'Europe dispose d\u00e9sormais d\'<strong>outils open source s\u00e9rieux pour l\'espace de travail</strong> \u2014 messagerie, documents, gestion de projet, vid\u00e9o, chat. Ils sont matures, d\u00e9ployables et de plus en plus adopt\u00e9s. Pourtant, <strong>la d\u00e9pendance aux suites dominantes continue de cro\u00eetre</strong>.',
+        'problem.text2': 'Pourquoi ? Non pas parce que les alternatives sont mauvaises \u2014 mais parce que Microsoft et Google offrent quelque chose de plus : l\'<strong>effet plateforme</strong>.',
+        'problem.li1': '<strong>Ce n\'est pas "un logiciel"</strong> \u2014 c\'est un \u00e9cosyst\u00e8me imbriqu\u00e9 con\u00e7u pour fonctionner comme un tout',
+        'problem.li2': '<strong>Partir ressemble \u00e0 un risque</strong>, pas \u00e0 un projet : co\u00fbt, complexit\u00e9, habitudes, continuit\u00e9',
+        'problem.li3': '<strong>Le SSO entre les applications ne suffit pas</strong> \u2014 un identifiant commun ne produit qu\'un catalogue d\'applications, pas une plateforme',
+        'problem.conclusion': 'Ce qui manque, ce ne sont pas de meilleures applications \u2014 c\'est <strong>la couche d\'orchestration entre elles</strong>.',
+        'problem.card1.title': 'Le D\u00e9ficit d\'Effet Plateforme',
+        'problem.card1.desc': 'Les applications open source fonctionnent \u2014 individuellement. Mais les suites dominantes l\'emportent parce qu\'elles donnent l\'impression d\'un seul produit : contexte partag\u00e9, flux de travail fluides, exp\u00e9rience unifi\u00e9e. L\'excellence individuelle ne bat pas la coh\u00e9sion de l\'\u00e9cosyst\u00e8me.',
+        'problem.card2.title': 'Le SSO N\'est Pas une Plateforme',
+        'problem.card2.desc': 'Un identifiant unique pour plusieurs outils semble \u00eatre un progr\u00e8s \u2014 mais cela ne produit qu\'un catalogue d\'applications derri\u00e8re une seule porte. Ce qui manque, c\'est la couche d\'orchestration : identit\u00e9, droits, notifications, documents et flux de travail circulant entre les services.',
+        'problem.card3.title': 'D\u00e9pendance Strat\u00e9gique',
+        'problem.card3.desc': 'La d\u00e9pendance n\'est pas seulement budg\u00e9taire \u2014 elle est politique. Les feuilles de route, int\u00e9grations et orientations de plateforme sont d\u00e9cid\u00e9es hors d\'Europe, structurant durablement des organisations qui n\'ont pas leur mot \u00e0 dire. La souverainet\u00e9 exige des infrastructures, pas seulement des intentions.',
+
+        // Vision
+        'vision.badge': 'LA VISION',
+        'vision.title': 'De la Fragmentation \u00e0 l\'Unit\u00e9',
+        'vision.subtitle': 'Open Buro orchestre les applications existantes en une plateforme coh\u00e9sive \u2014 sans d\u00e9pendance fournisseur, sans remplacement int\u00e9gral.',
+        'vision.feat1.title': 'Packaging Universel',
+        'vision.feat1.desc': 'Format d\'application standard. Un registre unique. Tout \u00e9diteur peut contribuer.',
+        'vision.feat2.title': 'Navigation Partag\u00e9e',
+        'vision.feat2.desc': 'Accueil commun, grille d\'applications unifi\u00e9e, recherche globale. Les utilisateurs ne se perdent jamais.',
+        'vision.feat3.title': 'Donn\u00e9es Inter-Applications',
+        'vision.feat3.desc': 'Les objets m\u00e9tier circulent entre les applications. Le graphe s\u00e9mantique connecte les connaissances.',
+        'vision.feat4.title': 'Identit\u00e9 Collective',
+        'vision.feat4.desc': 'Groupes, permissions et pr\u00e9sence \u00e0 l\'\u00e9chelle de l\'organisation. G\u00e9rer une fois, appliquer partout.',
+        'vision.quote': 'Open Buro ne remplace pas vos applications. Il les fait travailler ensemble.',
+
+        // Diagram
+        'diagram.isolated': 'Applications Isol\u00e9es',
+        'diagram.email': 'Email',
+        'diagram.docs': 'Docs',
+        'diagram.tasks': 'T\u00e2ches',
+        'diagram.layer': 'Couche Open Buro',
+        'diagram.standard': 'Standard Open Buro',
+        'diagram.unifiedNav': 'Navigation unifi\u00e9e',
+        'diagram.crossApp': 'Donn\u00e9es inter-apps',
+        'diagram.unified': 'Espace de Travail Unifi\u00e9',
+        'diagram.seamless': 'Exp\u00e9rience',
+        'diagram.experience': 'Fluide',
+
+        // Pillars
+        'pillars.badge': 'DEUX PILIERS',
+        'pillars.title': 'Standard + Alliance',
+        'pillars.subtitle': 'L\'orchestration technique rencontre la coordination de l\'\u00e9cosyst\u00e8me',
+        'pillars.standard.heading': 'Le Standard',
+        'pillars.acc1.title': '\ud83d\udd17 Int\u00e9gration des Applications',
+        'pillars.acc1.desc': 'SSO unifi\u00e9 avec flux OIDC, format de packaging d\'application standard, registre centralis\u00e9 pour la d\u00e9couverte, API de param\u00e8tres communs pour une UX coh\u00e9rente. Les \u00e9diteurs int\u00e8grent une fois, les utilisateurs s\'authentifient une fois.',
+        'pillars.acc2.title': '\ud83e\udded Navigation Inter-Services',
+        'pillars.acc2.desc': '\u00c9cran d\'accueil partag\u00e9, barres de navigation unifi\u00e9es, grille d\'applications avec recherche globale, palette de commandes inter-applications, syst\u00e8me d\'assistance int\u00e9gr\u00e9. Les utilisateurs naviguent dans la plateforme, pas dans les applications individuelles.',
+        'pillars.acc3.title': '\ud83e\udde0 Intelligence des Donn\u00e9es',
+        'pillars.acc3.desc': 'D\u00e9finitions d\'objets m\u00e9tier (contacts, documents, t\u00e2ches), streaming d\'\u00e9v\u00e9nements inter-applications, graphe de connaissance s\u00e9mantique, API unifi\u00e9es RAG/recherche. Les donn\u00e9es circulent entre les applications avec le contexte pr\u00e9serv\u00e9.',
+        'pillars.acc4.title': '\ud83e\udd1d Collaboration en Plateforme',
+        'pillars.acc4.desc': 'Espaces de travail inter-services, commentaires fil\u00e9s sur tout objet, centre de notifications agr\u00e9geant toutes les applications, pr\u00e9sence et statut partag\u00e9s. La collaboration transcende les fronti\u00e8res des applications.',
+        'pillars.acc5.title': '\ud83e\udd16 Inter-applications & IA',
+        'pillars.acc5.desc': 'D\u00e9l\u00e9gation de capacit\u00e9s/intentions (les applications exposent des fonctions \u00e0 la plateforme), vid\u00e9oconf\u00e9rence unifi\u00e9e, s\u00e9lecteur de fichiers partag\u00e9, \u00e9dition d\'images int\u00e9gr\u00e9e. Les applications se composent en flux de travail, les agents IA orchestrent entre les outils.',
+        'pillars.acc6.title': '\ud83d\udd12 S\u00e9curit\u00e9 & Chiffrement',
+        'pillars.acc6.desc': 'Coffre-fort de chiffrement de bout en bout au niveau plateforme, mod\u00e8les de permissions granulaires, journalisation d\'audit, stockage s\u00e9curis\u00e9 des secrets. La s\u00e9curit\u00e9 est orchestr\u00e9e, pas fragment\u00e9e entre les applications.',
+        'pillars.acc7.title': '\ud83d\udcf1 Mobile & Bureau',
+        'pillars.acc7.desc': 'Application mobile phare (iOS/Android) avec webviews int\u00e9gr\u00e9es, applications natives d\u00e9di\u00e9es pour les outils principaux, client bureau (Electron/Tauri), extension navigateur augment\u00e9e. Une seule plateforme, tous les appareils.',
+        'pillars.alliance.heading': 'L\'Alliance',
+        'pillars.alliance1.title': 'Un Manifeste',
+        'pillars.alliance1.desc': 'Open Buro existe pour pr\u00e9venir la fragmentation de l\'espace de travail europ\u00e9en. L\'open source sans orchestration cr\u00e9e le chaos. Nous \u00e9tablissons les principes fondateurs avant le code.',
+        'pillars.alliance2.title': 'Gouvernance Ouverte',
+        'pillars.alliance2.desc': 'Structure de fondation neutre mod\u00e9lis\u00e9e sur la Linux Foundation, la CNCF. Aucun fournisseur unique ne contr\u00f4le le standard. Prise de d\u00e9cision transparente, feuille de route publique.',
+        'pillars.alliance3.title': 'Actions d\'Adoption',
+        'pillars.alliance3.desc': 'Soutien \u00e0 l\'impl\u00e9mentation pour les \u00e9diteurs : architectures de r\u00e9f\u00e9rence, guides de migration, programme de certification. Les membres de l\'Alliance ne se contentent pas d\'approuver \u2014 ils impl\u00e9mentent.',
+        'pillars.alliance4.title': 'Visibilit\u00e9 Internationale',
+        'pillars.alliance4.desc': 'Promotion \u00e0 l\'\u00e9chelle europ\u00e9enne : conf\u00e9rences, contacts gouvernementaux, relations m\u00e9dias. Faire d\'Open Buro le pr\u00e9suppos\u00e9 par d\u00e9faut pour les achats de technologies de l\'espace de travail.',
+        'pillars.alliance5.title': 'Financement',
+        'pillars.alliance5.desc': 'Mobilisation de ressources via les contributions des membres, subventions publiques (fonds d\'innovation UE), services commerciaux. Un mod\u00e8le de financement durable garantit la viabilit\u00e9 \u00e0 long terme.',
+        'pillars.quote': '\u00ab Le code fait loi\u2026 mais l\'architecture est politique \u00bb',
+        'pillars.quote.cite': '\u2014 Principe fondateur d\'Open Buro',
+
+        // Timeline
+        'timeline.badge': 'EN MOUVEMENT',
+        'timeline.title': 'Calendrier du Projet',
+        'timeline.intro': 'De la vision \u00e0 la r\u00e9alit\u00e9, suivi de notre progression',
+        'timeline.m1.title': 'Travaux fondateurs',
+        'timeline.m1.desc': 'D\u00e9but de la collaboration La Suite x Twake.ai',
+        'timeline.m2.title': 'Int\u00e9gration avanc\u00e9e',
+        'timeline.m2.desc': 'Int\u00e9gration technique La Suite x Twake.ai',
+        'timeline.m3.title': 'Premi\u00e8res sp\u00e9cifications',
+        'timeline.m3.desc': 'Sp\u00e9cifications pr\u00e9liminaires d\'Open Buro publi\u00e9es au FOSDEM',
+        'timeline.m4.title': 'Publication du Standard V1.0',
+        'timeline.m4.desc': 'Publication officielle du standard et mise en place de la gouvernance',
+        'timeline.m5.title': 'Expansion de l\'Alliance',
+        'timeline.m5.desc': 'Croissance des membres sur les march\u00e9s europ\u00e9ens',
+
+        // Ecosystem
+        'ecosystem.badge': 'L\'\u00c9COSYST\u00c8ME',
+        'ecosystem.title': 'L\'Alliance',
+        'ecosystem.intro': 'Faire grandir ensemble l\'\u00e9cosyst\u00e8me europ\u00e9en de l\'espace de travail open source',
+        'ecosystem.founding': 'Membre Fondateur',
+        'ecosystem.linagora.subtitle': 'Plateforme Twake.ai',
+        'ecosystem.linagora.desc': 'Plateforme de collaboration d\'entreprise alimentant La Suite num\u00e9rique',
+        'ecosystem.dinum.subtitle': 'La Suite num\u00e9rique',
+        'ecosystem.dinum.desc': 'Espace de travail num\u00e9rique du gouvernement fran\u00e7ais pour le secteur public',
+        'ecosystem.placeholder': 'Votre organisation ici',
+        'ecosystem.cta.title': 'Rejoindre l\'Alliance Open Buro',
+        'ecosystem.cta.desc': 'Que vous soyez un \u00e9diteur open source, une institution ou une entreprise, aidez-nous \u00e0 construire l\'alternative europ\u00e9enne aux plateformes propri\u00e9taires.',
+        'ecosystem.cta.join': 'Devenir Membre',
+        'ecosystem.cta.learn': 'En savoir plus',
+
+        // News
+        'news.badge': 'DERNI\u00c8RES ACTUALIT\u00c9S',
+        'news.title': 'Derni\u00e8res Actualit\u00e9s',
+        'news.intro': 'Mises \u00e0 jour du projet Open Buro et de l\'Alliance',
+        'news.read': 'Lire',
+        'news.art1.date': 'F\u00e9v. 2026',
+        'news.art1.title': 'Quand un Observateur Ind\u00e9pendant Pose les Bonnes Questions',
+        'news.art1.excerpt': 'Une analyse ind\u00e9pendante cristallise ce qui manquait aux suites souveraines europ\u00e9ennes : non pas de meilleures applications, mais une meilleure orchestration.',
+        'news.art2.date': 'F\u00e9v. 2025',
+        'news.art2.title': 'Open Buro Pr\u00e9sent\u00e9 au FOSDEM 2025',
+        'news.art2.excerpt': 'Le projet a \u00e9t\u00e9 pr\u00e9sent\u00e9 \u00e0 la communaut\u00e9 open source lors de la plus grande conf\u00e9rence de d\u00e9veloppeurs d\'Europe.',
+        'news.art3.date': 'Juin 2025',
+        'news.art3.title': 'La Suite num\u00e9rique & Twake : Gen\u00e8se d\'un Standard',
+        'news.art3.excerpt': 'Comment la collaboration entre le gouvernement fran\u00e7ais et LINAGORA a cr\u00e9\u00e9 les fondations d\'Open Buro.',
+
+        // Newsletter
+        'newsletter.title': 'Restez Inform\u00e9',
+        'newsletter.desc': 'Recevez les mises \u00e0 jour du projet, les actualit\u00e9s de l\'Alliance et les d\u00e9veloppements de l\'\u00e9cosyst\u00e8me directement dans votre bo\u00eete de r\u00e9ception.',
+        'newsletter.coming': 'Bient\u00f4t disponible !',
+
+        // Footer
+        'footer.tagline': '\u00c9cosyst\u00e8me europ\u00e9en open source',
+        'footer.nav.heading': 'Navigation',
+        'footer.contact.heading': 'Contact',
+        'footer.copyright': '&copy; 2026 Open Buro Alliance. Sous licence <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>',
+      },
+
+      de: {
+        // Meta (placeholder - English fallback)
+        'meta.title': 'Open Buro - European Workplace Orchestration Standard (DE)',
+        'meta.description': 'An open European standard for workplace orchestration, providing the missing layer that turns isolated open source apps into a unified digital workplace platform.',
+        'nav.problem': 'Problem', 'nav.vision': 'Vision', 'nav.pillars': 'Pillars', 'nav.timeline': 'Timeline', 'nav.ecosystem': 'Ecosystem', 'nav.news': 'News', 'nav.newsletter': 'Newsletter', 'nav.cta': 'Join the Alliance',
+        'hero.badge': 'EUROPEAN OPEN STANDARD', 'hero.title': 'The European Standard for Workplace Orchestration', 'hero.subtitle': 'Unifying open source workplace apps into a true platform alternative to Microsoft 365', 'hero.cta.join': 'Join the Alliance', 'hero.cta.learn': 'Learn More',
+        'problem.badge': 'THE PROBLEM', 'problem.title': 'The Workplace Tech Paradox', 'problem.text1': 'Europe now has <strong>serious open source workplace tools</strong> \u2014 email, docs, project management, video, chat. They\'re mature, deployable, and increasingly adopted. Yet <strong>dependency on dominant suites keeps growing</strong>.', 'problem.text2': 'Why? Not because the alternatives are bad \u2014 but because Microsoft and Google have something more: the <strong>platform effect</strong>.', 'problem.li1': '<strong>It\'s not "a software"</strong> \u2014 it\'s an interlocked ecosystem designed to work as one', 'problem.li2': '<strong>Leaving feels like a risk</strong>, not a project: cost, complexity, habits, continuity', 'problem.li3': '<strong>SSO across apps isn\'t enough</strong> \u2014 a shared login only produces an app catalog, not a platform', 'problem.conclusion': 'What\'s missing isn\'t better apps \u2014 it\'s <strong>the orchestration layer between them</strong>.', 'problem.card1.title': 'The Platform Effect Gap', 'problem.card1.desc': 'Open source apps work \u2014 individually. But dominant suites win because they feel like one product: shared context, seamless workflows, unified experience. Individual excellence doesn\'t beat ecosystem cohesion.', 'problem.card2.title': 'SSO Is Not a Platform', 'problem.card2.desc': 'A single login across multiple tools sounds like progress \u2014 but it only produces an app catalog behind one door. What\'s missing is the orchestration layer: identity, rights, notifications, documents and workflows circulating between services.', 'problem.card3.title': 'Strategic Dependency', 'problem.card3.desc': 'The lock-in isn\'t just budgetary \u2014 it\'s political. Roadmaps, integrations, and platform orientations are decided outside Europe, durably structuring organizations that have no seat at the table. Sovereignty requires infrastructure, not just intentions.',
+        'vision.badge': 'THE VISION', 'vision.title': 'From Fragmentation to Unity', 'vision.subtitle': 'Open Buro orchestrates existing apps into a cohesive platform\u2014no vendor lock-in, no rip-and-replace.', 'vision.feat1.title': 'Universal Packaging', 'vision.feat1.desc': 'Standard app format. One registry. Any publisher can contribute.', 'vision.feat2.title': 'Shared Navigation', 'vision.feat2.desc': 'Common home, unified app grid, global search. Users never lost.', 'vision.feat3.title': 'Cross-App Data', 'vision.feat3.desc': 'Business objects flow between apps. Semantic graph connects knowledge.', 'vision.feat4.title': 'Collective Identity', 'vision.feat4.desc': 'Organization-wide groups, permissions, presence. Manage once, apply everywhere.', 'vision.quote': 'Open Buro doesn\'t replace your apps. It makes them work together.',
+        'diagram.isolated': 'Isolated Apps', 'diagram.email': 'Email', 'diagram.docs': 'Docs', 'diagram.tasks': 'Tasks', 'diagram.layer': 'Open Buro Layer', 'diagram.standard': 'Open Buro Standard', 'diagram.unifiedNav': 'Unified Nav', 'diagram.crossApp': 'Cross-app Data', 'diagram.unified': 'Unified Workplace', 'diagram.seamless': 'Seamless', 'diagram.experience': 'Experience',
+        'pillars.badge': 'TWO PILLARS', 'pillars.title': 'Standard + Alliance', 'pillars.subtitle': 'Technical orchestration meets ecosystem coordination', 'pillars.standard.heading': 'The Standard', 'pillars.acc1.title': '\ud83d\udd17 Application Integration', 'pillars.acc1.desc': 'Unified SSO with OIDC flow, standard app packaging format, centralized registry for discovery, common settings API for consistent UX. Publishers integrate once, users authenticate once.', 'pillars.acc2.title': '\ud83e\udded Cross-service Navigation', 'pillars.acc2.desc': 'Shared home screen, unified navigation bars, global app grid with search, cross-app command palette, integrated support system. Users navigate the platform, not individual apps.', 'pillars.acc3.title': '\ud83e\udde0 Data Intelligence', 'pillars.acc3.desc': 'Business object definitions (contacts, documents, tasks), cross-app event streaming, semantic knowledge graph, unified RAG/search APIs. Data flows between apps with context preserved.', 'pillars.acc4.title': '\ud83e\udd1d Platform Collaboration', 'pillars.acc4.desc': 'Cross-service workspaces, threaded comments on any object, notification center aggregating all apps, shared presence and status. Collaboration transcends app boundaries.', 'pillars.acc5.title': '\ud83e\udd16 Inter-apps & AI', 'pillars.acc5.desc': 'Capability/intent casting (apps expose functions to platform), unified video conferencing, shared file picker, integrated image editing. Apps compose into workflows, AI agents orchestrate across tools.', 'pillars.acc6.title': '\ud83d\udd12 Security & Encryption', 'pillars.acc6.desc': 'Platform-level end-to-end encryption vault, granular permission models, audit logging, secure secret storage. Security is orchestrated, not fragmented across apps.', 'pillars.acc7.title': '\ud83d\udcf1 Mobile & Desktop', 'pillars.acc7.desc': 'Flagship mobile app (iOS/Android) with embedded webviews, dedicated native apps for core tools, desktop client (Electron/Tauri), augmented browser extension. One platform, all devices.',
+        'pillars.alliance.heading': 'The Alliance', 'pillars.alliance1.title': 'A Manifesto', 'pillars.alliance1.desc': 'Open Buro exists to prevent European workplace fragmentation. Open source without orchestration creates chaos. We establish founding principles before code.', 'pillars.alliance2.title': 'Open Governance', 'pillars.alliance2.desc': 'Neutral foundation structure modeled on Linux Foundation, CNCF. No single vendor controls the standard. Transparent decision-making, public roadmap.', 'pillars.alliance3.title': 'Adoption Actions', 'pillars.alliance3.desc': 'Implementation support for publishers: reference architectures, migration guides, certification program. Alliance members don\'t just endorse\u2014they implement.', 'pillars.alliance4.title': 'International Visibility', 'pillars.alliance4.desc': 'European-scale promotion: conferences, government outreach, media relations. Make Open Buro the default assumption for workplace tech procurement.', 'pillars.alliance5.title': 'Funding', 'pillars.alliance5.desc': 'Resource mobilization through member contributions, public grants (EU innovation funds), commercial services. Sustainable funding model ensures long-term viability.', 'pillars.quote': '"Code is Law... but Architecture is Politics"', 'pillars.quote.cite': '\u2014 Open Buro founding principle',
+        'timeline.badge': 'IN MOTION', 'timeline.title': 'Project Timeline', 'timeline.intro': 'From vision to reality, tracking our progress', 'timeline.m1.title': 'Foundational work', 'timeline.m1.desc': 'La Suite x Twake.ai collaboration begins', 'timeline.m2.title': 'Advanced integration', 'timeline.m2.desc': 'La Suite x Twake.ai technical integration', 'timeline.m3.title': 'First specifications', 'timeline.m3.desc': 'Open Buro draft specifications published at FOSDEM', 'timeline.m4.title': 'Standard V1.0 publication', 'timeline.m4.desc': 'Official standard release and governance setup', 'timeline.m5.title': 'Alliance expansion', 'timeline.m5.desc': 'Growing membership across European markets',
+        'ecosystem.badge': 'THE ECOSYSTEM', 'ecosystem.title': 'The Alliance', 'ecosystem.intro': 'Growing the European open source workplace ecosystem together', 'ecosystem.founding': 'Founding Member', 'ecosystem.linagora.subtitle': 'Twake.ai Platform', 'ecosystem.linagora.desc': 'Enterprise collaboration platform powering La Suite numerique', 'ecosystem.dinum.subtitle': 'La Suite numerique', 'ecosystem.dinum.desc': 'French government digital workplace for public sector', 'ecosystem.placeholder': 'Your organization here', 'ecosystem.cta.title': 'Join the Open Buro Alliance', 'ecosystem.cta.desc': 'Whether you\'re an open source publisher, institution, or enterprise, help us build the European alternative to proprietary workplace platforms.', 'ecosystem.cta.join': 'Become a Member', 'ecosystem.cta.learn': 'Learn More',
+        'news.badge': 'LATEST NEWS', 'news.title': 'Latest News', 'news.intro': 'Updates from the Open Buro project and Alliance', 'news.read': 'Read', 'news.art1.date': 'Feb 2026', 'news.art1.title': 'When an Independent Observer Asks the Right Questions', 'news.art1.excerpt': 'An independent review crystallizes what European sovereign suites have been missing: not better apps, but better orchestration.', 'news.art2.date': 'Feb 2025', 'news.art2.title': 'Open Buro Presented at FOSDEM 2025', 'news.art2.excerpt': 'The project was introduced to the open source community at Europe\'s largest developer conference.', 'news.art3.date': 'Jun 2025', 'news.art3.title': 'La Suite numerique & Twake: Genesis of a Standard', 'news.art3.excerpt': 'How collaboration between French government and LINAGORA created the foundation for Open Buro.',
+        'newsletter.title': 'Stay Informed', 'newsletter.desc': 'Receive project updates, Alliance news, and ecosystem developments directly in your inbox.', 'newsletter.coming': 'Coming soon !',
+        'footer.tagline': 'European open source ecosystem', 'footer.nav.heading': 'Navigation', 'footer.contact.heading': 'Contact', 'footer.copyright': '&copy; 2026 Open Buro Alliance. Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>',
+      },
+
+      it: {
+        // Meta (placeholder - English fallback)
+        'meta.title': 'Open Buro - European Workplace Orchestration Standard (IT)',
+        'meta.description': 'An open European standard for workplace orchestration, providing the missing layer that turns isolated open source apps into a unified digital workplace platform.',
+        'nav.problem': 'Problem', 'nav.vision': 'Vision', 'nav.pillars': 'Pillars', 'nav.timeline': 'Timeline', 'nav.ecosystem': 'Ecosystem', 'nav.news': 'News', 'nav.newsletter': 'Newsletter', 'nav.cta': 'Join the Alliance',
+        'hero.badge': 'EUROPEAN OPEN STANDARD', 'hero.title': 'The European Standard for Workplace Orchestration', 'hero.subtitle': 'Unifying open source workplace apps into a true platform alternative to Microsoft 365', 'hero.cta.join': 'Join the Alliance', 'hero.cta.learn': 'Learn More',
+        'problem.badge': 'THE PROBLEM', 'problem.title': 'The Workplace Tech Paradox', 'problem.text1': 'Europe now has <strong>serious open source workplace tools</strong> \u2014 email, docs, project management, video, chat. They\'re mature, deployable, and increasingly adopted. Yet <strong>dependency on dominant suites keeps growing</strong>.', 'problem.text2': 'Why? Not because the alternatives are bad \u2014 but because Microsoft and Google have something more: the <strong>platform effect</strong>.', 'problem.li1': '<strong>It\'s not "a software"</strong> \u2014 it\'s an interlocked ecosystem designed to work as one', 'problem.li2': '<strong>Leaving feels like a risk</strong>, not a project: cost, complexity, habits, continuity', 'problem.li3': '<strong>SSO across apps isn\'t enough</strong> \u2014 a shared login only produces an app catalog, not a platform', 'problem.conclusion': 'What\'s missing isn\'t better apps \u2014 it\'s <strong>the orchestration layer between them</strong>.', 'problem.card1.title': 'The Platform Effect Gap', 'problem.card1.desc': 'Open source apps work \u2014 individually. But dominant suites win because they feel like one product: shared context, seamless workflows, unified experience. Individual excellence doesn\'t beat ecosystem cohesion.', 'problem.card2.title': 'SSO Is Not a Platform', 'problem.card2.desc': 'A single login across multiple tools sounds like progress \u2014 but it only produces an app catalog behind one door. What\'s missing is the orchestration layer: identity, rights, notifications, documents and workflows circulating between services.', 'problem.card3.title': 'Strategic Dependency', 'problem.card3.desc': 'The lock-in isn\'t just budgetary \u2014 it\'s political. Roadmaps, integrations, and platform orientations are decided outside Europe, durably structuring organizations that have no seat at the table. Sovereignty requires infrastructure, not just intentions.',
+        'vision.badge': 'THE VISION', 'vision.title': 'From Fragmentation to Unity', 'vision.subtitle': 'Open Buro orchestrates existing apps into a cohesive platform\u2014no vendor lock-in, no rip-and-replace.', 'vision.feat1.title': 'Universal Packaging', 'vision.feat1.desc': 'Standard app format. One registry. Any publisher can contribute.', 'vision.feat2.title': 'Shared Navigation', 'vision.feat2.desc': 'Common home, unified app grid, global search. Users never lost.', 'vision.feat3.title': 'Cross-App Data', 'vision.feat3.desc': 'Business objects flow between apps. Semantic graph connects knowledge.', 'vision.feat4.title': 'Collective Identity', 'vision.feat4.desc': 'Organization-wide groups, permissions, presence. Manage once, apply everywhere.', 'vision.quote': 'Open Buro doesn\'t replace your apps. It makes them work together.',
+        'diagram.isolated': 'Isolated Apps', 'diagram.email': 'Email', 'diagram.docs': 'Docs', 'diagram.tasks': 'Tasks', 'diagram.layer': 'Open Buro Layer', 'diagram.standard': 'Open Buro Standard', 'diagram.unifiedNav': 'Unified Nav', 'diagram.crossApp': 'Cross-app Data', 'diagram.unified': 'Unified Workplace', 'diagram.seamless': 'Seamless', 'diagram.experience': 'Experience',
+        'pillars.badge': 'TWO PILLARS', 'pillars.title': 'Standard + Alliance', 'pillars.subtitle': 'Technical orchestration meets ecosystem coordination', 'pillars.standard.heading': 'The Standard', 'pillars.acc1.title': '\ud83d\udd17 Application Integration', 'pillars.acc1.desc': 'Unified SSO with OIDC flow, standard app packaging format, centralized registry for discovery, common settings API for consistent UX. Publishers integrate once, users authenticate once.', 'pillars.acc2.title': '\ud83e\udded Cross-service Navigation', 'pillars.acc2.desc': 'Shared home screen, unified navigation bars, global app grid with search, cross-app command palette, integrated support system. Users navigate the platform, not individual apps.', 'pillars.acc3.title': '\ud83e\udde0 Data Intelligence', 'pillars.acc3.desc': 'Business object definitions (contacts, documents, tasks), cross-app event streaming, semantic knowledge graph, unified RAG/search APIs. Data flows between apps with context preserved.', 'pillars.acc4.title': '\ud83e\udd1d Platform Collaboration', 'pillars.acc4.desc': 'Cross-service workspaces, threaded comments on any object, notification center aggregating all apps, shared presence and status. Collaboration transcends app boundaries.', 'pillars.acc5.title': '\ud83e\udd16 Inter-apps & AI', 'pillars.acc5.desc': 'Capability/intent casting (apps expose functions to platform), unified video conferencing, shared file picker, integrated image editing. Apps compose into workflows, AI agents orchestrate across tools.', 'pillars.acc6.title': '\ud83d\udd12 Security & Encryption', 'pillars.acc6.desc': 'Platform-level end-to-end encryption vault, granular permission models, audit logging, secure secret storage. Security is orchestrated, not fragmented across apps.', 'pillars.acc7.title': '\ud83d\udcf1 Mobile & Desktop', 'pillars.acc7.desc': 'Flagship mobile app (iOS/Android) with embedded webviews, dedicated native apps for core tools, desktop client (Electron/Tauri), augmented browser extension. One platform, all devices.',
+        'pillars.alliance.heading': 'The Alliance', 'pillars.alliance1.title': 'A Manifesto', 'pillars.alliance1.desc': 'Open Buro exists to prevent European workplace fragmentation. Open source without orchestration creates chaos. We establish founding principles before code.', 'pillars.alliance2.title': 'Open Governance', 'pillars.alliance2.desc': 'Neutral foundation structure modeled on Linux Foundation, CNCF. No single vendor controls the standard. Transparent decision-making, public roadmap.', 'pillars.alliance3.title': 'Adoption Actions', 'pillars.alliance3.desc': 'Implementation support for publishers: reference architectures, migration guides, certification program. Alliance members don\'t just endorse\u2014they implement.', 'pillars.alliance4.title': 'International Visibility', 'pillars.alliance4.desc': 'European-scale promotion: conferences, government outreach, media relations. Make Open Buro the default assumption for workplace tech procurement.', 'pillars.alliance5.title': 'Funding', 'pillars.alliance5.desc': 'Resource mobilization through member contributions, public grants (EU innovation funds), commercial services. Sustainable funding model ensures long-term viability.', 'pillars.quote': '"Code is Law... but Architecture is Politics"', 'pillars.quote.cite': '\u2014 Open Buro founding principle',
+        'timeline.badge': 'IN MOTION', 'timeline.title': 'Project Timeline', 'timeline.intro': 'From vision to reality, tracking our progress', 'timeline.m1.title': 'Foundational work', 'timeline.m1.desc': 'La Suite x Twake.ai collaboration begins', 'timeline.m2.title': 'Advanced integration', 'timeline.m2.desc': 'La Suite x Twake.ai technical integration', 'timeline.m3.title': 'First specifications', 'timeline.m3.desc': 'Open Buro draft specifications published at FOSDEM', 'timeline.m4.title': 'Standard V1.0 publication', 'timeline.m4.desc': 'Official standard release and governance setup', 'timeline.m5.title': 'Alliance expansion', 'timeline.m5.desc': 'Growing membership across European markets',
+        'ecosystem.badge': 'THE ECOSYSTEM', 'ecosystem.title': 'The Alliance', 'ecosystem.intro': 'Growing the European open source workplace ecosystem together', 'ecosystem.founding': 'Founding Member', 'ecosystem.linagora.subtitle': 'Twake.ai Platform', 'ecosystem.linagora.desc': 'Enterprise collaboration platform powering La Suite numerique', 'ecosystem.dinum.subtitle': 'La Suite numerique', 'ecosystem.dinum.desc': 'French government digital workplace for public sector', 'ecosystem.placeholder': 'Your organization here', 'ecosystem.cta.title': 'Join the Open Buro Alliance', 'ecosystem.cta.desc': 'Whether you\'re an open source publisher, institution, or enterprise, help us build the European alternative to proprietary workplace platforms.', 'ecosystem.cta.join': 'Become a Member', 'ecosystem.cta.learn': 'Learn More',
+        'news.badge': 'LATEST NEWS', 'news.title': 'Latest News', 'news.intro': 'Updates from the Open Buro project and Alliance', 'news.read': 'Read', 'news.art1.date': 'Feb 2026', 'news.art1.title': 'When an Independent Observer Asks the Right Questions', 'news.art1.excerpt': 'An independent review crystallizes what European sovereign suites have been missing: not better apps, but better orchestration.', 'news.art2.date': 'Feb 2025', 'news.art2.title': 'Open Buro Presented at FOSDEM 2025', 'news.art2.excerpt': 'The project was introduced to the open source community at Europe\'s largest developer conference.', 'news.art3.date': 'Jun 2025', 'news.art3.title': 'La Suite numerique & Twake: Genesis of a Standard', 'news.art3.excerpt': 'How collaboration between French government and LINAGORA created the foundation for Open Buro.',
+        'newsletter.title': 'Stay Informed', 'newsletter.desc': 'Receive project updates, Alliance news, and ecosystem developments directly in your inbox.', 'newsletter.coming': 'Coming soon !',
+        'footer.tagline': 'European open source ecosystem', 'footer.nav.heading': 'Navigation', 'footer.contact.heading': 'Contact', 'footer.copyright': '&copy; 2026 Open Buro Alliance. Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>',
+      },
+
+      es: {
+        // Meta (placeholder - English fallback)
+        'meta.title': 'Open Buro - European Workplace Orchestration Standard (ES)',
+        'meta.description': 'An open European standard for workplace orchestration, providing the missing layer that turns isolated open source apps into a unified digital workplace platform.',
+        'nav.problem': 'Problem', 'nav.vision': 'Vision', 'nav.pillars': 'Pillars', 'nav.timeline': 'Timeline', 'nav.ecosystem': 'Ecosystem', 'nav.news': 'News', 'nav.newsletter': 'Newsletter', 'nav.cta': 'Join the Alliance',
+        'hero.badge': 'EUROPEAN OPEN STANDARD', 'hero.title': 'The European Standard for Workplace Orchestration', 'hero.subtitle': 'Unifying open source workplace apps into a true platform alternative to Microsoft 365', 'hero.cta.join': 'Join the Alliance', 'hero.cta.learn': 'Learn More',
+        'problem.badge': 'THE PROBLEM', 'problem.title': 'The Workplace Tech Paradox', 'problem.text1': 'Europe now has <strong>serious open source workplace tools</strong> \u2014 email, docs, project management, video, chat. They\'re mature, deployable, and increasingly adopted. Yet <strong>dependency on dominant suites keeps growing</strong>.', 'problem.text2': 'Why? Not because the alternatives are bad \u2014 but because Microsoft and Google have something more: the <strong>platform effect</strong>.', 'problem.li1': '<strong>It\'s not "a software"</strong> \u2014 it\'s an interlocked ecosystem designed to work as one', 'problem.li2': '<strong>Leaving feels like a risk</strong>, not a project: cost, complexity, habits, continuity', 'problem.li3': '<strong>SSO across apps isn\'t enough</strong> \u2014 a shared login only produces an app catalog, not a platform', 'problem.conclusion': 'What\'s missing isn\'t better apps \u2014 it\'s <strong>the orchestration layer between them</strong>.', 'problem.card1.title': 'The Platform Effect Gap', 'problem.card1.desc': 'Open source apps work \u2014 individually. But dominant suites win because they feel like one product: shared context, seamless workflows, unified experience. Individual excellence doesn\'t beat ecosystem cohesion.', 'problem.card2.title': 'SSO Is Not a Platform', 'problem.card2.desc': 'A single login across multiple tools sounds like progress \u2014 but it only produces an app catalog behind one door. What\'s missing is the orchestration layer: identity, rights, notifications, documents and workflows circulating between services.', 'problem.card3.title': 'Strategic Dependency', 'problem.card3.desc': 'The lock-in isn\'t just budgetary \u2014 it\'s political. Roadmaps, integrations, and platform orientations are decided outside Europe, durably structuring organizations that have no seat at the table. Sovereignty requires infrastructure, not just intentions.',
+        'vision.badge': 'THE VISION', 'vision.title': 'From Fragmentation to Unity', 'vision.subtitle': 'Open Buro orchestrates existing apps into a cohesive platform\u2014no vendor lock-in, no rip-and-replace.', 'vision.feat1.title': 'Universal Packaging', 'vision.feat1.desc': 'Standard app format. One registry. Any publisher can contribute.', 'vision.feat2.title': 'Shared Navigation', 'vision.feat2.desc': 'Common home, unified app grid, global search. Users never lost.', 'vision.feat3.title': 'Cross-App Data', 'vision.feat3.desc': 'Business objects flow between apps. Semantic graph connects knowledge.', 'vision.feat4.title': 'Collective Identity', 'vision.feat4.desc': 'Organization-wide groups, permissions, presence. Manage once, apply everywhere.', 'vision.quote': 'Open Buro doesn\'t replace your apps. It makes them work together.',
+        'diagram.isolated': 'Isolated Apps', 'diagram.email': 'Email', 'diagram.docs': 'Docs', 'diagram.tasks': 'Tasks', 'diagram.layer': 'Open Buro Layer', 'diagram.standard': 'Open Buro Standard', 'diagram.unifiedNav': 'Unified Nav', 'diagram.crossApp': 'Cross-app Data', 'diagram.unified': 'Unified Workplace', 'diagram.seamless': 'Seamless', 'diagram.experience': 'Experience',
+        'pillars.badge': 'TWO PILLARS', 'pillars.title': 'Standard + Alliance', 'pillars.subtitle': 'Technical orchestration meets ecosystem coordination', 'pillars.standard.heading': 'The Standard', 'pillars.acc1.title': '\ud83d\udd17 Application Integration', 'pillars.acc1.desc': 'Unified SSO with OIDC flow, standard app packaging format, centralized registry for discovery, common settings API for consistent UX. Publishers integrate once, users authenticate once.', 'pillars.acc2.title': '\ud83e\udded Cross-service Navigation', 'pillars.acc2.desc': 'Shared home screen, unified navigation bars, global app grid with search, cross-app command palette, integrated support system. Users navigate the platform, not individual apps.', 'pillars.acc3.title': '\ud83e\udde0 Data Intelligence', 'pillars.acc3.desc': 'Business object definitions (contacts, documents, tasks), cross-app event streaming, semantic knowledge graph, unified RAG/search APIs. Data flows between apps with context preserved.', 'pillars.acc4.title': '\ud83e\udd1d Platform Collaboration', 'pillars.acc4.desc': 'Cross-service workspaces, threaded comments on any object, notification center aggregating all apps, shared presence and status. Collaboration transcends app boundaries.', 'pillars.acc5.title': '\ud83e\udd16 Inter-apps & AI', 'pillars.acc5.desc': 'Capability/intent casting (apps expose functions to platform), unified video conferencing, shared file picker, integrated image editing. Apps compose into workflows, AI agents orchestrate across tools.', 'pillars.acc6.title': '\ud83d\udd12 Security & Encryption', 'pillars.acc6.desc': 'Platform-level end-to-end encryption vault, granular permission models, audit logging, secure secret storage. Security is orchestrated, not fragmented across apps.', 'pillars.acc7.title': '\ud83d\udcf1 Mobile & Desktop', 'pillars.acc7.desc': 'Flagship mobile app (iOS/Android) with embedded webviews, dedicated native apps for core tools, desktop client (Electron/Tauri), augmented browser extension. One platform, all devices.',
+        'pillars.alliance.heading': 'The Alliance', 'pillars.alliance1.title': 'A Manifesto', 'pillars.alliance1.desc': 'Open Buro exists to prevent European workplace fragmentation. Open source without orchestration creates chaos. We establish founding principles before code.', 'pillars.alliance2.title': 'Open Governance', 'pillars.alliance2.desc': 'Neutral foundation structure modeled on Linux Foundation, CNCF. No single vendor controls the standard. Transparent decision-making, public roadmap.', 'pillars.alliance3.title': 'Adoption Actions', 'pillars.alliance3.desc': 'Implementation support for publishers: reference architectures, migration guides, certification program. Alliance members don\'t just endorse\u2014they implement.', 'pillars.alliance4.title': 'International Visibility', 'pillars.alliance4.desc': 'European-scale promotion: conferences, government outreach, media relations. Make Open Buro the default assumption for workplace tech procurement.', 'pillars.alliance5.title': 'Funding', 'pillars.alliance5.desc': 'Resource mobilization through member contributions, public grants (EU innovation funds), commercial services. Sustainable funding model ensures long-term viability.', 'pillars.quote': '"Code is Law... but Architecture is Politics"', 'pillars.quote.cite': '\u2014 Open Buro founding principle',
+        'timeline.badge': 'IN MOTION', 'timeline.title': 'Project Timeline', 'timeline.intro': 'From vision to reality, tracking our progress', 'timeline.m1.title': 'Foundational work', 'timeline.m1.desc': 'La Suite x Twake.ai collaboration begins', 'timeline.m2.title': 'Advanced integration', 'timeline.m2.desc': 'La Suite x Twake.ai technical integration', 'timeline.m3.title': 'First specifications', 'timeline.m3.desc': 'Open Buro draft specifications published at FOSDEM', 'timeline.m4.title': 'Standard V1.0 publication', 'timeline.m4.desc': 'Official standard release and governance setup', 'timeline.m5.title': 'Alliance expansion', 'timeline.m5.desc': 'Growing membership across European markets',
+        'ecosystem.badge': 'THE ECOSYSTEM', 'ecosystem.title': 'The Alliance', 'ecosystem.intro': 'Growing the European open source workplace ecosystem together', 'ecosystem.founding': 'Founding Member', 'ecosystem.linagora.subtitle': 'Twake.ai Platform', 'ecosystem.linagora.desc': 'Enterprise collaboration platform powering La Suite numerique', 'ecosystem.dinum.subtitle': 'La Suite numerique', 'ecosystem.dinum.desc': 'French government digital workplace for public sector', 'ecosystem.placeholder': 'Your organization here', 'ecosystem.cta.title': 'Join the Open Buro Alliance', 'ecosystem.cta.desc': 'Whether you\'re an open source publisher, institution, or enterprise, help us build the European alternative to proprietary workplace platforms.', 'ecosystem.cta.join': 'Become a Member', 'ecosystem.cta.learn': 'Learn More',
+        'news.badge': 'LATEST NEWS', 'news.title': 'Latest News', 'news.intro': 'Updates from the Open Buro project and Alliance', 'news.read': 'Read', 'news.art1.date': 'Feb 2026', 'news.art1.title': 'When an Independent Observer Asks the Right Questions', 'news.art1.excerpt': 'An independent review crystallizes what European sovereign suites have been missing: not better apps, but better orchestration.', 'news.art2.date': 'Feb 2025', 'news.art2.title': 'Open Buro Presented at FOSDEM 2025', 'news.art2.excerpt': 'The project was introduced to the open source community at Europe\'s largest developer conference.', 'news.art3.date': 'Jun 2025', 'news.art3.title': 'La Suite numerique & Twake: Genesis of a Standard', 'news.art3.excerpt': 'How collaboration between French government and LINAGORA created the foundation for Open Buro.',
+        'newsletter.title': 'Stay Informed', 'newsletter.desc': 'Receive project updates, Alliance news, and ecosystem developments directly in your inbox.', 'newsletter.coming': 'Coming soon !',
+        'footer.tagline': 'European open source ecosystem', 'footer.nav.heading': 'Navigation', 'footer.contact.heading': 'Contact', 'footer.copyright': '&copy; 2026 Open Buro Alliance. Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>',
+      }
+    };
+
+    function setLanguage(lang) {
+      if (!translations[lang]) return;
+
+      // Update all data-i18n elements
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const value = translations[lang][key];
+        if (value !== undefined) {
+          if (el.getAttribute('data-i18n-html') === 'true') {
+            el.innerHTML = value;
+          } else {
+            el.textContent = value;
+          }
+        }
+      });
+
+      // Update html lang attribute
+      document.documentElement.lang = lang;
+
+      // Update title and meta description
+      const titleEl = document.querySelector('title');
+      if (titleEl) titleEl.textContent = translations[lang]['meta.title'];
+
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', translations[lang]['meta.description']);
+
+      // Save preference
+      localStorage.setItem('lang', lang);
+
+      // Update ALL dropdown instances (desktop + mobile)
+      document.querySelectorAll('.lang-dropdown').forEach(dropdown => {
+        // Update displayed lang code
+        const codeEl = dropdown.querySelector('.lang-code');
+        if (codeEl) codeEl.textContent = lang.toUpperCase();
+
+        // Update aria-checked on menu buttons
+        dropdown.querySelectorAll('.lang-dropdown-menu button[data-lang]').forEach(btn => {
+          const isActive = btn.getAttribute('data-lang') === lang;
+          btn.setAttribute('aria-checked', isActive ? 'true' : 'false');
+        });
+
+        // Close dropdown after selection
+        dropdown.setAttribute('aria-expanded', 'false');
+      });
+    }
+
     // Initialize on DOMContentLoaded
     document.addEventListener('DOMContentLoaded', () => {
       // Initialize canvas animation
@@ -3228,6 +3808,70 @@
 
       // Initialize mobile drawer (Phase 6)
       initMobileDrawer();
+
+      // Initialize i18n system
+      const supportedLangs = ['en', 'fr', 'de', 'it', 'es'];
+      const savedLang = localStorage.getItem('lang');
+      setLanguage(supportedLangs.includes(savedLang) ? savedLang : 'en');
+
+      // Initialize language dropdowns (desktop + mobile)
+      document.querySelectorAll('.lang-dropdown').forEach(dropdown => {
+        const trigger = dropdown.querySelector('.lang-dropdown-trigger');
+        const menu = dropdown.querySelector('.lang-dropdown-menu');
+        const items = menu.querySelectorAll('button[data-lang]');
+
+        // Toggle dropdown on trigger click
+        trigger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isOpen = dropdown.getAttribute('aria-expanded') === 'true';
+          // Close all other dropdowns first
+          document.querySelectorAll('.lang-dropdown').forEach(d => d.setAttribute('aria-expanded', 'false'));
+          if (!isOpen) {
+            dropdown.setAttribute('aria-expanded', 'true');
+            // Focus first item
+            items[0]?.focus();
+          }
+        });
+
+        // Language selection
+        items.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            setLanguage(btn.getAttribute('data-lang'));
+          });
+        });
+
+        // Keyboard navigation
+        menu.addEventListener('keydown', (e) => {
+          const focused = document.activeElement;
+          const itemArr = Array.from(items);
+          const idx = itemArr.indexOf(focused);
+
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            const next = idx < itemArr.length - 1 ? idx + 1 : 0;
+            itemArr[next].focus();
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            const prev = idx > 0 ? idx - 1 : itemArr.length - 1;
+            itemArr[prev].focus();
+          } else if (e.key === 'Escape') {
+            dropdown.setAttribute('aria-expanded', 'false');
+            trigger.focus();
+          } else if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            if (focused.hasAttribute('data-lang')) {
+              setLanguage(focused.getAttribute('data-lang'));
+              trigger.focus();
+            }
+          }
+        });
+      });
+
+      // Close dropdowns on click outside
+      document.addEventListener('click', () => {
+        document.querySelectorAll('.lang-dropdown').forEach(d => d.setAttribute('aria-expanded', 'false'));
+      });
     });
   </script>
 </body>

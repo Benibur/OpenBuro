@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-02-16)
 Phase: 7 of 7 (Performance & Launch) - COMPLETE
 Plan: 2 of 2 in current phase - PHASE COMPLETE
 Status: ALL PHASES COMPLETE - Landing page production-ready
-Last activity: 2026-02-18 - Completed quick task 2: Move all external resources locally
+Last activity: 2026-02-20 - Completed quick task 4: Replace pill toggle with globe dropdown (EN/FR/DE/IT/ES)
 
 Progress: [██████████] 100%
 
@@ -102,6 +102,13 @@ All decisions across all phases:
 - [Phase 07-01]: aria-hidden on all decorative elements (canvas, emojis, SVGs)
 - [Phase 07-02]: Network node favicon (8 connected nodes, 885 bytes data URI)
 - [Phase 07-02]: GDPR by design: zero tracking, zero cookies, zero analytics
+- [Quick-03]: data-i18n + data-i18n-html attribute pattern for bilingual text elements
+- [Quick-03]: FOUC prevention for language mirrors dark mode pattern (blocking head script)
+- [Quick-03]: Pill-style lang toggle with lang-active CSS class using --color-primary
+- [Quick-04]: Globe dropdown with aria-expanded toggle replaces binary pill radiogroup
+- [Quick-04]: DE/IT/ES use English fallback (architecture ready for real translations)
+- [Quick-04]: data-driven setLanguage() replaces hardcoded getElementById approach
+- [Quick-04]: Mobile dropdown opens upward to prevent viewport overflow
 
 ### Pending Todos
 
@@ -118,11 +125,13 @@ None - all phases executed successfully.
 | 1 | Add emojis to the 7 standardization points | 2026-02-17 | ee9b783 | [1-add-emojis-to-the-7-standardization-poin](./quick/1-add-emojis-to-the-7-standardization-poin/) |
 | 2 | Move all external resources locally (Tailwind, Google Fonts, Phosphor Icons) | 2026-02-18 | 6651850 | [2-move-all-external-resources-locally-no-o](./quick/2-move-all-external-resources-locally-no-o/) |
 | 3 | Add visually prominent BETA badge in hero section | 2026-02-20 | 99c15a1 | [3-add-a-visually-prominent-beta-badge-in-t](./quick/3-add-a-visually-prominent-beta-badge-in-t/) |
+| 4 | Add language toggle between English and French (EN/FR i18n system) | 2026-02-20 | a5b24e7 | [3-add-language-toggle-between-english-and-](./quick/3-add-language-toggle-between-english-and-/) |
+| 5 | Replace pill toggle with globe dropdown (5-language: EN/FR/DE/IT/ES) | 2026-02-20 | 2e903ea | [4-replace-pill-toggle-with-globe-dropdown-](./quick/4-replace-pill-toggle-with-globe-dropdown-/) |
 
 ## Session Continuity
 
-Last session: 2026-02-20 (Quick task 3 - Add BETA badge to hero section)
-Stopped at: PROJECT COMPLETE - All 7 phases + 3 quick tasks finished
+Last session: 2026-02-20 (Merge i18n language toggle back into master)
+Stopped at: PROJECT COMPLETE - All 7 phases + 5 quick tasks finished
 Resume file: None
 
 ---
