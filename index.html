@@ -1226,11 +1226,11 @@
 
     .pull-quote {
       margin: 4rem auto 0;
-      padding: 2rem 0 2rem 2rem;
+      padding: 2rem 0;
       border-left: 4px solid var(--color-accent);
       max-width: 800px;
       background: linear-gradient(90deg, rgba(96, 165, 250, 0.05) 0%, transparent 100%);
-      text-align: left;
+      text-align: center;
     }
 
     .dark .pull-quote {
@@ -1238,6 +1238,8 @@
     }
 
     .pull-quote p {
+      display: inline-block;
+      text-align: left;
       font-size: 1.75rem;
       font-weight: 600;
       font-family: var(--font-heading);
@@ -1248,6 +1250,9 @@
     }
 
     .pull-quote cite {
+      display: block;
+      text-align: center;
+      margin-top: 1rem;
       font-size: 1rem;
       color: var(--color-text-muted);
       font-style: normal;
@@ -2605,7 +2610,7 @@
 
       <!-- Conclusion Quote -->
       <blockquote class="vision-quote">
-        <p data-i18n="vision.quote">Open Buro doesn't replace your apps. It makes them work together.</p>
+        <p data-i18n="vision.quote" data-i18n-html="true">Open Buro doesn't replace your apps.<br>It makes them work together.</p>
       </blockquote>
     </div>
   </section>
@@ -2735,8 +2740,8 @@
 
       <!-- Pull Quote -->
       <blockquote class="pull-quote">
-        <p data-i18n="pillars.quote">"Code is Law... but Architecture is Politics"</p>
-        <cite data-i18n="pillars.quote.cite">— Open Buro founding principle</cite>
+        <p data-i18n="pillars.quote" data-i18n-html="true">"Code is Law...<br>but Architecture is Politics"</p>
+        <cite data-i18n="pillars.quote.cite">— Open Buro est un projet au service de la politique de souveraineté numérique européenne.</cite>
       </blockquote>
     </div>
   </section>
@@ -3530,7 +3535,7 @@
         'vision.feat3.desc': 'Business objects flow between apps. Semantic graph connects knowledge.',
         'vision.feat4.title': 'Collective Identity',
         'vision.feat4.desc': 'Organization-wide groups, permissions, presence. Manage once, apply everywhere.',
-        'vision.quote': 'Open Buro doesn\'t replace your apps. It makes them work together.',
+        'vision.quote': 'Open Buro doesn\'t replace your apps.<br>It makes them work together.',
 
         // Diagram
         'diagram.isolated': 'Isolated Apps',
@@ -3575,8 +3580,8 @@
         'pillars.alliance4.desc': 'European-scale promotion: conferences, government outreach, media relations. Make Open Buro the default assumption for workplace tech procurement.',
         'pillars.alliance5.title': 'Funding',
         'pillars.alliance5.desc': 'Resource mobilization through member contributions, public grants (EU innovation funds), commercial services. Sustainable funding model ensures long-term viability.',
-        'pillars.quote': '"Code is Law... but Architecture is Politics"',
-        'pillars.quote.cite': '\u2014 Open Buro founding principle',
+        'pillars.quote': '"Code is Law...<br>but Architecture is Politics"',
+        'pillars.quote.cite': '\u2014 Open Buro est un projet au service de la politique de souveraineté numérique européenne.',
 
         // Timeline
         'timeline.badge': 'IN MOTION',
@@ -3685,7 +3690,7 @@
         'vision.feat3.desc': 'Les objets m\u00e9tier circulent entre les applications. Le graphe s\u00e9mantique connecte les connaissances.',
         'vision.feat4.title': 'Identit\u00e9 Collective',
         'vision.feat4.desc': 'Groupes, permissions et pr\u00e9sence \u00e0 l\'\u00e9chelle de l\'organisation. G\u00e9rer une fois, appliquer partout.',
-        'vision.quote': 'Open Buro ne remplace pas vos applications. Il les fait travailler ensemble.',
+        'vision.quote': 'Open Buro ne remplace pas vos applications.<br>Il les fait travailler ensemble.',
 
         // Diagram
         'diagram.isolated': 'Applications Isol\u00e9es',
@@ -3730,8 +3735,8 @@
         'pillars.alliance4.desc': 'Promotion \u00e0 l\'\u00e9chelle europ\u00e9enne : conf\u00e9rences, contacts gouvernementaux, relations m\u00e9dias. Faire d\'Open Buro le pr\u00e9suppos\u00e9 par d\u00e9faut pour les achats de technologies de l\'espace de travail.',
         'pillars.alliance5.title': 'Financement',
         'pillars.alliance5.desc': 'Mobilisation de ressources via les contributions des membres, subventions publiques (fonds d\'innovation UE), services commerciaux. Un mod\u00e8le de financement durable garantit la viabilit\u00e9 \u00e0 long terme.',
-        'pillars.quote': '\u00ab Le code fait loi\u2026 mais l\'architecture est politique \u00bb',
-        'pillars.quote.cite': '\u2014 Principe fondateur d\'Open Buro',
+        'pillars.quote': '"Code is Law...<br>but Architecture is Politics"',
+        'pillars.quote.cite': '\u2014 Open Buro est un projet au service de la politique de souveraineté numérique européenne.',
 
         // Timeline
         'timeline.badge': 'EN MOUVEMENT',
@@ -3840,7 +3845,7 @@
         'vision.feat3.desc': 'Gesch\u00e4ftsobjekte flie\u00dfen zwischen Apps. Ein semantischer Graph verbindet Wissen.',
         'vision.feat4.title': 'Kollektive Identit\u00e4t',
         'vision.feat4.desc': 'Organisationsweite Gruppen, Berechtigungen, Pr\u00e4senz. Einmal verwalten, \u00fcberall anwenden.',
-        'vision.quote': 'Open Buro ersetzt nicht Ihre Apps. Es l\u00e4sst sie zusammenarbeiten.',
+        'vision.quote': 'Open Buro ersetzt nicht Ihre Apps.<br>Es l\u00e4sst sie zusammenarbeiten.',
 
         // Diagram
         'diagram.isolated': 'Isolierte Apps',
@@ -3885,8 +3890,8 @@
         'pillars.alliance4.desc': 'Europ\u00e4ische Promotion: Konferenzen, Regierungskontakte, Medienarbeit. Open Buro als Standardannahme f\u00fcr die Beschaffung von Arbeitsplatztechnologie etablieren.',
         'pillars.alliance5.title': 'Finanzierung',
         'pillars.alliance5.desc': 'Ressourcenmobilisierung durch Mitgliedsbeitr\u00e4ge, \u00f6ffentliche F\u00f6rdermittel (EU-Innovationsfonds), kommerzielle Dienste. Ein nachhaltiges Finanzierungsmodell sichert die langfristige Tragf\u00e4higkeit.',
-        'pillars.quote': '\u201eCode is Law... aber Architektur ist Politik\u201c',
-        'pillars.quote.cite': '\u2014 Open-Buro-Gr\u00fcndungsprinzip',
+        'pillars.quote': '"Code is Law...<br>but Architecture is Politics"',
+        'pillars.quote.cite': '\u2014 Open Buro est un projet au service de la politique de souveraineté numérique européenne.',
 
         // Timeline
         'timeline.badge': 'IN BEWEGUNG',
@@ -3995,7 +4000,7 @@
         'vision.feat3.desc': 'Gli oggetti di business fluiscono tra le app. Un grafo semantico collega la conoscenza.',
         'vision.feat4.title': 'Identit\u00e0 Collettiva',
         'vision.feat4.desc': 'Gruppi, permessi e presenza a livello organizzativo. Gestisci una volta, applica ovunque.',
-        'vision.quote': 'Open Buro non sostituisce le tue app. Le fa lavorare insieme.',
+        'vision.quote': 'Open Buro non sostituisce le tue app.<br>Le fa lavorare insieme.',
 
         // Diagram
         'diagram.isolated': 'App Isolate',
@@ -4040,8 +4045,8 @@
         'pillars.alliance4.desc': 'Promozione su scala europea: conferenze, relazioni con i governi, relazioni con i media. Rendere Open Buro l\u2019assunto predefinito per l\u2019approvvigionamento di tecnologia per il lavoro.',
         'pillars.alliance5.title': 'Finanziamento',
         'pillars.alliance5.desc': 'Mobilitazione di risorse tramite contributi dei membri, sovvenzioni pubbliche (fondi di innovazione UE), servizi commerciali. Un modello di finanziamento sostenibile garantisce la viabilit\u00e0 a lungo termine.',
-        'pillars.quote': '\u201cCode is Law... ma l\u2019Architettura \u00e8 Politica\u201d',
-        'pillars.quote.cite': '\u2014 Principio fondante di Open Buro',
+        'pillars.quote': '"Code is Law...<br>but Architecture is Politics"',
+        'pillars.quote.cite': '\u2014 Open Buro est un projet au service de la politique de souveraineté numérique européenne.',
 
         // Timeline
         'timeline.badge': 'IN MOVIMENTO',
@@ -4150,7 +4155,7 @@
         'vision.feat3.desc': 'Los objetos de negocio fluyen entre apps. Un grafo sem\u00e1ntico conecta el conocimiento.',
         'vision.feat4.title': 'Identidad Colectiva',
         'vision.feat4.desc': 'Grupos, permisos y presencia a nivel organizacional. Gestiona una vez, aplica en todas partes.',
-        'vision.quote': 'Open Buro no reemplaza tus apps. Las hace trabajar juntas.',
+        'vision.quote': 'Open Buro no reemplaza tus apps.<br>Las hace trabajar juntas.',
 
         // Diagram
         'diagram.isolated': 'Apps Aisladas',
@@ -4195,8 +4200,8 @@
         'pillars.alliance4.desc': 'Promoci\u00f3n a escala europea: conferencias, relaciones con gobiernos, relaciones con medios. Hacer de Open Buro el est\u00e1ndar por defecto en la adquisici\u00f3n de tecnolog\u00eda laboral.',
         'pillars.alliance5.title': 'Financiaci\u00f3n',
         'pillars.alliance5.desc': 'Movilizaci\u00f3n de recursos mediante contribuciones de miembros, subvenciones p\u00fablicas (fondos de innovaci\u00f3n UE), servicios comerciales. Un modelo de financiaci\u00f3n sostenible garantiza la viabilidad a largo plazo.',
-        'pillars.quote': '\u201cCode is Law... pero la Arquitectura es Pol\u00edtica\u201d',
-        'pillars.quote.cite': '\u2014 Principio fundacional de Open Buro',
+        'pillars.quote': '"Code is Law...<br>but Architecture is Politics"',
+        'pillars.quote.cite': '\u2014 Open Buro est un projet au service de la politique de souveraineté numérique européenne.',
 
         // Timeline
         'timeline.badge': 'EN MOVIMIENTO',
