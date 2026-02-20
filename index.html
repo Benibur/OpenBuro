@@ -513,19 +513,29 @@
       margin-bottom: 1rem;
     }
 
-    .beta-badge {
-      display: inline-block;
-      font-size: var(--text-sm);
-      font-weight: 600;
-      letter-spacing: 0.1em;
+    .nav-logo {
+      position: relative;
+      overflow: visible;
+      white-space: nowrap;
+    }
+
+    .beta-ribbon {
+      position: absolute;
+      top: 2px;
+      right: -28px;
+      background: #dc2626;
+      color: #fff;
+      font-size: 0.55rem;
+      font-weight: 700;
+      font-family: var(--font-body);
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: var(--color-accent);
-      background: transparent;
-      border: 1px solid var(--color-accent);
-      padding: 0.15rem 0.6rem;
-      border-radius: 999px;
-      margin-left: 0.5rem;
-      vertical-align: middle;
+      padding: 1px 8px;
+      transform: rotate(20deg);
+      line-height: 1.4;
+      border-radius: 2px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      pointer-events: none;
     }
 
     /* ========================================
@@ -2073,9 +2083,6 @@
       .hero-content h1 {
         font-size: 1.875rem;
       }
-      .beta-badge {
-        padding: 0.1rem 0.5rem;
-      }
     }
 
     /* ========================================
@@ -2239,7 +2246,7 @@
   <!-- Navigation -->
   <nav aria-label="Main navigation" role="navigation">
     <div class="nav-container">
-      <div class="nav-logo">Open Buro</div>
+      <div class="nav-logo">Open Buro<span class="beta-ribbon" aria-label="Beta">beta</span></div>
       <div class="nav-desktop">
         <a href="#problem" class="link-underline" data-i18n="nav.problem">Problem</a>
         <a href="#vision" class="link-underline" data-i18n="nav.vision">Vision</a>
@@ -2318,7 +2325,7 @@
   <section id="hero" aria-label="Hero introduction">
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-content">
-      <div class="badge hero-text" data-i18n="hero.badge">EUROPEAN OPEN STANDARD <span class="beta-badge" aria-label="Beta version">BETA</span></div>
+      <div class="badge hero-text" data-i18n="hero.badge">EUROPEAN OPEN STANDARD</div>
       <h1 class="hero-text" style="color: #ffffff;" data-i18n="hero.title">The European Standard for Workplace Orchestration</h1>
       <p class="subtitle hero-text" data-i18n="hero.subtitle">Unifying open source workplace apps into a true platform alternative to Microsoft 365</p>
       <div class="hero-cta hero-text">
