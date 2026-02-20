@@ -2088,6 +2088,16 @@
       font-size: var(--text-sm);
     }
 
+    .nav-lang-desktop {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .nav-lang-desktop {
+        display: block;
+      }
+    }
+
     .lang-dropdown-trigger {
       display: flex;
       align-items: center;
@@ -2198,12 +2208,30 @@
       margin-bottom: 0.5rem;
     }
 
+    /* Navbar dropdown: opaque black background */
+    .nav-lang-desktop .lang-dropdown-menu {
+      background: #0a0a0a;
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .nav-lang-desktop .lang-dropdown-menu button {
+      color: #f9fafb;
+    }
+
+    .nav-lang-desktop .lang-dropdown-menu button:hover,
+    .nav-lang-desktop .lang-dropdown-menu button:focus-visible {
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* Mobile drawer dropdown: match drawer background */
     .mobile-lang-toggle .lang-dropdown-menu {
       bottom: calc(100% + 4px);
       top: auto;
       left: 50%;
       right: auto;
       transform: translateX(-50%);
+      background: var(--color-bg-elevated);
+      border-color: var(--color-border);
     }
   </style>
 </head>
@@ -2222,7 +2250,7 @@
         <a href="#news" class="link-underline" data-i18n="nav.news">News</a>
         <a href="#newsletter" class="link-underline" data-i18n="nav.newsletter">Newsletter</a>
       </div>
-      <div class="lang-dropdown" aria-expanded="false">
+      <div class="lang-dropdown nav-lang-desktop" aria-expanded="false">
         <button class="lang-dropdown-trigger" aria-haspopup="listbox" aria-label="Select language">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
           <span class="lang-code">EN</span>
