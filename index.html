@@ -508,6 +508,33 @@
       margin-bottom: 1rem;
     }
 
+    .beta-badge {
+      display: inline-block;
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #ffffff;
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      padding: 0.4rem 1.2rem;
+      border-radius: 6px;
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
+      position: relative;
+      animation: betaPulse 2s ease-in-out infinite;
+      vertical-align: middle;
+      margin-left: 0.5rem;
+    }
+
+    @keyframes betaPulse {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 30px rgba(245, 158, 11, 0.6), 0 4px 16px rgba(0, 0, 0, 0.4);
+      }
+    }
+
     /* ========================================
        8. CARDS
        ======================================== */
@@ -839,6 +866,9 @@
       .scroll-indicator {
         animation: none;
         opacity: 0.7;
+      }
+      .beta-badge {
+        animation: none;
       }
     }
 
@@ -2053,6 +2083,10 @@
       .hero-content h1 {
         font-size: 1.875rem;
       }
+      .beta-badge {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.8rem;
+      }
     }
   </style>
 </head>
@@ -2110,7 +2144,7 @@
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-content">
       <div class="badge hero-text">EUROPEAN OPEN STANDARD</div>
-      <h1 class="hero-text" style="color: #ffffff;">The European Standard for Workplace Orchestration</h1>
+      <h1 class="hero-text" style="color: #ffffff;">The European Standard for Workplace Orchestration <span class="beta-badge" aria-label="Beta version">BETA</span></h1>
       <p class="subtitle hero-text">Unifying open source workplace apps into a true platform alternative to Microsoft 365</p>
       <div class="hero-cta hero-text">
         <a href="mailto:hello@open-buro.eu?subject=%5BOpen-buro.eu%5D%20I'm%20interested%20to%20join" class="btn-primary">Join the Alliance</a>
