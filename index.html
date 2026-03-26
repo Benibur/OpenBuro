@@ -917,161 +917,9 @@
       }
     }
 
-    /* ========================================
-       13. TIMELINE
-       ======================================== */
-
-    .timeline-container {
-      position: relative;
-      padding: 4rem 0 2rem;
-    }
-
-    .timeline-line {
-      position: absolute;
-      left: 8px;
-      top: 4rem;
-      bottom: 2rem;
-      width: 2px;
-      background: var(--color-border);
-    }
-
-    .timeline-milestones {
-      display: flex;
-      flex-direction: column;
-      gap: 3rem;
-      align-items: flex-start;
-      position: relative;
-    }
-
-    .timeline-milestone {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      position: relative;
-    }
-
-    .milestone-node {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      border: 2px solid var(--color-border);
-      background: transparent;
-      flex-shrink: 0;
-      margin-right: 1rem;
-      z-index: 1;
-      position: relative;
-    }
-
-    .milestone-content {
-      text-align: left;
-    }
-
-    .milestone-date {
-      font-size: var(--text-sm);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-      font-family: var(--font-mono);
-      color: var(--color-text-muted);
-    }
-
-    .milestone-title {
-      font-family: var(--font-heading);
-      font-size: var(--text-lg);
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-      color: var(--color-text);
-    }
-
-    .milestone-desc {
-      font-size: var(--text-sm);
-      line-height: 1.5;
-      color: var(--color-text-muted);
-      margin: 0;
-    }
-
-    /* State: Completed */
-    .milestone-completed .milestone-node {
-      background: #10b981;
-      border-color: #10b981;
-    }
-
-    .milestone-completed .milestone-date {
-      color: #10b981;
-    }
-
-    /* State: Current */
-    .milestone-current .milestone-node {
-      background: var(--blue-500);
-      border-color: var(--blue-500);
-      animation: pulse-blue 2s infinite;
-    }
-
-    .milestone-current .milestone-date {
-      color: var(--blue-500);
-      font-weight: 600;
-    }
-
-    /* State: Future */
-    .milestone-future .milestone-node {
-      background: transparent;
-      border-color: var(--color-text-muted);
-    }
-
-    .milestone-future .milestone-date,
-    .milestone-future .milestone-title {
-      opacity: 0.6;
-    }
-
     @keyframes pulse-blue {
       0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
       50% { box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); }
-    }
-
-    /* Desktop: Horizontal timeline */
-    @media (min-width: 768px) {
-      .timeline-container {
-        padding: 4rem 0;
-      }
-
-      .timeline-line {
-        left: 0;
-        right: 0;
-        top: calc(4rem + 8px);
-        bottom: auto;
-        width: 100%;
-        height: 2px;
-      }
-
-      .timeline-milestones {
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 1rem;
-      }
-
-      .timeline-milestone {
-        flex-direction: column;
-        align-items: center;
-        flex: 1;
-      }
-
-      .milestone-node {
-        margin-right: 0;
-        margin-bottom: 1rem;
-      }
-
-      .milestone-content {
-        text-align: center;
-        max-width: 180px;
-      }
-    }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      .milestone-current .milestone-node {
-        animation: none;
-        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
-      }
     }
 
     /* ========================================
@@ -2327,8 +2175,6 @@
         <a href="#problem" class="link-underline" data-i18n="nav.problem">Problem</a>
         <a href="#vision" class="link-underline" data-i18n="nav.vision">Vision</a>
         <a href="#pillars" class="link-underline" data-i18n="nav.pillars">Pillars</a>
-        <a href="#timeline" class="link-underline" data-i18n="nav.timeline">Timeline</a>
-        <!-- <a href="#first-implementation" class="link-underline">1st Implementation</a> -->
         <a href="#ecosystem" class="link-underline" data-i18n="nav.ecosystem">Ecosystem</a>
         <a href="#news" class="link-underline" data-i18n="nav.news">News</a>
         <a href="#newsletter" class="link-underline" data-i18n="nav.newsletter">Newsletter</a>
@@ -2371,8 +2217,6 @@
       <a href="#problem" data-i18n="nav.problem">Problem</a>
       <a href="#vision" data-i18n="nav.vision">Vision</a>
       <a href="#pillars" data-i18n="nav.pillars">Pillars</a>
-      <a href="#timeline" data-i18n="nav.timeline">Timeline</a>
-      <!-- <a href="#first-implementation">1st Implementation</a> -->
       <a href="#ecosystem" data-i18n="nav.ecosystem">Ecosystem</a>
       <a href="#news" data-i18n="nav.news">News</a>
       <a href="#newsletter" data-i18n="nav.newsletter">Newsletter</a>
@@ -2746,79 +2590,6 @@
     </div>
   </section>
 
-  <!-- Timeline Section -->
-  <section id="timeline" aria-label="Project timeline" class="animate-on-scroll">
-    <div class="container">
-      <div class="badge animate-on-scroll scale-in" data-i18n="timeline.badge">IN MOTION</div>
-      <h2 data-i18n="timeline.title">Project Timeline</h2>
-      <p class="intro" data-i18n="timeline.intro">From vision to reality, tracking our progress</p>
-
-      <div class="timeline-container">
-        <div class="timeline-line" aria-hidden="true"></div>
-        <div class="timeline-milestones">
-          <div class="timeline-milestone milestone-completed">
-            <div class="milestone-node" aria-hidden="true"></div>
-            <div class="milestone-content">
-              <div class="milestone-date">2025 Q2</div>
-              <h3 class="milestone-title" data-i18n="timeline.m1.title">Foundational work</h3>
-              <p class="milestone-desc" data-i18n="timeline.m1.desc">La Suite x Twake.ai collaboration begins</p>
-            </div>
-          </div>
-
-          <div class="timeline-milestone milestone-completed">
-            <div class="milestone-node" aria-hidden="true"></div>
-            <div class="milestone-content">
-              <div class="milestone-date">2025 Q4</div>
-              <h3 class="milestone-title" data-i18n="timeline.m2.title">Advanced integration</h3>
-              <p class="milestone-desc" data-i18n="timeline.m2.desc">La Suite x Twake.ai technical integration</p>
-            </div>
-          </div>
-
-          <div class="timeline-milestone milestone-current">
-            <div class="milestone-node" aria-hidden="true"></div>
-            <div class="milestone-content">
-              <div class="milestone-date">2026 Q1</div>
-              <h3 class="milestone-title" data-i18n="timeline.m3.title">First specifications</h3>
-              <p class="milestone-desc" data-i18n="timeline.m3.desc">Open Buro draft specifications published at FOSDEM</p>
-            </div>
-          </div>
-
-          <div class="timeline-milestone milestone-future">
-            <div class="milestone-node" aria-hidden="true"></div>
-            <div class="milestone-content">
-              <div class="milestone-date">2026 Q2</div>
-              <h3 class="milestone-title" data-i18n="timeline.m4.title">Standard V1.0 publication</h3>
-              <p class="milestone-desc" data-i18n="timeline.m4.desc">Official standard release and governance setup</p>
-            </div>
-          </div>
-
-          <div class="timeline-milestone milestone-future">
-            <div class="milestone-node" aria-hidden="true"></div>
-            <div class="milestone-content">
-              <div class="milestone-date">2026 Q2</div>
-              <h3 class="milestone-title" data-i18n="timeline.m5.title">Alliance expansion</h3>
-              <p class="milestone-desc" data-i18n="timeline.m5.desc">Growing membership across European markets</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- First Implementation Section
-  <section id="first-implementation" aria-label="First implementation in Twake.AI" class="animate-on-scroll" style="padding: var(--space-section-y) 0;">
-    <div class="container">
-      <div class="badge animate-on-scroll scale-in">FIRST IMPLEMENTATION</div>
-      <h2>First Implementation in Twake.AI</h2>
-      <p class="intro">Twake.AI is the first platform to integrate La Suite num&eacute;rique components from DINUM, built on the Open Buro beta specification. It brings together messaging, videoconferencing, document editing, email, and more into a unified sovereign workplace.</p>
-
-      <div style="margin-top: 2.5rem; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12); border: 1px solid var(--border);">
-        <img src="assets/images/twake-workplace-dashboard.png" alt="Twake Workplace dashboard showing integrated apps: Chat, Drive, Mail, Notes, Docs, Visio, Calendar and more" style="width: 100%; height: auto; display: block;">
-      </div>
-
-      <p style="margin-top: 1.5rem; text-align: center; color: var(--text-secondary); font-size: 0.95rem;">The Twake Workplace dashboard &mdash; a unified interface orchestrating 15+ open source applications following the Open Buro standard.</p>
-    </div>
-  </section> -->
 
   <!-- Ecosystem Section -->
   <section id="ecosystem" aria-label="Alliance ecosystem" class="animate-on-scroll">
@@ -2995,8 +2766,6 @@
           <a href="#problem" data-i18n="nav.problem">Problem</a>
           <a href="#vision" data-i18n="nav.vision">Vision</a>
           <a href="#pillars" data-i18n="nav.pillars">Pillars</a>
-          <a href="#timeline" data-i18n="nav.timeline">Timeline</a>
-          <!-- <a href="#first-implementation">1st Implementation</a> -->
           <a href="#ecosystem" data-i18n="nav.ecosystem">Ecosystem</a>
           <a href="#news" data-i18n="nav.news">News</a>
           <a href="#newsletter" data-i18n="nav.newsletter">Newsletter</a>
@@ -3522,7 +3291,6 @@
         'nav.problem': 'Problem',
         'nav.vision': 'Vision',
         'nav.pillars': 'Pillars',
-        'nav.timeline': 'Timeline',
         'nav.ecosystem': 'Ecosystem',
         'nav.news': 'News',
         'nav.newsletter': 'Newsletter',
@@ -3611,21 +3379,6 @@
         'pillars.quote': '"Code is Law...<br>but Architecture is Politics"',
         'pillars.quote.cite': '\u2014 Open Buro est un projet au service de la politique de souveraineté numérique européenne.',
 
-        // Timeline
-        'timeline.badge': 'IN MOTION',
-        'timeline.title': 'Project Timeline',
-        'timeline.intro': 'From vision to reality, tracking our progress',
-        'timeline.m1.title': 'Foundational work',
-        'timeline.m1.desc': 'La Suite x Twake.ai collaboration begins',
-        'timeline.m2.title': 'Advanced integration',
-        'timeline.m2.desc': 'La Suite x Twake.ai technical integration',
-        'timeline.m3.title': 'First specifications',
-        'timeline.m3.desc': 'Open Buro draft specifications published at FOSDEM',
-        'timeline.m4.title': 'Standard V1.0 publication',
-        'timeline.m4.desc': 'Official standard release and governance setup',
-        'timeline.m5.title': 'Alliance expansion',
-        'timeline.m5.desc': 'Growing membership across European markets',
-
         // Ecosystem
         'ecosystem.badge': 'THE ECOSYSTEM',
         'ecosystem.title': 'The Alliance',
@@ -3685,7 +3438,6 @@
         'nav.problem': 'Probl\u00e8me',
         'nav.vision': 'Vision',
         'nav.pillars': 'Piliers',
-        'nav.timeline': 'Calendrier',
         'nav.ecosystem': '\u00c9cosyst\u00e8me',
         'nav.news': 'Actualit\u00e9s',
         'nav.newsletter': 'Lettre d\'info',
@@ -3774,20 +3526,6 @@
         'pillars.quote': '"Code is Law...<br>but Architecture is Politics"',
         'pillars.quote.cite': '\u2014 Open Buro est un projet au service de la politique de souveraineté numérique européenne.',
 
-        // Timeline
-        'timeline.badge': 'EN MOUVEMENT',
-        'timeline.title': 'Calendrier du Projet',
-        'timeline.intro': 'De la vision \u00e0 la r\u00e9alit\u00e9, suivi de notre progression',
-        'timeline.m1.title': 'Travaux fondateurs',
-        'timeline.m1.desc': 'D\u00e9but de la collaboration La Suite x Twake.ai',
-        'timeline.m2.title': 'Int\u00e9gration avanc\u00e9e',
-        'timeline.m2.desc': 'Int\u00e9gration technique La Suite x Twake.ai',
-        'timeline.m3.title': 'Premi\u00e8res sp\u00e9cifications',
-        'timeline.m3.desc': 'Sp\u00e9cifications pr\u00e9liminaires d\'Open Buro publi\u00e9es au FOSDEM',
-        'timeline.m4.title': 'Publication du Standard V1.0',
-        'timeline.m4.desc': 'Publication officielle du standard et mise en place de la gouvernance',
-        'timeline.m5.title': 'Expansion de l\'Alliance',
-        'timeline.m5.desc': 'Croissance des membres sur les march\u00e9s europ\u00e9ens',
 
         // Ecosystem
         'ecosystem.badge': 'L\'\u00c9COSYST\u00c8ME',
@@ -3848,7 +3586,6 @@
         'nav.problem': 'Problem',
         'nav.vision': 'Vision',
         'nav.pillars': 'S\u00e4ulen',
-        'nav.timeline': 'Zeitplan',
         'nav.ecosystem': '\u00d6kosystem',
         'nav.news': 'Neuigkeiten',
         'nav.newsletter': 'Newsletter',
@@ -3937,21 +3674,6 @@
         'pillars.quote': '"Code is Law...<br>but Architecture is Politics"',
         'pillars.quote.cite': '\u2014 Open Buro est un projet au service de la politique de souveraineté numérique européenne.',
 
-        // Timeline
-        'timeline.badge': 'IN BEWEGUNG',
-        'timeline.title': 'Projektzeitplan',
-        'timeline.intro': 'Von der Vision zur Realit\u00e4t \u2013 unser Fortschritt',
-        'timeline.m1.title': 'Grundlagenarbeit',
-        'timeline.m1.desc': 'La Suite x Twake.ai \u2013 Zusammenarbeit beginnt',
-        'timeline.m2.title': 'Erweiterte Integration',
-        'timeline.m2.desc': 'La Suite x Twake.ai \u2013 technische Integration',
-        'timeline.m3.title': 'Erste Spezifikationen',
-        'timeline.m3.desc': 'Open-Buro-Spezifikationsentwurf ver\u00f6ffentlicht auf der FOSDEM',
-        'timeline.m4.title': 'Standard V1.0 Ver\u00f6ffentlichung',
-        'timeline.m4.desc': 'Offizielle Standard-Ver\u00f6ffentlichung und Governance-Aufbau',
-        'timeline.m5.title': 'Allianz-Erweiterung',
-        'timeline.m5.desc': 'Wachsende Mitgliedschaft in europ\u00e4ischen M\u00e4rkten',
-
         // Ecosystem
         'ecosystem.badge': 'DAS \u00d6KOSYSTEM',
         'ecosystem.title': 'Die Allianz',
@@ -4011,7 +3733,6 @@
         'nav.problem': 'Problema',
         'nav.vision': 'Visione',
         'nav.pillars': 'Pilastri',
-        'nav.timeline': 'Cronologia',
         'nav.ecosystem': 'Ecosistema',
         'nav.news': 'Notizie',
         'nav.newsletter': 'Newsletter',
@@ -4100,21 +3821,6 @@
         'pillars.quote': '"Code is Law...<br>but Architecture is Politics"',
         'pillars.quote.cite': '\u2014 Open Buro est un projet au service de la politique de souveraineté numérique européenne.',
 
-        // Timeline
-        'timeline.badge': 'IN MOVIMENTO',
-        'timeline.title': 'Cronologia del Progetto',
-        'timeline.intro': 'Dalla visione alla realt\u00e0, seguendo i nostri progressi',
-        'timeline.m1.title': 'Lavoro fondativo',
-        'timeline.m1.desc': 'Inizia la collaborazione La Suite x Twake.ai',
-        'timeline.m2.title': 'Integrazione avanzata',
-        'timeline.m2.desc': 'Integrazione tecnica La Suite x Twake.ai',
-        'timeline.m3.title': 'Prime specifiche',
-        'timeline.m3.desc': 'Bozza delle specifiche Open Buro pubblicata al FOSDEM',
-        'timeline.m4.title': 'Pubblicazione Standard V1.0',
-        'timeline.m4.desc': 'Rilascio ufficiale dello standard e creazione della governance',
-        'timeline.m5.title': 'Espansione dell\u2019Alleanza',
-        'timeline.m5.desc': 'Crescita dei membri nei mercati europei',
-
         // Ecosystem
         'ecosystem.badge': 'L\u2019ECOSISTEMA',
         'ecosystem.title': 'L\u2019Alleanza',
@@ -4174,7 +3880,6 @@
         'nav.problem': 'Problema',
         'nav.vision': 'Visi\u00f3n',
         'nav.pillars': 'Pilares',
-        'nav.timeline': 'Cronolog\u00eda',
         'nav.ecosystem': 'Ecosistema',
         'nav.news': 'Noticias',
         'nav.newsletter': 'Bolet\u00edn',
@@ -4262,21 +3967,6 @@
         'pillars.alliance5.desc': 'Movilizaci\u00f3n de recursos mediante contribuciones de miembros, subvenciones p\u00fablicas (fondos de innovaci\u00f3n UE), servicios comerciales. Un modelo de financiaci\u00f3n sostenible garantiza la viabilidad a largo plazo.',
         'pillars.quote': '"Code is Law...<br>but Architecture is Politics"',
         'pillars.quote.cite': '\u2014 Open Buro est un projet au service de la politique de souveraineté numérique européenne.',
-
-        // Timeline
-        'timeline.badge': 'EN MOVIMIENTO',
-        'timeline.title': 'Cronolog\u00eda del Proyecto',
-        'timeline.intro': 'De la visi\u00f3n a la realidad, siguiendo nuestro progreso',
-        'timeline.m1.title': 'Trabajo fundacional',
-        'timeline.m1.desc': 'Comienza la colaboraci\u00f3n La Suite x Twake.ai',
-        'timeline.m2.title': 'Integraci\u00f3n avanzada',
-        'timeline.m2.desc': 'Integraci\u00f3n t\u00e9cnica La Suite x Twake.ai',
-        'timeline.m3.title': 'Primeras especificaciones',
-        'timeline.m3.desc': 'Borrador de especificaciones Open Buro publicado en FOSDEM',
-        'timeline.m4.title': 'Publicaci\u00f3n Est\u00e1ndar V1.0',
-        'timeline.m4.desc': 'Lanzamiento oficial del est\u00e1ndar y configuraci\u00f3n de gobernanza',
-        'timeline.m5.title': 'Expansi\u00f3n de la Alianza',
-        'timeline.m5.desc': 'Crecimiento de miembros en mercados europeos',
 
         // Ecosystem
         'ecosystem.badge': 'EL ECOSISTEMA',
